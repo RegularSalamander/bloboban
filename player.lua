@@ -2,6 +2,7 @@ player = class:new()
 
 function player:init(x, y)
     self.pos = {x=x, y=y}
+    self.nextPos = {x=x, y=y}
 end
 
 function player:draw()
@@ -12,33 +13,47 @@ function player:draw()
     )
 end
 
-function player:update()
+function player:control()
+    local allowMove = false
+
     --movement
     if controls["up"] == 1 then
-        self:move(0, -1)
+        allowMove = self:move(0, -1)
     elseif controls["down"] == 1 then
-        self:move(0, 1)
+        allowMove = self:move(0, 1)
     elseif controls["left"] == 1 then
-        self:move(-1, 0)
+        allowMove = self:move(-1, 0)
     elseif controls["right"] == 1 then
-        self:move(1, 0)
+        allowMove = self:move(1, 0)
     end
 
-    return true
+    return allowMove
 end
 
 function player:move(dx, dy)
     local doMove = true
 
     local next = getObjectAt(self.pos.x + dx, self.pos.y + dy)
-    if next.wall then return end
+    if next.wall then return false end
 
     if next.blob then
         doMove = next.blob:push(dx, dy)
     end
 
     if doMove then
-        self.pos.x = self.pos.x + dx
-        self.pos.y = self.pos.y + dy
+        self.nextPos.x = self.pos.x + dx
+        self.nextPos.y = self.pos.y + dy
     end
+
+    return doMove
+end
+
+function player:applyMove()
+    self.pos.x = self.nextPos.x
+    self.pos.y = self.nextPos.y
+end
+
+function player:cancelMove()
+    self.nextPos.x = self.pos.x
+    self.nextPos.y = self.pos.y
 end
