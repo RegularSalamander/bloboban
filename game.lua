@@ -38,6 +38,13 @@ function game_update(delta)
         for i = 1, #objects.holes do
             objects.holes[i]:applyMove()
         end
+
+        for i = 1, #objects.blobs do
+            objects.blobs[i]:affectConnections()
+        end
+        for i = 1, #objects.holes do
+            objects.holes[i]:affectConnections()
+        end
     else
         for i = 1, #objects.blobs do
             objects.blobs[i]:cancelMove()
