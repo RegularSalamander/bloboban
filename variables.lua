@@ -6,3 +6,5 @@ screenHeight = 180
 defaultScale = 3
 
 updatesPerFrame = 1
+
+tileSize = 12

@@ -18,7 +18,7 @@ function game_load()
 
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
-    --objects.player = { player:new() }
+    objects.player = { player:new(0, 0) }
     --objects.buildings = {}
 end
 
@@ -68,7 +68,7 @@ end
 function game_draw()
     love.graphics.setCanvas(gameCanvas)
 
-    love.graphics.setBackgroundColor(1, 0, 0)
+    love.graphics.setBackgroundColor(0.5, 0.5, 0.5)
 
     for k in pairs(objects) do
         for i = 1, #objects[k] do
@@ -88,4 +88,12 @@ end
 function game_keyreleased(key, scancode, isrepeat)
     if isrepeat then return end
     if controls[scancode] ~= nil then controls[scancode] = 0 end
+end
+
+function getObjectAt(x, y)
+    for i in 1, #objects do
+        if objects[i].pos.x == x and objects[i].pos.y == y then
+            return objects[i] 
+        end
+    end
 end

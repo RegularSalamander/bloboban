@@ -5,6 +5,8 @@ require "variables"
 
 require "game"
 
+require "player"
+
 gameState = ""
 
 function love.load()
@@ -17,7 +19,7 @@ function love.load()
     love.window.setTitle("Cleric of the Sun God")
 
     images = {}
-    --images.player = love.graphics.newImage("assets/playerrun.png")
+    images.player = love.graphics.newImage("assets/player.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
