@@ -7,6 +7,7 @@ require "game"
 
 require "player"
 require "blob"
+require "hole"
 require "wall"
 
 gameState = ""
@@ -23,6 +24,7 @@ function love.load()
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
     images.blob = love.graphics.newImage("assets/blob.png")
+    images.hole = love.graphics.newImage("assets/hole.png")
     images.wall = love.graphics.newImage("assets/wall.png")
 
     sounds = {}

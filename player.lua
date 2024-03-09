@@ -40,6 +40,10 @@ function player:move(dx, dy)
         doMove = next.blob:push(dx, dy)
     end
 
+    if next.hole then
+        doMove = doMove and next.hole:push(dx, dy)
+    end
+
     if doMove then
         self.nextPos.x = self.pos.x + dx
         self.nextPos.y = self.pos.y + dy

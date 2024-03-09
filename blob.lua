@@ -1,11 +1,15 @@
 blob = class:new()
 
-function blob:init(x, y)
+function blob:init(x, y, cn)
     self.pos = {x=x, y=y}
     self.nextPos = {x=x, y=y}
 
-    self.connectNum = 0
+    self.connectNum = cn
     self.connections = {up=false, left=false, right=false, down=false}
+    if cn % 2 == 1 then self.connections.up = true end
+    if cn/2 % 2 == 1 then self.connections.left = true end
+    if cn/4 % 2 == 1 then self.connections.right = true end
+    if cn/8 % 2 == 1 then self.connections.down = true end
 
     self.checked = false
 end

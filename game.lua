@@ -19,9 +19,9 @@ function game_load()
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = { player:new(0, 0) }
-    objects.blobs = { blob:new(10, 10), blob:new(12, 12), blob:new(10, 12), blob:new(12, 10) }
+    objects.blobs = { blob:new(10, 10, 4), blob:new(11, 10, 2) }
     objects.walls = { wall:new(14, 10) }
-    objects.holes = {}
+    objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2) }
 end
 
 function game_update(delta)
@@ -68,11 +68,23 @@ function game_draw()
     love.graphics.setBackgroundColor(0.5, 0.5, 0.5)
     love.graphics.clear()
 
-    for k in pairs(objects) do
-        for i = 1, #objects[k] do
-            if objects[k][i].draw then
-                objects[k][i]:draw()
-            end
+    objects.player[1]:draw()
+
+    for i = 1, #objects.holes do
+        if objects.holes[i].draw then
+            objects.holes[i]:draw()
+        end
+    end
+
+    for i = 1, #objects.blobs do
+        if objects.blobs[i].draw then
+            objects.blobs[i]:draw()
+        end
+    end
+
+    for i = 1, #objects.walls do
+        if objects.walls[i].draw then
+            objects.walls[i]:draw()
         end
     end
 end
