@@ -19,7 +19,9 @@ function game_load()
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = { player:new(0, 0) }
-    --objects.buildings = {}
+    objects.blobs = { blob:new(10, 10), blob:new(12, 12) }
+    objects.walls = {}
+    objects.holes = {}
 end
 
 function game_update(delta)
@@ -92,9 +94,30 @@ function game_keyreleased(key, scancode, isrepeat)
 end
 
 function getObjectAt(x, y)
-    for i in 1, #objects do
-        if objects[i].pos.x == x and objects[i].pos.y == y then
-            return objects[i] 
+    local rv = {
+        wall = nil,
+        blob = nil,
+        hole = nil
+    }
+    
+    for i = 1, #objects.walls do
+        if objects.walls[i].pos.x == x and objects.walls[i].pos.y == y then
+            rv.wall = objects.walls[i] 
+            break
         end
     end
+    for i = 1, #objects.blobs do
+        if objects.blobs[i].pos.x == x and objects.blobs[i].pos.y == y then
+            rv.blob = objects.blobs[i] 
+            break
+        end
+    end
+    for i = 1, #objects.holes do
+        if objects.holes[i].pos.x == x and objects.holes[i].pos.y == y then
+            rv.hole = objects.holes[i] 
+            break
+        end
+    end
+    
+    return rv
 end

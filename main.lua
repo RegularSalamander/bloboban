@@ -6,6 +6,7 @@ require "variables"
 require "game"
 
 require "player"
+require "blob"
 
 gameState = ""
 
@@ -20,6 +21,7 @@ function love.load()
 
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
+    images.blob = love.graphics.newImage("assets/blob.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
