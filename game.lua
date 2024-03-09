@@ -19,9 +19,11 @@ function game_load()
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = { player:new(0, 0) }
-    objects.blobs = { blob:new(10, 10, 4), blob:new(11, 10, 2) }
+    objects.blobs = { blob:new(10, 10, 0), blob:new(8, 10, 0), blob:new(10, 8, 0) }
     objects.walls = { wall:new(14, 10) }
     objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2) }
+
+    animationFrame = 0
 end
 
 function game_update(delta)
@@ -30,7 +32,18 @@ function game_update(delta)
     --if we're at less than 30 fps that probably means the game was unfocused
     delta = math.min(delta, 2)
 
-    if objects.player[1]:control() then
+    if animationFrame == 0 then
+        if objects.player[1]:control() then
+            animationFrame = 1
+        else
+            for i = 1, #objects.blobs do
+                objects.blobs[i]:cancelMove()
+            end
+            for i = 1, #objects.holes do
+                objects.holes[i]:cancelMove()
+            end
+        end
+    elseif animationFrame == tweenTime then
         objects.player[1]:applyMove()
         for i = 1, #objects.blobs do
             objects.blobs[i]:applyMove()
@@ -45,14 +58,12 @@ function game_update(delta)
         for i = 1, #objects.holes do
             objects.holes[i]:affectConnections()
         end
+
+        animationFrame = 0
     else
-        for i = 1, #objects.blobs do
-            objects.blobs[i]:cancelMove()
-        end
-        for i = 1, #objects.holes do
-            objects.holes[i]:cancelMove()
-        end
+        animationFrame = animationFrame + 1
     end
+
 
     --keys are updated last so that objects can see if they're 1 or -1
     for k, v in pairs(controls) do

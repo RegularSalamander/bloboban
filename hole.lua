@@ -15,11 +15,14 @@ function hole:init(x, y, cn)
 end
 
 function hole:draw()
+    local drawx = util.map(animationFrame, 0, tweenTime, self.pos.x, self.nextPos.x)
+    local drawy = util.map(animationFrame, 0, tweenTime, self.pos.y, self.nextPos.y)
+
     love.graphics.draw(
         images.hole,
         love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
-        self.pos.x * tileSize,
-        self.pos.y * tileSize,
+        drawx * tileSize,
+        drawy * tileSize,
         0,
         1,
         1

@@ -8,3 +8,5 @@ defaultScale = 3
 updatesPerFrame = 1
 
 tileSize = 12
+
+tweenTime = 10

@@ -6,10 +6,13 @@ function player:init(x, y)
 end
 
 function player:draw()
+    local drawx = util.map(animationFrame, 0, tweenTime, self.pos.x, self.nextPos.x)
+    local drawy = util.map(animationFrame, 0, tweenTime, self.pos.y, self.nextPos.y)
+
     love.graphics.draw(
         images.player,
-        self.pos.x * tileSize,
-        self.pos.y * tileSize
+        drawx * tileSize,
+        drawy * tileSize
     )
 end
 
@@ -17,13 +20,13 @@ function player:control()
     local allowMove = false
 
     --movement
-    if controls["up"] == 1 then
+    if controls["up"] >= 1 then
         allowMove = self:move(0, -1)
-    elseif controls["down"] == 1 then
+    elseif controls["down"] >= 1 then
         allowMove = self:move(0, 1)
-    elseif controls["left"] == 1 then
+    elseif controls["left"] >= 1 then
         allowMove = self:move(-1, 0)
-    elseif controls["right"] == 1 then
+    elseif controls["right"] >= 1 then
         allowMove = self:move(1, 0)
     end
 
