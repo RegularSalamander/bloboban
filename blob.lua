@@ -11,10 +11,20 @@ function blob:init(x, y)
 end
 
 function blob:draw()
+    -- love.graphics.draw(
+    --     images.blob,
+    --     self.pos.x * tileSize,
+    --     self.pos.y * tileSize
+    -- )
+
     love.graphics.draw(
         images.blob,
+        love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
         self.pos.x * tileSize,
-        self.pos.y * tileSize
+        self.pos.y * tileSize,
+        0,
+        1,
+        1
     )
 end
 

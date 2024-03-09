@@ -19,7 +19,7 @@ function game_load()
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = { player:new(0, 0) }
-    objects.blobs = { blob:new(10, 10), blob:new(12, 12) }
+    objects.blobs = { blob:new(10, 10), blob:new(12, 12), blob:new(10, 12), blob:new(12, 10) }
     objects.walls = { wall:new(14, 10) }
     objects.holes = {}
 end
