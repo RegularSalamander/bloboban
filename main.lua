@@ -1,5 +1,5 @@
 require "class"
-util = require "salamanderUtils"
+util = require "utils"
 
 require "variables"
 
