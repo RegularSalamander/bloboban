@@ -79,8 +79,8 @@ function blob:affectConnections()
     if down.blob then self.connections.down = true end
 
     self.connectNum = 0
-    if self.connections.up then self.connectNum = self.connectNum + 8 end
-    if self.connections.left then self.connectNum = self.connectNum + 4 end
-    if self.connections.right then self.connectNum = self.connectNum + 2 end
-    if self.connections.down then self.connectNum = self.connectNum + 1 end
+    if self.connections.up then self.connectNum = self.connectNum + 1 end
+    if self.connections.left then self.connectNum = self.connectNum + 2 end
+    if self.connections.right then self.connectNum = self.connectNum + 4 end
+    if self.connections.down then self.connectNum = self.connectNum + 8 end
 end
