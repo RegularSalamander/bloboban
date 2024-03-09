@@ -69,6 +69,7 @@ function game_draw()
     love.graphics.setCanvas(gameCanvas)
 
     love.graphics.setBackgroundColor(0.5, 0.5, 0.5)
+    love.graphics.clear()
 
     for k in pairs(objects) do
         for i = 1, #objects[k] do
