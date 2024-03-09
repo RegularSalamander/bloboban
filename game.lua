@@ -20,7 +20,7 @@ function game_load()
     objects = {}
     objects.player = { player:new(0, 0) }
     objects.blobs = { blob:new(10, 10), blob:new(12, 12) }
-    objects.walls = {}
+    objects.walls = { wall:new(14, 10) }
     objects.holes = {}
 end
 

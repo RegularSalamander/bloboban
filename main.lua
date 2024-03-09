@@ -7,6 +7,7 @@ require "game"
 
 require "player"
 require "blob"
+require "wall"
 
 gameState = ""
 
@@ -22,6 +23,7 @@ function love.load()
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
     images.blob = love.graphics.newImage("assets/blob.png")
+    images.wall = love.graphics.newImage("assets/wall.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
