@@ -43,7 +43,7 @@ function game_update(delta)
                 objects.holes[i]:cancelMove()
             end
         end
-    elseif animationFrame == tweenTime then
+    elseif animationFrame == tweenTime + waitTime then
         --finalize movement
         objects.player[1]:applyMove()
         for i = 1, #objects.blobs do

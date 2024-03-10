@@ -17,8 +17,8 @@ function hole:init(x, y, cn)
 end
 
 function hole:draw()
-    local drawx = util.map(animationFrame, 0, tweenTime, self.pos.x, self.nextPos.x)
-    local drawy = util.map(animationFrame, 0, tweenTime, self.pos.y, self.nextPos.y)
+    local drawx = util.map(math.min(animationFrame, tweenTime), 0, tweenTime, self.pos.x, self.nextPos.x)
+    local drawy = util.map(math.min(animationFrame, tweenTime), 0, tweenTime, self.pos.y, self.nextPos.y)
     if self.filled then
         love.graphics.draw(
             images.filledhole,

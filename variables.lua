@@ -9,4 +9,5 @@ updatesPerFrame = 1
 
 tileSize = 12
 
-tweenTime = 30
+tweenTime = 10
+waitTime = 2
