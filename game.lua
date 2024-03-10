@@ -21,7 +21,7 @@ function game_load()
     objects.player = { player:new(0, 0) }
     objects.blobs = { blob:new(10, 10, 0), blob:new(8, 10, 0), blob:new(10, 8, 0), blob:new(10, 12, 0), blob:new(12, 10, 0) }
     objects.walls = { wall:new(14, 10) }
-    objects.holes = { hole:new(10, 10, 15), hole:new(9, 10, 4), hole:new(10, 9, 8), hole:new(10, 11, 1), hole:new(11, 10, 2) }
+    objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2), hole:new(20, 11, 4), hole:new(21, 11, 2) }
 
     animationFrame = 0
 end

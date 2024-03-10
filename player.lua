@@ -11,8 +11,8 @@ function player:draw()
 
     love.graphics.draw(
         images.player,
-        drawx * tileSize,
-        drawy * tileSize
+        math.floor(drawx * tileSize),
+        math.floor(drawy * tileSize)
     )
 end
 

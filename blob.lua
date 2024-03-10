@@ -23,8 +23,8 @@ function blob:draw()
     love.graphics.draw(
         images.blob,
         love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
-        drawx * tileSize,
-        drawy * tileSize,
+        math.floor(drawx * tileSize),
+        math.floor(drawy * tileSize),
         0,
         1,
         1
