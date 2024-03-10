@@ -25,6 +25,7 @@ function love.load()
     images.player = love.graphics.newImage("assets/player.png")
     images.blob = love.graphics.newImage("assets/blob.png")
     images.hole = love.graphics.newImage("assets/hole.png")
+    images.filledhole = love.graphics.newImage("assets/filledhole.png")
     images.wall = love.graphics.newImage("assets/wall.png")
 
     sounds = {}

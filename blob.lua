@@ -11,6 +11,8 @@ function blob:init(x, y, cn)
     if cn/4 % 2 == 1 then self.connections.right = true end
     if cn/8 % 2 == 1 then self.connections.down = true end
 
+    self.alive = true
+
     self.checked = false
 end
 

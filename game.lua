@@ -19,9 +19,9 @@ function game_load()
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = { player:new(0, 0) }
-    objects.blobs = { blob:new(10, 10, 0), blob:new(8, 10, 0), blob:new(10, 8, 0) }
+    objects.blobs = { blob:new(10, 10, 0), blob:new(8, 10, 0), blob:new(10, 8, 0), blob:new(10, 12, 0), blob:new(12, 10, 0) }
     objects.walls = { wall:new(14, 10) }
-    objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2) }
+    objects.holes = { hole:new(10, 10, 15), hole:new(9, 10, 4), hole:new(10, 9, 8), hole:new(10, 11, 1), hole:new(11, 10, 2) }
 
     animationFrame = 0
 end
@@ -44,6 +44,7 @@ function game_update(delta)
             end
         end
     elseif animationFrame == tweenTime then
+        --finalize movement
         objects.player[1]:applyMove()
         for i = 1, #objects.blobs do
             objects.blobs[i]:applyMove()
@@ -52,11 +53,24 @@ function game_update(delta)
             objects.holes[i]:applyMove()
         end
 
+        --affect the connections between objects
         for i = 1, #objects.blobs do
             objects.blobs[i]:affectConnections()
         end
         for i = 1, #objects.holes do
             objects.holes[i]:affectConnections()
+        end
+
+        --check for filled holes
+        for i = 1, #objects.holes do
+            if objects.holes[i]:checkFill() then objects.holes[i]:applyFill() end
+        end
+
+        --delete blobs from filled holes
+        for i = #objects.blobs, 1, -1 do
+            if not objects.blobs[i].alive then
+                table.remove(objects.blobs, i)
+            end
         end
 
         animationFrame = 0
@@ -76,7 +90,7 @@ end
 function game_draw()
     love.graphics.setCanvas(gameCanvas)
 
-    love.graphics.setBackgroundColor(0.5, 0.5, 0.5)
+    love.graphics.setBackgroundColor(1, 1, 1)
     love.graphics.clear()
 
     objects.player[1]:draw()

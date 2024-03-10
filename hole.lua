@@ -6,10 +6,12 @@ function hole:init(x, y, cn)
 
     self.connectNum = cn
     self.connections = {up=false, left=false, right=false, down=false}
-    if cn % 2 == 1 then self.connections.up = true end
-    if cn/2 % 2 == 1 then self.connections.left = true end
-    if cn/4 % 2 == 1 then self.connections.right = true end
-    if cn/8 % 2 == 1 then self.connections.down = true end
+    if math.floor(cn/1) % 2 ~= 0 then self.connections.up = true end
+    if math.floor(cn/2) % 2 ~= 0 then self.connections.left = true end
+    if math.floor(cn/4) % 2 ~= 0 then self.connections.right = true end
+    if math.floor(cn/8) % 2 ~= 0 then self.connections.down = true end
+
+    self.filled = false
 
     self.checked = false
 end
@@ -17,16 +19,27 @@ end
 function hole:draw()
     local drawx = util.map(animationFrame, 0, tweenTime, self.pos.x, self.nextPos.x)
     local drawy = util.map(animationFrame, 0, tweenTime, self.pos.y, self.nextPos.y)
-
-    love.graphics.draw(
-        images.hole,
-        love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
-        drawx * tileSize,
-        drawy * tileSize,
-        0,
-        1,
-        1
-    )
+    if self.filled then
+        love.graphics.draw(
+            images.filledhole,
+            love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
+            drawx * tileSize,
+            drawy * tileSize,
+            0,
+            1,
+            1
+        )
+    else
+        love.graphics.draw(
+            images.hole,
+            love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
+            drawx * tileSize,
+            drawy * tileSize,
+            0,
+            1,
+            1
+        )
+    end
 end
 
 function hole:push(dx, dy)
@@ -80,4 +93,64 @@ end
 
 function hole:affectConnections()
     
+end
+
+function hole:checkFill()
+    if self.checked then return true end
+    if self.filled then return false end
+
+    self.checked = true
+
+    local filling = true
+
+    here = getObjectAt(self.pos.x, self.pos.y)
+
+    if here.blob then
+        if self.connections.up == here.blob.connections.up
+        and self.connections.left == here.blob.connections.left
+        and self.connections.right == here.blob.connections.right
+        and self.connections.down == here.blob.connections.down then
+            if self.connections.up then
+                filling = getObjectAt(self.pos.x, self.pos.y - 1).hole:checkFill()
+            end
+            if self.connections.left then
+                filling = filling and getObjectAt(self.pos.x - 1, self.pos.y).hole:checkFill()
+            end
+            if self.connections.right then
+                filling = filling and getObjectAt(self.pos.x + 1, self.pos.y).hole:checkFill()
+            end
+            if self.connections.down then
+                filling = filling and getObjectAt(self.pos.x, self.pos.y + 1).hole:checkFill()
+            end
+        else
+            filling = false
+        end
+    else
+        filling = false
+    end
+
+    self.checked = false
+    return filling
+end
+
+function hole:applyFill()
+    if self.filled then return end
+
+    here = getObjectAt(self.pos.x, self.pos.y)
+
+    self.filled = true
+    here.blob.alive = false
+
+    if self.connections.up then
+        getObjectAt(self.pos.x, self.pos.y - 1).hole:applyFill()
+    end
+    if self.connections.left then
+        getObjectAt(self.pos.x - 1, self.pos.y).hole:applyFill()
+    end
+    if self.connections.right then
+        getObjectAt(self.pos.x + 1, self.pos.y).hole:applyFill()
+    end
+    if self.connections.down then
+        getObjectAt(self.pos.x, self.pos.y + 1).hole:applyFill()
+    end
 end
