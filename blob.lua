@@ -1,6 +1,6 @@
 blob = class:new()
 
-function blob:init(x, y, cn)
+function blob:init(x, y, color, cn)
     self.pos = {x=x, y=y}
     self.nextPos = {x=x, y=y}
 
@@ -10,6 +10,7 @@ function blob:init(x, y, cn)
     if cn/2 % 2 == 1 then self.connections.left = true end
     if cn/4 % 2 == 1 then self.connections.right = true end
     if cn/8 % 2 == 1 then self.connections.down = true end
+    self.color = color
 
     self.alive = true
 
@@ -22,7 +23,7 @@ function blob:draw()
 
     love.graphics.draw(
         images.blob,
-        love.graphics.newQuad(self.connectNum*tileSize, 0, tileSize, tileSize, tileSize*16, tileSize),
+        love.graphics.newQuad(self.connectNum*tileSize, self.color*tileSize, tileSize, tileSize, tileSize*16, tileSize*3),
         math.floor(drawx * tileSize),
         math.floor(drawy * tileSize),
         0,
@@ -86,10 +87,10 @@ function blob:affectConnections()
     local right = getObjectAt(self.pos.x + 1, self.pos.y)
     local down = getObjectAt(self.pos.x, self.pos.y + 1)
 
-    if up.blob then self.connections.up = true end
-    if left.blob then self.connections.left = true end
-    if right.blob then self.connections.right = true end
-    if down.blob then self.connections.down = true end
+    if up.blob and up.blob.color == self.color then self.connections.up = true end
+    if left.blob and left.blob.color == self.color then self.connections.left = true end
+    if right.blob and right.blob.color == self.color then self.connections.right = true end
+    if down.blob and down.blob.color == self.color then self.connections.down = true end
 
     self.connectNum = 0
     if self.connections.up then self.connectNum = self.connectNum + 1 end
