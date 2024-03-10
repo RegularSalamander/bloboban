@@ -22,7 +22,7 @@ function blob:draw()
 
     love.graphics.draw(
         images.blob,
-        love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
+        love.graphics.newQuad(self.connectNum*tileSize, 0, tileSize, tileSize, tileSize*16, tileSize),
         math.floor(drawx * tileSize),
         math.floor(drawy * tileSize),
         0,

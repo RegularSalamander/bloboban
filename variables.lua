@@ -1,13 +1,13 @@
 --native resolution (16:9)
-screenWidth = 320
-screenHeight = 180
+screenWidth = 432
+screenHeight = 243
 
 --scale the window starts as (multiplier of the native resolution)
 defaultScale = 3
 
 updatesPerFrame = 1
 
-tileSize = 12
+tileSize = 16
 
-tweenTime = 8
+tweenTime = 10
 waitTime = 2
