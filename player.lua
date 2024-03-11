@@ -37,7 +37,7 @@ function player:control()
     end
     
     --don't move unless buffered or actively pressing
-    if mostRecentPressed < 0 and not bufferedControl then
+    if mostRecentPressed <= 0 and not bufferedControl then
         return false
     end
 
