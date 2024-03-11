@@ -15,6 +15,7 @@ function game_load()
         x = 0,
         c = 0
     }
+    bufferedControl = false
 
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
@@ -39,6 +40,7 @@ function game_update(delta)
 
     if animationState == animStates.ready then
         if checkPlayerMoving() then
+            bufferedControl = false
             changeAnimationState(animStates.moving)
         end
     elseif animationState == animStates.moving then
@@ -128,6 +130,9 @@ end
 function game_keypressed(key, scancode, isrepeat)
     --if you want to remap keys, do it by changing the scancode
     if isrepeat then return end
+    if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" and animationState ~= animStates.ready then
+        bufferedControl = true
+    end
     if controls[scancode] ~= nil then controls[scancode] = 1 end
 end
 

@@ -20,14 +20,35 @@ end
 function player:control()
     local allowMove = false
 
+    --determine most recently pressed button
+    local input = "up"
+    local mostRecentPressed = controls["up"]
+    if controls["left"] > mostRecentPressed then
+        mostRecentPressed = controls["left"]
+        input = "left"
+    end
+    if controls["right"] > mostRecentPressed then
+        mostRecentPressed = controls["right"]
+        input = "right"
+    end
+    if controls["down"] > mostRecentPressed then
+        mostRecentPressed = controls["down"]
+        input = "down"
+    end
+    
+    --don't move unless buffered or actively pressing
+    if mostRecentPressed < 0 and not bufferedControl then
+        return false
+    end
+
     --movement
-    if controls["up"] >= 1 then
+    if input == "up" then
         allowMove = self:move(0, -1)
-    elseif controls["down"] >= 1 then
+    elseif input == "down" then
         allowMove = self:move(0, 1)
-    elseif controls["left"] >= 1 then
+    elseif input == "left" then
         allowMove = self:move(-1, 0)
-    elseif controls["right"] >= 1 then
+    elseif input == "right" then
         allowMove = self:move(1, 0)
     end
 
