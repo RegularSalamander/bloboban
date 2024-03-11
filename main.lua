@@ -2,6 +2,7 @@ require "class"
 util = require "utils"
 
 require "variables"
+require "levels"
 
 require "game"
 
