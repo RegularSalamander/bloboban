@@ -12,8 +12,14 @@ tileSize = 16
 animStates = {
     ready = 0,
     moving = 1,
-    waiting = 2
+    waiting = 2,
+    preconnect = 3,
+    postconnect = 4
 }
 --controlTime = 0
 moveTime = 10
+preconnectTime = 10
+postconnectTime = 10
 waitTime = 2
+
+blobEnlarge = 1.5

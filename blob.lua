@@ -18,17 +18,23 @@ function blob:init(x, y, color, cn)
 end
 
 function blob:draw()
+    local drawScale = 1
+    if animationState == animStates.preconnect and self.willConnect then
+        drawScale = util.map(animationFrame, 0, preconnectTime, 1, blobEnlarge)
+    elseif animationState == animStates.postconnect and self.willConnect then
+        drawScale = util.map(animationFrame, 0, postconnectTime, blobEnlarge, 1)
+    end
     local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
     local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
 
     love.graphics.draw(
         images.blob,
         love.graphics.newQuad(self.connectNum*tileSize, self.color*tileSize, tileSize, tileSize, tileSize*16, tileSize*3),
-        math.floor(drawx * tileSize),
-        math.floor(drawy * tileSize),
+        math.floor(drawx * tileSize) - 0.5*tileSize*(drawScale-1),
+        math.floor(drawy * tileSize) - 0.5*tileSize*(drawScale-1),
         0,
-        1,
-        1
+        drawScale,
+        drawScale
     )
 end
 
@@ -79,6 +85,22 @@ function blob:cancelMove()
     self.nextPos.x = self.pos.x
     self.nextPos.y = self.pos.y
     self.checked = false
+end
+
+function blob:testConnections()
+    self.willConnect = false
+
+    local up = getObjectAt(self.pos.x, self.pos.y - 1)
+    local left = getObjectAt(self.pos.x - 1, self.pos.y)
+    local right = getObjectAt(self.pos.x + 1, self.pos.y)
+    local down = getObjectAt(self.pos.x, self.pos.y + 1)
+
+    if up.blob and up.blob.color == self.color and not self.connections.up then self.willConnect = true end
+    if left.blob and left.blob.color == self.color and not self.connections.left then self.willConnect = true end
+    if right.blob and right.blob.color == self.color and not self.connections.right then self.willConnect = true end
+    if down.blob and down.blob.color == self.color and not self.connections.down then self.willConnect = true end
+
+    return self.willConnect
 end
 
 function blob:affectConnections()

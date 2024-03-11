@@ -18,7 +18,7 @@ function game_load()
 
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
-    objects.player = { player:new(0, 0) }
+    objects.player = { player:new(7, 10) }
     objects.blobs = { blob:new(10, 10, 0, 0), blob:new(8, 10, 0, 0), blob:new(10, 8, 1, 0), blob:new(10, 12, 1, 0), blob:new(12, 10, 2, 0) }
     objects.walls = { wall:new(14, 10) }
     objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2), hole:new(20, 11, 4), hole:new(21, 11, 2) }
@@ -58,7 +58,26 @@ function game_update(delta)
             for i = 1, #objects.holes do
                 objects.holes[i]:applyMove()
             end
-    
+
+            --check if any blobs will connect
+            --if yes, go to preconnect
+            --if not go to waiting
+            local nextState = animStates.waiting
+            for i = 1, #objects.blobs do
+                if objects.blobs[i]:testConnections() then
+                    nextState = animStates.preconnect
+                end
+            end
+
+            if nextState == animStates.waiting then
+                checkHoleFilling()
+            end
+
+            animationState = nextState
+            animationFrame = 0
+        end
+    elseif animationState == animStates.preconnect then
+        if animationFrame == preconnectTime then
             --affect the connections between objects
             for i = 1, #objects.blobs do
                 objects.blobs[i]:affectConnections()
@@ -66,18 +85,13 @@ function game_update(delta)
             for i = 1, #objects.holes do
                 objects.holes[i]:affectConnections()
             end
-    
-            --check for filled holes
-            for i = 1, #objects.holes do
-                if objects.holes[i]:checkFill() then objects.holes[i]:applyFill() end
-            end
-    
-            --delete blobs from filled holes
-            for i = #objects.blobs, 1, -1 do
-                if not objects.blobs[i].alive then
-                    table.remove(objects.blobs, i)
-                end
-            end
+
+            animationState = animStates.postconnect
+            animationFrame = 0
+        end
+    elseif animationState == animStates.postconnect then
+        if animationFrame == postconnectTime then
+            checkHoleFilling()
 
             animationState = animStates.waiting
             animationFrame = 0
@@ -163,4 +177,21 @@ function getObjectAt(x, y)
     end
     
     return rv
+end
+
+function checkHoleFilling()
+    --check for filled holes
+    for i = 1, #objects.holes do
+        if objects.holes[i]:checkFill() then
+            objects.holes[i]:applyFill()
+        end
+    end
+
+    --delete blobs from filled holes
+    for i = #objects.blobs, 1, -1 do
+        if not objects.blobs[i].alive then
+            table.remove(objects.blobs, i)
+        end
+    end
+    
 end
