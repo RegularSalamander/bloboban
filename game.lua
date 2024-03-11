@@ -19,7 +19,7 @@ function game_load()
     --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = { player:new(7, 10) }
-    objects.blobs = { blob:new(10, 10, 0, 0), blob:new(8, 10, 0, 0), blob:new(10, 8, 1, 0), blob:new(10, 12, 1, 0), blob:new(12, 10, 2, 0) }
+    objects.blobs = { blob:new(10, 10, 0, 0), blob:new(8, 10, 0, 0), blob:new(10, 8, 0, 0), blob:new(10, 12, 0, 0), blob:new(12, 10, 0, 0) }
     objects.walls = { wall:new(14, 10) }
     objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2), hole:new(20, 11, 4), hole:new(21, 11, 2) }
 
@@ -36,28 +36,12 @@ function game_update(delta)
     animationFrame = animationFrame + 1
 
     if animationState == animStates.ready then
-        if objects.player[1]:control() then
-            animationState = animStates.moving
-            animationFrame = 0
-        else
-            for i = 1, #objects.blobs do
-                objects.blobs[i]:cancelMove()
-            end
-            for i = 1, #objects.holes do
-                objects.holes[i]:cancelMove()
-            end
+        if checkPlayerMoving() then
+            changeAnimationState(animStates.moving)
         end
     elseif animationState == animStates.moving then
         if animationFrame == moveTime then
-            --finalize movement
-            objects.player[1]:applyMove()
-
-            for i = 1, #objects.blobs do
-                objects.blobs[i]:applyMove()
-            end
-            for i = 1, #objects.holes do
-                objects.holes[i]:applyMove()
-            end
+            applyMovement()
 
             --check if any blobs will connect
             --if yes, go to preconnect
@@ -73,33 +57,22 @@ function game_update(delta)
                 checkHoleFilling()
             end
 
-            animationState = nextState
-            animationFrame = 0
+            changeAnimationState(nextState)
         end
     elseif animationState == animStates.preconnect then
         if animationFrame == preconnectTime then
-            --affect the connections between objects
-            for i = 1, #objects.blobs do
-                objects.blobs[i]:affectConnections()
-            end
-            for i = 1, #objects.holes do
-                objects.holes[i]:affectConnections()
-            end
-
-            animationState = animStates.postconnect
-            animationFrame = 0
+            affectConnections()
+            changeAnimationState(animStates.postconnect)
         end
     elseif animationState == animStates.postconnect then
         if animationFrame == postconnectTime then
             checkHoleFilling()
 
-            animationState = animStates.waiting
-            animationFrame = 0
+            changeAnimationState(animStates.waiting)
         end
     elseif animationState == animStates.waiting then
         if animationFrame == waitTime then
-            animationState = animStates.ready
-            animationFrame = 0
+            changeAnimationState(animStates.ready)
         end
     end
 
@@ -179,8 +152,45 @@ function getObjectAt(x, y)
     return rv
 end
 
+function checkPlayerMoving()
+    local rv =  objects.player[1]:control()
+
+    if not rv then
+        for i = 1, #objects.blobs do
+            objects.blobs[i]:cancelMove()
+        end
+        for i = 1, #objects.holes do
+            objects.holes[i]:cancelMove()
+        end
+    end
+
+    return rv
+end
+
+function applyMovement()
+    --apply movement
+    objects.player[1]:applyMove()
+
+    for i = 1, #objects.blobs do
+        objects.blobs[i]:applyMove()
+    end
+    for i = 1, #objects.holes do
+        objects.holes[i]:applyMove()
+    end
+end
+
+function affectConnections()
+    --affect the connections between objects
+    for i = 1, #objects.blobs do
+        objects.blobs[i]:affectConnections()
+    end
+    for i = 1, #objects.holes do
+        objects.holes[i]:affectConnections()
+    end
+end
+
 function checkHoleFilling()
-    --check for filled holes
+    --check for filled holes and fill them
     for i = 1, #objects.holes do
         if objects.holes[i]:checkFill() then
             objects.holes[i]:applyFill()
@@ -194,4 +204,9 @@ function checkHoleFilling()
         end
     end
     
+end
+
+function changeAnimationState(newState)
+    animationState = newState
+    animationFrame = 0
 end
