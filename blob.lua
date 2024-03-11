@@ -10,7 +10,7 @@ function blob:init(x, y, color, cn)
     if cn/2 % 2 == 1 then self.connections.left = true end
     if cn/4 % 2 == 1 then self.connections.right = true end
     if cn/8 % 2 == 1 then self.connections.down = true end
-    self.color = color
+    self.color = color --0=red, 1=green, 2=blue
 
     self.alive = true
 

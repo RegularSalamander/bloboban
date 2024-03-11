@@ -12,6 +12,7 @@ function hole:init(x, y, cn)
     if math.floor(cn/8) % 2 ~= 0 then self.connections.down = true end
 
     self.filled = false
+    self.color = 0
 
     self.checked = false
 end
@@ -22,7 +23,7 @@ function hole:draw()
     if self.filled then
         love.graphics.draw(
             images.filledhole,
-            love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
+            love.graphics.newQuad(self.connectNum*tileSize, self.color*tileSize, tileSize, tileSize, tileSize*16, tileSize*3),
             math.floor(drawx * tileSize),
             math.floor(drawy * tileSize),
             0,
@@ -32,7 +33,7 @@ function hole:draw()
     else
         love.graphics.draw(
             images.hole,
-            love.graphics.newQuad(self.connectNum*tileSize, 0, 12, 12, 192, 12),
+            love.graphics.newQuad(self.connectNum*tileSize, 0, tileSize, tileSize, tileSize*16, tileSize),
             drawx * tileSize,
             drawy * tileSize,
             0,
@@ -139,6 +140,7 @@ function hole:applyFill()
     here = getObjectAt(self.pos.x, self.pos.y)
 
     self.filled = true
+    self.color = here.blob.color
     here.blob.alive = false
 
     if self.connections.up then
