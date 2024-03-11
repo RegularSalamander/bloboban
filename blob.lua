@@ -27,6 +27,7 @@ function blob:draw()
     local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
     local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
 
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
         images.blob,
         love.graphics.newQuad(self.connectNum*tileSize, self.color*tileSize, tileSize, tileSize, tileSize*16, tileSize*3),

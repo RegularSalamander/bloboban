@@ -9,6 +9,7 @@ function player:draw()
     local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
     local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
 
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
         images.player,
         math.floor(drawx * tileSize),

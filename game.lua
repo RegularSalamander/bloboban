@@ -20,8 +20,12 @@ function game_load()
     objects = {}
     objects.player = { player:new(7, 10) }
     objects.blobs = { blob:new(10, 10, 0, 0), blob:new(8, 10, 0, 0), blob:new(10, 8, 0, 0), blob:new(10, 12, 0, 0), blob:new(12, 10, 0, 0) }
-    objects.walls = { wall:new(14, 10) }
+    objects.walls = { wall:new(14, 10), wall:new(15, 10), wall:new(15, 9) }
     objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2), hole:new(20, 11, 4), hole:new(21, 11, 2) }
+
+    for i = 1, #objects.walls do
+        objects.walls[i]:setOutlines()
+    end
 
     animationState = animStates.ready
     animationFrame = 0
