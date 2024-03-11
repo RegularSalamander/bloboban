@@ -9,6 +9,11 @@ updatesPerFrame = 1
 
 tileSize = 16
 
+colors = {
+    checkerLight = {159/255, 209/255, 234/255},
+    checkerDark = {94/255, 144/255, 168/255}
+}
+
 animStates = {
     ready = 0,
     moving = 1,

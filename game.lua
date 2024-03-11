@@ -95,6 +95,17 @@ function game_draw()
     love.graphics.setBackgroundColor(1, 1, 1)
     love.graphics.clear()
 
+    for x = 0, screenWidth/tileSize do
+        for y = 0, screenHeight/tileSize do
+            if (x+y)%2 == 0 then
+                love.graphics.setColor(colors.checkerLight)
+            else
+                love.graphics.setColor(colors.checkerDark)
+            end
+            love.graphics.rectangle("fill", x*tileSize, y*tileSize, tileSize, tileSize)
+        end
+    end
+
     objects.player[1]:draw()
 
     for i = 1, #objects.holes do
