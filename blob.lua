@@ -18,8 +18,8 @@ function blob:init(x, y, color, cn)
 end
 
 function blob:draw()
-    local drawx = util.map(math.min(animationFrame, tweenTime), 0, tweenTime, self.pos.x, self.nextPos.x)
-    local drawy = util.map(math.min(animationFrame, tweenTime), 0, tweenTime, self.pos.y, self.nextPos.y)
+    local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
+    local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
 
     love.graphics.draw(
         images.blob,

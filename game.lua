@@ -23,6 +23,7 @@ function game_load()
     objects.walls = { wall:new(14, 10) }
     objects.holes = { hole:new(20, 10, 4), hole:new(21, 10, 2), hole:new(20, 11, 4), hole:new(21, 11, 2) }
 
+    animationState = animStates.ready
     animationFrame = 0
 end
 
@@ -32,9 +33,12 @@ function game_update(delta)
     --if we're at less than 30 fps that probably means the game was unfocused
     delta = math.min(delta, 2)
 
-    if animationFrame == 0 then
+    animationFrame = animationFrame + 1
+
+    if animationState == animStates.ready then
         if objects.player[1]:control() then
-            animationFrame = 1
+            animationState = animStates.moving
+            animationFrame = 0
         else
             for i = 1, #objects.blobs do
                 objects.blobs[i]:cancelMove()
@@ -43,39 +47,46 @@ function game_update(delta)
                 objects.holes[i]:cancelMove()
             end
         end
-    elseif animationFrame == tweenTime + waitTime then
-        --finalize movement
-        objects.player[1]:applyMove()
-        for i = 1, #objects.blobs do
-            objects.blobs[i]:applyMove()
-        end
-        for i = 1, #objects.holes do
-            objects.holes[i]:applyMove()
-        end
+    elseif animationState == animStates.moving then
+        if animationFrame == moveTime then
+            --finalize movement
+            objects.player[1]:applyMove()
 
-        --affect the connections between objects
-        for i = 1, #objects.blobs do
-            objects.blobs[i]:affectConnections()
-        end
-        for i = 1, #objects.holes do
-            objects.holes[i]:affectConnections()
-        end
-
-        --check for filled holes
-        for i = 1, #objects.holes do
-            if objects.holes[i]:checkFill() then objects.holes[i]:applyFill() end
-        end
-
-        --delete blobs from filled holes
-        for i = #objects.blobs, 1, -1 do
-            if not objects.blobs[i].alive then
-                table.remove(objects.blobs, i)
+            for i = 1, #objects.blobs do
+                objects.blobs[i]:applyMove()
             end
-        end
+            for i = 1, #objects.holes do
+                objects.holes[i]:applyMove()
+            end
+    
+            --affect the connections between objects
+            for i = 1, #objects.blobs do
+                objects.blobs[i]:affectConnections()
+            end
+            for i = 1, #objects.holes do
+                objects.holes[i]:affectConnections()
+            end
+    
+            --check for filled holes
+            for i = 1, #objects.holes do
+                if objects.holes[i]:checkFill() then objects.holes[i]:applyFill() end
+            end
+    
+            --delete blobs from filled holes
+            for i = #objects.blobs, 1, -1 do
+                if not objects.blobs[i].alive then
+                    table.remove(objects.blobs, i)
+                end
+            end
 
-        animationFrame = 0
-    else
-        animationFrame = animationFrame + 1
+            animationState = animStates.waiting
+            animationFrame = 0
+        end
+    elseif animationState == animStates.waiting then
+        if animationFrame == waitTime then
+            animationState = animStates.ready
+            animationFrame = 0
+        end
     end
 
 

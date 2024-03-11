@@ -9,5 +9,11 @@ updatesPerFrame = 1
 
 tileSize = 16
 
-tweenTime = 10
+animStates = {
+    ready = 0,
+    moving = 1,
+    waiting = 2
+}
+--controlTime = 0
+moveTime = 10
 waitTime = 2
