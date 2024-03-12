@@ -46,41 +46,49 @@ function game_update(delta)
         end
     elseif animationState == animStates.moving then
         if animationFrame == moveTime then
-            applyMovement()
+            applyMove()
 
-            --check if any blobs will connect
-            --if yes, go to preconnect
-            --if not go to waiting
-            local nextState = animStates.waiting
-            for i = 1, #objects.blobs do
-                if objects.blobs[i]:testChanges() then
-                    nextState = animStates.preconnect
-                end
+            if checkAffect() then
+                changeAnimationState(animStates.affect)
+            elseif checkConnect() then
+                changeAnimationState(animStates.connect)
+            elseif checkFill() then
+                changeAnimationState(animStates.fill)
+            else
+                changeAnimationState(animStates.waiting)
             end
-
-            if nextState == animStates.waiting then
-                checkHoleFilling()
+        end
+    elseif animationState == animStates.affect then
+        if animationFrame == affectTime then
+            applyAffect()
+        elseif animationFrame == affectTime*2 then
+            if checkConnect() then
+                changeAnimationState(animStates.connect)
+            elseif checkFill() then
+                changeAnimationState(animStates.fill)
+            else
+                changeAnimationState(animStates.ready)
             end
-
-            changeAnimationState(nextState)
         end
-    elseif animationState == animStates.preconnect then
-        if animationFrame == preconnectTime then
-            applyChanges()
-            changeAnimationState(animStates.postconnect)
+    elseif animationState == animStates.connect then
+        if animationFrame == connectTime then
+            applyConnect()
+        elseif animationFrame == connectTime*2 then
+            if checkFill() then
+                changeAnimationState(animStates.fill)
+            else
+                changeAnimationState(animStates.ready)
+            end
         end
-    elseif animationState == animStates.postconnect then
-        if animationFrame == postconnectTime then
-            checkHoleFilling()
-
-            changeAnimationState(animStates.waiting)
+    elseif animationState == animStates.fill then
+        if animationFrame == fillTime then
+            checkFill()
         end
     elseif animationState == animStates.waiting then
         if animationFrame == waitTime then
             changeAnimationState(animStates.ready)
         end
     end
-
 
     --keys are updated last so that objects can see if they're 1 or -1
     for k, v in pairs(controls) do
@@ -199,8 +207,7 @@ function checkPlayerMoving()
     return rv
 end
 
-function applyMovement()
-    --apply movement
+function applyMove()
     objects.player[1]:applyMove()
 
     for i = 1, #objects.blobs do
@@ -211,17 +218,44 @@ function applyMovement()
     end
 end
 
-function applyChanges()
-    --affect the connections between objects
+function checkAffect()
+    local rv = false
+    
     for i = 1, #objects.blobs do
-        objects.blobs[i]:applyChanges()
+        if objects.blobs[i]:checkAffect() then
+            rv = true
+        end
     end
-    for i = 1, #objects.holes do
-        objects.holes[i]:applyChanges()
+
+    return rv
+end
+
+function applyAffect()
+    for i = 1, #objects.blobs do
+        objects.blobs[i]:applyAffect()
     end
 end
 
-function checkHoleFilling()
+
+function checkConnect()
+    local rv = false
+    
+    for i = 1, #objects.blobs do
+        if objects.blobs[i]:checkConnect() then
+            rv = true
+        end
+    end
+
+    return rv
+end
+
+function applyConnect()
+    for i = 1, #objects.blobs do
+        objects.blobs[i]:applyConnect()
+    end
+end
+
+function checkFill()
     --check for filled holes and fill them
     for i = 1, #objects.holes do
         if objects.holes[i]:checkFill() then
@@ -235,7 +269,6 @@ function checkHoleFilling()
             table.remove(objects.blobs, i)
         end
     end
-    
 end
 
 function changeAnimationState(newState)

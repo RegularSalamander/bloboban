@@ -19,10 +19,18 @@ end
 
 function blob:draw()
     local drawScale = 1
-    if animationState == animStates.preconnect and self.willChange then
-        drawScale = util.map(animationFrame, 0, preconnectTime, 1, blobEnlarge)
-    elseif animationState == animStates.postconnect and self.willChange then
-        drawScale = util.map(animationFrame, 0, postconnectTime, blobEnlarge, 1)
+    if animationState == animStates.affect and self.willChange then
+        if animationFrame <= affectTime then
+            drawScale = util.map(animationFrame, 0, affectTime, 1, blobEnlarge)
+        else
+            drawScale = util.map(animationFrame, affectTime, affectTime*2, blobEnlarge, 1)
+        end
+    elseif animationState == animStates.connect and self.willChange then
+        if animationFrame <= connectTime then
+            drawScale = util.map(animationFrame, 0, connectTime, 1, blobEnlarge)
+        else
+            drawScale = util.map(animationFrame, connectTime, connectTime*2, blobEnlarge, 1)
+        end
     end
     local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
     local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
@@ -88,13 +96,8 @@ function blob:cancelMove()
     self.checked = false
 end
 
-function blob:testChanges()
+function blob:checkAffect()
     self.willChange = false
-
-    local up = getObjectAt(self.pos.x, self.pos.y - 1)
-    local left = getObjectAt(self.pos.x - 1, self.pos.y)
-    local right = getObjectAt(self.pos.x + 1, self.pos.y)
-    local down = getObjectAt(self.pos.x, self.pos.y + 1)
 
     local affector = getObjectAt(self.pos.x, self.pos.y).affector
 
@@ -103,41 +106,31 @@ function blob:testChanges()
             if self.color ~= affector.color then
                 self.willChange = true
                 if self.connections.up then
-                    up.blob.willChange = true
+                    getObjectAt(self.pos.x, self.pos.y - 1).blob.willChange = true
                 end
                 if self.connections.left then
-                    left.blob.willChange = true
+                    getObjectAt(self.pos.x - 1, self.pos.y).blob.willChange = true
                 end
                 if self.connections.right then
-                    right.blob.willChange = true
+                    getObjectAt(self.pos.x + 1, self.pos.y).blob.willChange = true
                 end
                 if self.connections.down then
-                    down.blob.willChange = true
+                    getObjectAt(self.pos.x, self.pos.y + 1).blob.willChange = true
                 end
             end
         end
     end
 
-    if up.blob and up.blob.color == self.color and not self.connections.up then self.willChange = true end
-    if left.blob and left.blob.color == self.color and not self.connections.left then self.willChange = true end
-    if right.blob and right.blob.color == self.color and not self.connections.right then self.willChange = true end
-    if down.blob and down.blob.color == self.color and not self.connections.down then self.willChange = true end
-
     return self.willChange
 end
 
-function blob:applyChanges()
+function blob:applyAffect()
     local up = getObjectAt(self.pos.x, self.pos.y - 1)
     local left = getObjectAt(self.pos.x - 1, self.pos.y)
     local right = getObjectAt(self.pos.x + 1, self.pos.y)
     local down = getObjectAt(self.pos.x, self.pos.y + 1)
 
     local affector = getObjectAt(self.pos.x, self.pos.y).affector
-
-    if up.blob and up.blob.color == self.color then self.connections.up = true end
-    if left.blob and left.blob.color == self.color then self.connections.left = true end
-    if right.blob and right.blob.color == self.color then self.connections.right = true end
-    if down.blob and down.blob.color == self.color then self.connections.down = true end
 
     if affector then
         if affector.type == "colorChanger" then
@@ -166,6 +159,36 @@ function blob:applyChanges()
             end
         end
     end
+
+    self:changeConnectNum()
+end
+
+function blob:checkConnect()
+    self.willChange = false
+
+    local up = getObjectAt(self.pos.x, self.pos.y - 1)
+    local left = getObjectAt(self.pos.x - 1, self.pos.y)
+    local right = getObjectAt(self.pos.x + 1, self.pos.y)
+    local down = getObjectAt(self.pos.x, self.pos.y + 1)
+
+    if up.blob and up.blob.color == self.color and not self.connections.up then self.willChange = true end
+    if left.blob and left.blob.color == self.color and not self.connections.left then self.willChange = true end
+    if right.blob and right.blob.color == self.color and not self.connections.right then self.willChange = true end
+    if down.blob and down.blob.color == self.color and not self.connections.down then self.willChange = true end
+
+    return self.willChange
+end
+
+function blob:applyConnect()
+    local up = getObjectAt(self.pos.x, self.pos.y - 1)
+    local left = getObjectAt(self.pos.x - 1, self.pos.y)
+    local right = getObjectAt(self.pos.x + 1, self.pos.y)
+    local down = getObjectAt(self.pos.x, self.pos.y + 1)
+
+    if up.blob and up.blob.color == self.color then self.connections.up = true end
+    if left.blob and left.blob.color == self.color then self.connections.left = true end
+    if right.blob and right.blob.color == self.color then self.connections.right = true end
+    if down.blob and down.blob.color == self.color then self.connections.down = true end
 
     self:changeConnectNum()
 end

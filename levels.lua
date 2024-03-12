@@ -18,7 +18,7 @@ function loadLevel(num)
         objects.walls[i]:setOutlines()
     end
     for i = 1, #objects.blobs do
-        objects.blobs[i]:applyChanges()
+        objects.blobs[i]:applyConnect()
     end
 end
 

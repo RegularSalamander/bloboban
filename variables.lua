@@ -18,13 +18,15 @@ animStates = {
     ready = 0,
     moving = 1,
     waiting = 2,
-    preconnect = 3,
-    postconnect = 4
+    affect = 3,
+    connect = 4,
+    fill = 5
 }
 --controlTime = 0
 moveTime = 10
-preconnectTime = 10
-postconnectTime = 10
+affectTime = 10
+connectTime = 10
+fillTime = 5
 waitTime = 2
 
 blobEnlarge = 1.5
