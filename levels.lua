@@ -34,7 +34,8 @@ function addLevelObjects(num)
         objects.player = { player:new(10, 6) }
         objects.blobs = { blob:new(8, 8, 0), blob:new(10, 8, 0), blob:new(12, 8, 0) }
         objects.holes = { hole:new(19, 5, 8), hole:new(19, 6, 9), hole:new(19, 7, 1) }
-        fillWallRect(6, 4, 15, 1)
+        fillWallRect(7, 4, 14, 1)
+        fillWallRect(7, 5, 1, 1)
         fillWallRect(6, 5, 1, 4)
         fillWallRect(7, 8, 1, 3)
         fillWallRect(8, 10, 6, 1)
@@ -83,6 +84,22 @@ function addLevelObjects(num)
         fillWallRect(19, 5, 2, 1)
         fillWallRect(20, 6, 1, 4)
         fillWallRect(19, 8, 1, 2)
+
+        addFloorRect(7, 5, 13, 5)
+    elseif num == 3 then
+        objects.player = { player:new(9, 7) }
+        objects.blobs = { blob:new(12, 6, 0), blob:new(12, 7, 0), blob:new(12, 8, 0) }
+        objects.holes = { hole:new(19, 6, 8), hole:new(19, 7, 1), hole:new(19, 8, 0) }
+        objects.affectors = { colorChanger:new(15, 6, 1) }
+
+        fillWallRect(8, 4, 4, 1)
+        fillWallRect(6, 5, 3, 1)
+        fillWallRect(11, 5, 10, 1)
+        fillWallRect(7, 9, 2, 1)
+        fillWallRect(6, 6, 1, 4)
+        fillWallRect(8, 10, 4, 1)
+        fillWallRect(11, 9, 10, 1)
+        fillWallRect(20, 6, 1, 3)
 
         addFloorRect(7, 5, 13, 5)
     end

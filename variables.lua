@@ -10,6 +10,7 @@ updatesPerFrame = 1
 tileSize = 16
 
 colors = {
+    background = {220/255, 220/255, 220/255},
     checkerLight = {159/255, 209/255, 234/255},
     checkerDark = {94/255, 144/255, 168/255},
     particle = {220/255, 220/255, 220/255}

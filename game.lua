@@ -28,7 +28,7 @@ function game_load()
 
     floorQuads = {}
 
-    loadLevel(0)
+    loadLevel(3)
 
     animationState = animStates.ready
     animationFrame = 0
@@ -118,7 +118,7 @@ end
 function game_draw()
     love.graphics.setCanvas(gameCanvas)
 
-    love.graphics.setBackgroundColor(1, 1, 1)
+    love.graphics.setBackgroundColor(colors.background)
     love.graphics.clear()
 
     for i = 1, #floorQuads do
