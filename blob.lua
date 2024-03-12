@@ -131,6 +131,8 @@ function blob:applyAffect()
     if affector then
         if affector.type == "colorChanger" then
             if self.color ~= affector.color then
+                spawnParticleSquare(50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 30)
+
                 self.color = affector.color
                 if self.connections.up then
                     self.connections.up = false

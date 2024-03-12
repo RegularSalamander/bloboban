@@ -145,6 +145,8 @@ function hole:applyFill()
     self.color = here.blob.color
     here.blob.alive = false
 
+    spawnParticleSquare(50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 30)
+
     if self.connections.up then
         getObjectAt(self.pos.x, self.pos.y - 1).hole:applyFill()
     end

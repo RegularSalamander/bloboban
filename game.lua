@@ -24,10 +24,11 @@ function game_load()
     objects.walls = {}
     objects.holes = {}
     objects.affectors = {}
+    objects.particles = {}
 
     floorQuads = {}
 
-    loadLevel(2)
+    loadLevel(0)
 
     animationState = animStates.ready
     animationFrame = 0
@@ -39,6 +40,20 @@ function game_update(delta)
     --if we're at less than 30 fps that probably means the game was unfocused
     delta = math.min(delta, 2)
 
+    -- table.insert(objects.particles, particle:new(100, 100, love.math.random()*1-0.5, love.math.random()*1-0.5, 10, 50))
+
+    --update and kill particles
+    for i = 1, #objects.particles do
+        objects.particles[i]:update()
+    end
+
+    for i = #objects.particles, 1, -1 do
+        if not objects.particles[i].alive then
+            table.remove(objects.particles, i)
+        end
+    end
+
+    --update animation and state
     animationFrame = animationFrame + 1
 
     if animationState == animStates.ready then
@@ -121,29 +136,25 @@ function game_draw()
     
 
     for i = 1, #objects.affectors do
-        if objects.affectors[i].draw then
-            objects.affectors[i]:draw()
-        end
+        objects.affectors[i]:draw()
     end
 
     objects.player[1]:draw()
     
     for i = 1, #objects.holes do
-        if objects.holes[i].draw then
-            objects.holes[i]:draw()
-        end
+        objects.holes[i]:draw()
     end
 
     for i = 1, #objects.blobs do
-        if objects.blobs[i].draw then
-            objects.blobs[i]:draw()
-        end
+        objects.blobs[i]:draw()
     end
 
     for i = 1, #objects.walls do
-        if objects.walls[i].draw then
-            objects.walls[i]:draw()
-        end
+        objects.walls[i]:draw()
+    end
+
+    for i = 1, #objects.particles do
+        objects.particles[i]:draw()
     end
 end
 

@@ -11,6 +11,7 @@ require "blob"
 require "hole"
 require "wall"
 require "colorChanger"
+require "particle"
 
 gameState = ""
 
