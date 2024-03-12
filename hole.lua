@@ -94,7 +94,7 @@ function hole:cancelMove()
     self.checked = false
 end
 
-function hole:affectConnections()
+function hole:applyChanges()
     
 end
 

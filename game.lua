@@ -23,8 +23,9 @@ function game_load()
     objects.blobs = {}
     objects.walls = {}
     objects.holes = {}
+    objects.affectors = {}
 
-    loadLevel(0)
+    loadLevel(1)
 
     animationState = animStates.ready
     animationFrame = 0
@@ -52,7 +53,7 @@ function game_update(delta)
             --if not go to waiting
             local nextState = animStates.waiting
             for i = 1, #objects.blobs do
-                if objects.blobs[i]:testConnections() then
+                if objects.blobs[i]:testChanges() then
                     nextState = animStates.preconnect
                 end
             end
@@ -65,7 +66,7 @@ function game_update(delta)
         end
     elseif animationState == animStates.preconnect then
         if animationFrame == preconnectTime then
-            affectConnections()
+            applyChanges()
             changeAnimationState(animStates.postconnect)
         end
     elseif animationState == animStates.postconnect then
@@ -106,8 +107,14 @@ function game_draw()
         end
     end
 
-    objects.player[1]:draw()
+    for i = 1, #objects.affectors do
+        if objects.affectors[i].draw then
+            objects.affectors[i]:draw()
+        end
+    end
 
+    objects.player[1]:draw()
+    
     for i = 1, #objects.holes do
         if objects.holes[i].draw then
             objects.holes[i]:draw()
@@ -145,7 +152,8 @@ function getObjectAt(x, y)
     local rv = {
         wall = nil,
         blob = nil,
-        hole = nil
+        hole = nil,
+        affector = nil
     }
     
     for i = 1, #objects.walls do
@@ -163,6 +171,12 @@ function getObjectAt(x, y)
     for i = 1, #objects.holes do
         if objects.holes[i].pos.x == x and objects.holes[i].pos.y == y then
             rv.hole = objects.holes[i] 
+            break
+        end
+    end
+    for i = 1, #objects.affectors do
+        if objects.affectors[i].pos.x == x and objects.affectors[i].pos.y == y then
+            rv.affector = objects.affectors[i] 
             break
         end
     end
@@ -197,13 +211,13 @@ function applyMovement()
     end
 end
 
-function affectConnections()
+function applyChanges()
     --affect the connections between objects
     for i = 1, #objects.blobs do
-        objects.blobs[i]:affectConnections()
+        objects.blobs[i]:applyChanges()
     end
     for i = 1, #objects.holes do
-        objects.holes[i]:affectConnections()
+        objects.holes[i]:applyChanges()
     end
 end
 

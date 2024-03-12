@@ -10,6 +10,7 @@ require "player"
 require "blob"
 require "hole"
 require "wall"
+require "colorChanger"
 
 gameState = ""
 
