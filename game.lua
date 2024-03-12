@@ -25,7 +25,9 @@ function game_load()
     objects.holes = {}
     objects.affectors = {}
 
-    loadLevel(1)
+    floorQuads = {}
+
+    loadLevel(2)
 
     animationState = animStates.ready
     animationFrame = 0
@@ -104,16 +106,19 @@ function game_draw()
     love.graphics.setBackgroundColor(1, 1, 1)
     love.graphics.clear()
 
-    for x = 0, screenWidth/tileSize do
-        for y = 0, screenHeight/tileSize do
-            if (x+y)%2 == 0 then
-                love.graphics.setColor(colors.checkerLight)
-            else
-                love.graphics.setColor(colors.checkerDark)
+    for i = 1, #floorQuads do
+        for x = floorQuads[i].x, floorQuads[i].x+floorQuads[i].w-1 do
+            for y = floorQuads[i].y, floorQuads[i].y+floorQuads[i].h-1 do
+                if (x+y)%2 == 0 then
+                    love.graphics.setColor(colors.checkerLight)
+                else
+                    love.graphics.setColor(colors.checkerDark)
+                end
+                love.graphics.rectangle("fill", x*tileSize, y*tileSize, tileSize, tileSize)
             end
-            love.graphics.rectangle("fill", x*tileSize, y*tileSize, tileSize, tileSize)
         end
     end
+    
 
     for i = 1, #objects.affectors do
         if objects.affectors[i].draw then
