@@ -28,7 +28,7 @@ function game_load()
 
     floorQuads = {}
 
-    loadLevel(3)
+    loadLevel(4)
 
     animationState = animStates.ready
     animationFrame = 0
@@ -37,7 +37,6 @@ end
 function game_update(delta)
     --default frame rate is 60, delta time is dealt with in frames
     delta = delta * 60
-    --if we're at less than 30 fps that probably means the game was unfocused
     delta = math.min(delta, 2)
 
     -- table.insert(objects.particles, particle:new(100, 100, love.math.random()*1-0.5, love.math.random()*1-0.5, 10, 50))
@@ -46,7 +45,6 @@ function game_update(delta)
     for i = 1, #objects.particles do
         objects.particles[i]:update()
     end
-
     for i = #objects.particles, 1, -1 do
         if not objects.particles[i].alive then
             table.remove(objects.particles, i)
@@ -243,12 +241,22 @@ function checkAffect()
         end
     end
 
+    for i = 1, #objects.holes do
+        if objects.holes[i]:checkAffect() then
+            rv = true
+        end
+    end
+
     return rv
 end
 
 function applyAffect()
     for i = 1, #objects.blobs do
         objects.blobs[i]:applyAffect()
+    end
+
+    for i = 1, #objects.holes do
+        objects.holes[i]:applyAffect()
     end
 end
 

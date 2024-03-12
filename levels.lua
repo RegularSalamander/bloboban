@@ -102,5 +102,21 @@ function addLevelObjects(num)
         fillWallRect(20, 6, 1, 3)
 
         addFloorRect(7, 5, 13, 5)
+    elseif num == 4 then
+        objects.player = { player:new(6, 7) }
+        objects.blobs = {
+            blob:new(9, 6, 0), blob:new(10, 6, 0),
+            blob:new(8, 7, 0), blob:new(9, 7, 0), blob:new(10, 7, 0)
+        }
+        objects.holes = {
+            hole:new(8, 6, 4), hole:new(9, 6, 14), hole:new(10, 6, 10),
+            hole:new(9, 7, 5), hole:new(10, 7, 3)
+        }
+        objects.affectors = { 
+            colorChanger:new(5, 6, 1),
+            holeDisconnector:new(13, 7, 8), holeDisconnector:new(13, 8, 1)
+        }
+
+        addFloorRect(0, 0, 27, 15)
     end
 end

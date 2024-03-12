@@ -94,8 +94,62 @@ function hole:cancelMove()
     self.checked = false
 end
 
-function hole:applyChanges()
-    
+function hole:checkAffect()
+    local affector = getObjectAt(self.pos.x, self.pos.y).affector
+
+    local willChange = false
+
+    if affector then
+        if affector.type == "holeDisconnector" then
+            if self.connections.up and affector.connections.up then
+                willChange = true
+            end
+            if self.connections.left and affector.connections.left then
+                willChange = true
+            end
+            if self.connections.right and affector.connections.right then
+                willChange = true
+            end
+            if self.connections.down and affector.connections.down then
+                willChange = true
+            end
+            
+        end
+    end
+
+    return willChange
+end
+
+function hole:applyAffect()
+    local affector = getObjectAt(self.pos.x, self.pos.y).affector
+
+    local willChange = false
+
+    if affector then
+        if affector.type == "holeDisconnector" then
+            if self.connections.up and affector.connections.up then
+                willChange = true
+                self.connections.up = false
+            end
+            if self.connections.left and affector.connections.left then
+                willChange = true
+                self.connections.left = false
+            end
+            if self.connections.right and affector.connections.right then
+                willChange = true
+                self.connections.right = false
+            end
+            if self.connections.down and affector.connections.down then
+                willChange = true
+                self.connections.down = false
+            end
+        end
+    end
+
+    if willChange then
+        self:changeConnectNum()
+        spawnParticleSquare(50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 30)
+    end
 end
 
 function hole:checkFill()
@@ -159,4 +213,12 @@ function hole:applyFill()
     if self.connections.down then
         getObjectAt(self.pos.x, self.pos.y + 1).hole:applyFill()
     end
+end
+
+function hole:changeConnectNum()
+    self.connectNum = 0
+    if self.connections.up then self.connectNum = self.connectNum + 1 end
+    if self.connections.left then self.connectNum = self.connectNum + 2 end
+    if self.connections.right then self.connectNum = self.connectNum + 4 end
+    if self.connections.down then self.connectNum = self.connectNum + 8 end
 end
