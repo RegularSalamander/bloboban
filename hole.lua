@@ -113,7 +113,19 @@ function hole:checkAffect()
             if self.connections.down and affector.connections.down then
                 willChange = true
             end
-            
+        elseif affector.type == "holeConnector" then
+            if not self.connections.up and affector.connections.up and getObjectAt(self.pos.x, self.pos.y - 1).hole then
+                willChange = true
+            end
+            if not self.connections.left and affector.connections.left and getObjectAt(self.pos.x - 1, self.pos.y).hole then
+                willChange = true
+            end
+            if not self.connections.right and affector.connections.right and getObjectAt(self.pos.x + 1, self.pos.y).hole then
+                willChange = true
+            end
+            if not self.connections.down and affector.connections.down and getObjectAt(self.pos.x, self.pos.y + 1).hole then
+                willChange = true
+            end
         end
     end
 
@@ -142,6 +154,23 @@ function hole:applyAffect()
             if self.connections.down and affector.connections.down then
                 willChange = true
                 self.connections.down = false
+            end
+        elseif affector.type == "holeConnector" then
+            if not self.connections.up and affector.connections.up and getObjectAt(self.pos.x, self.pos.y - 1).hole then
+                willChange = true
+                self.connections.up = true
+            end
+            if not self.connections.left and affector.connections.left and getObjectAt(self.pos.x - 1, self.pos.y).hole then
+                willChange = true
+                self.connections.left = true
+            end
+            if not self.connections.right and affector.connections.right and getObjectAt(self.pos.x + 1, self.pos.y).hole then
+                willChange = true
+                self.connections.right = true
+            end
+            if not self.connections.down and affector.connections.down and getObjectAt(self.pos.x, self.pos.y + 1).hole then
+                willChange = true
+                self.connections.down = true
             end
         end
     end

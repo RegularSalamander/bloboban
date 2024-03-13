@@ -12,7 +12,7 @@ require "blob"
 require "hole"
 require "wall"
 require "colorChanger"
-require "holeDisconnector"
+require "holeAffectors"
 require "particle"
 
 gameState = ""
@@ -33,7 +33,7 @@ function love.load()
     images.filledhole = love.graphics.newImage("assets/filledhole.png")
     images.wall = love.graphics.newImage("assets/wall.png")
     images.colorChanger = love.graphics.newImage("assets/colorChanger.png")
-    images.holeDisconnector = love.graphics.newImage("assets/holeDisconnector.png")
+    images.holeAffector = love.graphics.newImage("assets/holeAffector.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
@@ -46,7 +46,7 @@ function love.load()
 
     setGameState("game")
 
-    -- for i = 1, 5 do
+    -- for i = 1, 13 do
     --     io.write('"')
     --     levels[i] = compileLevel(i)
     --     io.write('",\n')

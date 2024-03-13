@@ -78,11 +78,17 @@ function compileLevel(num)
                 str = str .. string.char(x+65)
                 str = str .. string.char(y+65)
                 str = str .. string.char(g+65)
+            elseif r == 255 and b == 128 and a == 255 then --hole connector
+                str = str .. "r"
+                str = str .. string.char(x+65)
+                str = str .. string.char(y+65)
+                str = str .. string.char(g+65)
             end
         end
     end
 
     io.write(str)
+    levels[num] = str
     return str
 end
 
@@ -132,8 +138,14 @@ function readLevel(num)
                 string.byte(util.charAt(line, i+3)) - 65
             ))
             i = i + 4
+        elseif t == "r" then
+            table.insert(objects.affectors, holeConnector:new(
+                string.byte(util.charAt(line, i+1)) - 65,
+                string.byte(util.charAt(line, i+2)) - 65,
+                string.byte(util.charAt(line, i+3)) - 65
+            ))
+            i = i + 4
         elseif t == "f" then
-            io.write("AHHH")
             addFloorRect(
                 string.byte(util.charAt(line, i+1)) - 65,
                 string.byte(util.charAt(line, i+2)) - 65,
