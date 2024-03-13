@@ -3,6 +3,7 @@ util = require "utils"
 
 require "variables"
 require "levels"
+require "levelLoader"
 
 require "game"
 
@@ -41,6 +42,13 @@ function love.load()
 
     gameCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
 
+    setGameState("game")
+
+    for i = 1, 5 do
+        io.write('"')
+        levels[i] = compileLevel(i)
+        io.write('",\n')
+    end
     setGameState("game")
 end
 

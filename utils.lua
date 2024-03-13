@@ -118,4 +118,8 @@ function util.removeYFromQuad(quad1, quad2)
     return list
 end
 
+function util.charAt(str, i)
+    return string.sub(str, i, i)
+end
+
 return util
