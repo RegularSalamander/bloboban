@@ -16,8 +16,12 @@ end
 function holeDisconnector:draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
-        images.wall,
-        self.pos.x * tileSize,
-        self.pos.y * tileSize
-    )
+            images.holeDisconnector,
+            love.graphics.newQuad(self.connectNum*tileSize, 0, tileSize, tileSize, tileSize*16, tileSize),
+            self.pos.x * tileSize,
+            self.pos.y * tileSize,
+            0,
+            1,
+            1
+        )
 end

@@ -32,6 +32,8 @@ function love.load()
     images.hole = love.graphics.newImage("assets/hole.png")
     images.filledhole = love.graphics.newImage("assets/filledhole.png")
     images.wall = love.graphics.newImage("assets/wall.png")
+    images.colorChanger = love.graphics.newImage("assets/colorChanger.png")
+    images.holeDisconnector = love.graphics.newImage("assets/holeDisconnector.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")

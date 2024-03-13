@@ -9,8 +9,12 @@ end
 function colorChanger:draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
-        images.wall,
+        images.colorChanger,
+        love.graphics.newQuad(self.color*tileSize, 0, tileSize, tileSize, tileSize*3, tileSize),
         self.pos.x * tileSize,
-        self.pos.y * tileSize
+        self.pos.y * tileSize,
+        0,
+        drawScale,
+        drawScale
     )
 end
