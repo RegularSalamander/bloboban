@@ -46,12 +46,12 @@ function love.load()
 
     setGameState("game")
 
-    for i = 1, 5 do
-        io.write('"')
-        levels[i] = compileLevel(i)
-        io.write('",\n')
-    end
-    setGameState("game")
+    -- for i = 1, 5 do
+    --     io.write('"')
+    --     levels[i] = compileLevel(i)
+    --     io.write('",\n')
+    -- end
+    -- setGameState("game")
 end
 
 function love.update(dt)

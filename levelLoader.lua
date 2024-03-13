@@ -21,8 +21,6 @@ function loadLevel(num)
 
     readLevel(num)
 
-    addFloorRect(0, 0, 27, 15)
-
     for i = 1, #objects.walls do
         objects.walls[i]:setOutlines()
     end
@@ -89,7 +87,7 @@ function compileLevel(num)
 end
 
 function readLevel(num)
-    local line = levels[num]
+    local line = floors[num] .. levels[num]
     local i = 1
 
     while i <= #line do
@@ -134,6 +132,15 @@ function readLevel(num)
                 string.byte(util.charAt(line, i+3)) - 65
             ))
             i = i + 4
+        elseif t == "f" then
+            io.write("AHHH")
+            addFloorRect(
+                string.byte(util.charAt(line, i+1)) - 65,
+                string.byte(util.charAt(line, i+2)) - 65,
+                string.byte(util.charAt(line, i+3)) - 65,
+                string.byte(util.charAt(line, i+4)) - 65
+            )
+            i = i + 5
         end
     end
 end
