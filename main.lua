@@ -5,6 +5,7 @@ require "variables"
 require "levels"
 require "levelLoader"
 
+require "levelSelect"
 require "game"
 
 require "player"
@@ -24,7 +25,7 @@ function love.load()
     love.graphics.setLineStyle("rough")
     
     love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true })
-    love.window.setTitle("Cleric of the Sun God")
+    love.window.setTitle("Bloboban")
 
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
@@ -44,14 +45,13 @@ function love.load()
 
     gameCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
 
-    setGameState("game")
-
     for i = 1, 13 do
         io.write('"')
         levels[i] = compileLevel(i)
         io.write('",\n')
     end
-    setGameState("game")
+    
+    setGameState("levelSelect")
 end
 
 function love.update(dt)

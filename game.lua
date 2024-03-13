@@ -28,7 +28,7 @@ function game_load()
 
     floorQuads = {}
 
-    loadLevel(13)
+    loadLevel(levelMap[currentWorld][currentLevel].i)
 
     animationState = animStates.ready
     animationFrame = 0
