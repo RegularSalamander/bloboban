@@ -13,15 +13,8 @@ function levelSelect_load()
 end
 
 function levelSelect_update()
-    local smoothing = 15
-    if util.dist(
-        mapPlayerPos.x, mapPlayerPos.y,
-        levelMap[currentWorld][currentLevel].x, levelMap[currentWorld][currentLevel].y
-    )*mapTileSize < 5 then
-        smoothing = 5
-    end
-    mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentWorld][currentLevel].x, 0.25)
-    mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentWorld][currentLevel].y, 0.25)
+    mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentWorld][currentLevel].x, 0.1)
+    mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentWorld][currentLevel].y, 0.1)
 end
 
 function levelSelect_draw()

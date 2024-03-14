@@ -49,14 +49,20 @@ function love.load()
     --font:setFilter("nearest", "nearest")
 
     gameCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
-
-    for i = 1, 13 do
-        io.write('"')
-        levels[i] = compileLevel(i)
-        io.write('",\n')
-    end
     
     setGameState("levelSelect")
+
+    -- for i = 1, 16 do
+    --     io.write('"')
+    --     levels[i] = compileLevel(i)
+    --     io.write('",\n')
+    -- end
+
+    -- --for playtesting levels
+    -- currentWorld = 1
+    -- currentLevel = 1
+    -- levelMap[1][1].i = 16
+    -- setGameState("game")
 end
 
 function love.update(dt)
