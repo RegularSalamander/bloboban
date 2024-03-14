@@ -97,7 +97,17 @@ function game_update(delta)
         end
     elseif animationState == animStates.fill then
         if animationFrame == fillTime then
-            checkFill()
+            applyFill()
+            if checkVictory() then
+                changeAnimationState(animStates.victory)
+                -- setGameState("levelSelect")
+            else
+                changeAnimationState(animStates.ready)
+            end
+        end
+    elseif animationState == animStates.victory then
+        if animationFrame == victoryTime then
+            setGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then
         if animationFrame == waitTime then
@@ -153,6 +163,41 @@ function game_draw()
 
     for i = 1, #objects.particles do
         objects.particles[i]:draw()
+    end
+
+    if animationState == animStates.victory then
+        drawVictoryAnimation()
+    end
+end
+
+function drawVictoryAnimation()
+    for i = 0, 6 do
+        local spacing = 20
+        local offset = 3
+        local x = (animationFrame - i*offset)/(victoryTime-offset*7)
+
+        local drawx = screenWidth/2 - 7*(8+spacing)/2 + i*(8+spacing)
+        local drawy = victoryY(x, currentWorld, currentLevel)
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.draw(
+            images.victory,
+            love.graphics.newQuad(i*8, 0, 8, 14, 8*7, 14),
+            drawx,
+            drawy,
+            0,
+            1,
+            1
+        )
+    end
+end
+
+function victoryY(x, w, l)
+    if (w+l)%3 == 0 then
+        return 0.5*(math.pow(2*x-1, 4)+1) * screenHeight
+    elseif (w+l)%3 == 1 then
+        return screenHeight - 0.5*(math.pow(2*x-1, 4)+1) * screenHeight
+    else
+        return 0.5*(math.pow(2*x-1, 3)+1) * screenHeight
     end
 end
 
@@ -283,6 +328,15 @@ function checkFill()
     --check for filled holes and fill them
     for i = 1, #objects.holes do
         if objects.holes[i]:checkFill() then
+            return true
+        end
+    end
+end
+
+function applyFill()
+    --check for filled holes and fill them
+    for i = 1, #objects.holes do
+        if objects.holes[i]:checkFill() then
             objects.holes[i]:applyFill()
         end
     end
@@ -293,6 +347,16 @@ function checkFill()
             table.remove(objects.blobs, i)
         end
     end
+end
+
+function checkVictory()
+    for i = 1, #objects.holes do
+        if not objects.holes[i].filled then
+            return false
+        end
+    end
+
+    return true
 end
 
 function changeAnimationState(newState)

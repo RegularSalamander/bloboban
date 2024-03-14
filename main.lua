@@ -36,6 +36,7 @@ function love.load()
     images.colorChanger = love.graphics.newImage("assets/colorChanger.png")
     images.holeAffector = love.graphics.newImage("assets/holeAffector.png")
     images.level = love.graphics.newImage("assets/level.png")
+    images.victory = love.graphics.newImage("assets/victory.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
@@ -46,11 +47,11 @@ function love.load()
 
     gameCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
 
-    -- for i = 1, 13 do
-    --     io.write('"')
-    --     levels[i] = compileLevel(i)
-    --     io.write('",\n')
-    -- end
+    for i = 1, 13 do
+        io.write('"')
+        levels[i] = compileLevel(i)
+        io.write('",\n')
+    end
     
     setGameState("levelSelect")
 end

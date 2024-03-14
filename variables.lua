@@ -31,7 +31,8 @@ animStates = {
     waiting = 2,
     affect = 3,
     connect = 4,
-    fill = 5
+    fill = 5,
+    victory = 6
 }
 --controlTime = 0
 moveTime = 10
@@ -39,5 +40,6 @@ affectTime = 10
 connectTime = 10
 fillTime = 5
 waitTime = 2
+victoryTime = 180
 
 blobEnlarge = 1.5
