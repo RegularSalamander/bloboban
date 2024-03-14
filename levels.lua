@@ -14,19 +14,24 @@ levels = {
     "wFEwGEwHEwIEwJEwKEwLEwMEwNEwOEwPEwQEwREwSEwTEwUEwFFpLFbRFAbSFAbTFAwUFwFGhHGMhIGGhJGKdKGIrMGIbRGAbSGBbTGAwUGwFHhHHJhJHJdKHBrMHBhOHAbRHAbSHAbTHAwUHwFIhHIFhIIGhJIDwRIwSIwTIwUIwFJwRJwFKwGKwHKwIKwJKwKKwLKwMKwNKwOKwPKwQKwRK"
 }
 
-floors = {
-    "fHFGFfNFHD","fHFHFfNFHD","fGFOF","fIFMF","fGFOF","","","fHCIIfJKGD","","fHDNFfHDJJ","","","fGEOEfGHMD"
-}
-
 levelMap = {
     {
-        {i=1, x=1, y=1, right={2, 1}},
+        {i=1, x=1, y=1, right={1, 2}},
+        {i=2, x=3, y=1, left={1, 1}, right={1, 3}},
+        {i=3, x=5, y=1, left={1, 2}, right={1, 4}},
+        {i=4, x=7, y=1, left={1, 3}, down={2, 1}}
     },
     {
-        {i=2, x=3, y=1, left={1, 1}, down={3, 1}},
+        {i=5, x=7, y=3, up={1, 4}, left={2, 2}},
+        {i=6, x=5, y=3, right={2, 1}, left={2, 3}},
+        {i=7, x=3, y=3, right={2, 2}, left={2, 4}},
+        {i=8, x=1, y=3, right={2, 3}, down={3, 1}}
     },
     {
-        {i=12, x=3, y=3, up={2, 1}}
+        {i=9, x=1, y=5, up={2, 4}, right={3, 2}},
+        {i=10, x=5, y=5, left={3, 1}, right={3, 3}},
+        {i=12, x=7, y=5, left={3, 2}, right={3, 4}},
+        {i=13, x=9, y=5, left={3, 3}}
     }
     -- world1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 }

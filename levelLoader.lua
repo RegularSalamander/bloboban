@@ -6,10 +6,6 @@ function fillWallRect(x, y, w, h)
     end
 end
 
-function addFloorRect(x, y, w, h)
-    table.insert(floorQuads, {x=x, y=y, w=w, h=h})
-end
-
 function loadLevel(num)
     objects.player = {}
     objects.walls = {}
@@ -40,6 +36,13 @@ function compileLevel(num)
             g = g * 255
             b = b * 255
             a = a * 255
+
+            if a > 0 and (x+y)%2 == 1 then
+                str = str .. "f"
+                str = str .. string.char(x+65)
+                str = str .. string.char(y+65)
+            end
+
             if r == 0 and g == 0 and b == 0 and a == 255 then --wall
                 str = str .. "w"
                 str = str .. string.char(x+65)
@@ -93,7 +96,7 @@ function compileLevel(num)
 end
 
 function readLevel(num)
-    local line = floors[num] .. levels[num]
+    local line = levels[num]
     local i = 1
 
     while i <= #line do
@@ -146,13 +149,11 @@ function readLevel(num)
             ))
             i = i + 4
         elseif t == "f" then
-            addFloorRect(
-                string.byte(util.charAt(line, i+1)) - 65,
-                string.byte(util.charAt(line, i+2)) - 65,
-                string.byte(util.charAt(line, i+3)) - 65,
-                string.byte(util.charAt(line, i+4)) - 65
-            )
-            i = i + 5
+            table.insert(floors, {
+                x=string.byte(util.charAt(line, i+1)) - 65,
+                y=string.byte(util.charAt(line, i+2)) - 65
+            })
+            i = i + 3
         end
     end
 end

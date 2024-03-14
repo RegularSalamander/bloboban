@@ -13,7 +13,9 @@ function game_load()
         down = 0,
         z = 0,
         x = 0,
-        c = 0
+        c = 0,
+        r = 0,
+        escape = 0
     }
     bufferedControl = false
 
@@ -26,7 +28,7 @@ function game_load()
     objects.affectors = {}
     objects.particles = {}
 
-    floorQuads = {}
+    floors = {}
 
     loadLevel(levelMap[currentWorld][currentLevel].i)
 
@@ -38,6 +40,17 @@ function game_update(delta)
     --default frame rate is 60, delta time is dealt with in frames
     delta = delta * 60
     delta = math.min(delta, 2)
+
+    if animationState ~= animStates.victory then
+        if controls["escape"] == 1 then
+            disolveToGameState("levelSelect")
+            return
+        end
+        if controls["r"] == 1 then
+            disolveToGameState("game")
+            return
+        end
+    end
 
     -- table.insert(objects.particles, particle:new(100, 100, love.math.random()*1-0.5, love.math.random()*1-0.5, 10, 50))
 
@@ -107,6 +120,7 @@ function game_update(delta)
         end
     elseif animationState == animStates.victory then
         if animationFrame == victoryTime then
+            levelMap[currentWorld][currentLevel].completed = true
             disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then
@@ -129,17 +143,9 @@ function game_draw()
     love.graphics.setColor(colors.checkerLight[currentWorld])
     love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
 
-    for i = 1, #floorQuads do
-        for x = floorQuads[i].x, floorQuads[i].x+floorQuads[i].w-1 do
-            for y = floorQuads[i].y, floorQuads[i].y+floorQuads[i].h-1 do
-                if (x+y)%2 == 0 then
-                    love.graphics.setColor(colors.checkerLight[currentWorld])
-                else
-                    love.graphics.setColor(colors.checkerDark[currentWorld])
-                end
-                love.graphics.rectangle("fill", x*tileSize, y*tileSize, tileSize, tileSize)
-            end
-        end
+    for i = 1, #floors do
+        love.graphics.setColor(colors.checkerDark[currentWorld])
+        love.graphics.rectangle("fill", floors[i].x*tileSize, floors[i].y*tileSize, tileSize, tileSize)
     end
     
 

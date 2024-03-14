@@ -10,6 +10,10 @@ updatesPerFrame = 1
 tileSize = 16
 mapTileSize = 16
 
+disolveGrid = 32
+disolveSize = 1
+disolvesPerFrame = 40
+
 colors = {
     checkerLight = {
         {234/255, 225/255, 159/255},

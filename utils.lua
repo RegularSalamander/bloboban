@@ -118,6 +118,14 @@ function util.removeYFromQuad(quad1, quad2)
     return list
 end
 
+function util.approach(x, y, a)
+    if math.abs(x-y) < a then return y end
+    if x < y then
+        return x + a
+    end
+    return x - a
+end
+
 function util.charAt(str, i)
     return string.sub(str, i, i)
 end

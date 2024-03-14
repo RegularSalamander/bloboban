@@ -1,7 +1,3 @@
-local disolveGrid = 16
-local disolveSize = 3
-local disolvesPerFrame = 5
-
 function swap(lst, i, j)
     local temp = lst[i]
     lst[i] = lst[j]
@@ -28,7 +24,7 @@ function disolveTransition_update()
     end
 
     if #tuples == 0 then
-        setGameState(nextGameState)
+        gameState = nextGameState
     end
 end
 
@@ -43,7 +39,12 @@ function disolveTransition_draw()
         overlayCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
 
         love.graphics.setCanvas(overlayCanvas)
+        love.graphics.setColor(1, 1, 1, 1)
         love.graphics.draw(pic)
+
+        if _G[nextGameState .. "_load"] then
+            _G[nextGameState .. "_load"]()
+        end
     end
 
     -- love.graphics.setCanvas(disolveCanvas)
@@ -58,6 +59,7 @@ function disolveTransition_draw()
     love.graphics.setCanvas({overlayCanvas, stencil = true})
     love.graphics.stencil(stencilFunc, "replace", 1)
     love.graphics.setStencilTest("greater", 0)
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(pic)
     love.graphics.setStencilTest()
 
@@ -65,6 +67,7 @@ function disolveTransition_draw()
     if _G[nextGameState .. "_draw"] then
         _G[nextGameState .. "_draw"]()
     end
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(overlayCanvas)
 end
 
