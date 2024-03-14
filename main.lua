@@ -7,6 +7,7 @@ require "levelLoader"
 
 require "levelSelect"
 require "game"
+require "disolveTransition"
 
 require "player"
 require "blob"
@@ -17,6 +18,8 @@ require "holeAffectors"
 require "particle"
 
 gameState = ""
+oldGameState = ""
+nextGameState = ""
 
 function love.load()
     math.randomseed(os.time())
@@ -99,4 +102,12 @@ function setGameState(newGameState)
     if _G[gameState .. "_load"] then
         _G[gameState .. "_load"]()
     end
+end
+
+function disolveToGameState(newGameState)
+    oldGameState = gameState
+    nextGameState = newGameState
+    gameState = "disolveTransition"
+
+    disolveTransition_load()
 end

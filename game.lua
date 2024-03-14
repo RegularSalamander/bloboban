@@ -107,7 +107,7 @@ function game_update(delta)
         end
     elseif animationState == animStates.victory then
         if animationFrame == victoryTime then
-            setGameState("levelSelect")
+            disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then
         if animationFrame == waitTime then
@@ -126,8 +126,8 @@ end
 function game_draw()
     love.graphics.setCanvas(gameCanvas)
 
-    love.graphics.setBackgroundColor(colors.checkerLight[currentWorld])
-    love.graphics.clear()
+    love.graphics.setColor(colors.checkerLight[currentWorld])
+    love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
 
     for i = 1, #floorQuads do
         for x = floorQuads[i].x, floorQuads[i].x+floorQuads[i].w-1 do
