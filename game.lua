@@ -116,16 +116,16 @@ end
 function game_draw()
     love.graphics.setCanvas(gameCanvas)
 
-    love.graphics.setBackgroundColor(colors.background)
+    love.graphics.setBackgroundColor(colors.checkerLight[currentWorld])
     love.graphics.clear()
 
     for i = 1, #floorQuads do
         for x = floorQuads[i].x, floorQuads[i].x+floorQuads[i].w-1 do
             for y = floorQuads[i].y, floorQuads[i].y+floorQuads[i].h-1 do
                 if (x+y)%2 == 0 then
-                    love.graphics.setColor(colors.checkerLight)
+                    love.graphics.setColor(colors.checkerLight[currentWorld])
                 else
-                    love.graphics.setColor(colors.checkerDark)
+                    love.graphics.setColor(colors.checkerDark[currentWorld])
                 end
                 love.graphics.rectangle("fill", x*tileSize, y*tileSize, tileSize, tileSize)
             end

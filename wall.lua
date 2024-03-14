@@ -26,7 +26,7 @@ function wall:draw()
         self.pos.y * tileSize
     )
 
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(colors.outline)
     if self.outlines.up then love.graphics.rectangle("fill", self.pos.x*tileSize, self.pos.y*tileSize, tileSize, 1) end
     if self.outlines.left then love.graphics.rectangle("fill", self.pos.x*tileSize, self.pos.y*tileSize, 1, tileSize) end
     if self.outlines.right then love.graphics.rectangle("fill", self.pos.x*tileSize+15, self.pos.y*tileSize, 1, tileSize) end

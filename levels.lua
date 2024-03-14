@@ -15,14 +15,18 @@ levels = {
 }
 
 floors = {
-    "fHFGFfNFHD","fHFHFfNFHD","fGFOF","fIFMF","fGFOF","","","fHCIIfJKGD","","","","","fGEOEfGHMD"
+    "fHFGFfNFHD","fHFHFfNFHD","fGFOF","fIFMF","fGFOF","","","fHCIIfJKGD","","fHDNFfHDJJ","","","fGEOEfGHMD"
 }
 
 levelMap = {
     {
-        {i=1, x=1, y=1, right={1, 2}},
-        {i=2, x=3, y=1, left={1, 1}, down={1, 3}},
-        {i=3, x=3, y=3, up={1, 2}}
+        {i=1, x=1, y=1, right={2, 1}},
+    },
+    {
+        {i=2, x=3, y=1, left={1, 1}, down={3, 1}},
+    },
+    {
+        {i=13, x=3, y=3, up={2, 1}}
     }
     -- world1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 }
