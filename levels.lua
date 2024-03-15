@@ -20,23 +20,26 @@ levels = {
 }
 
 levelMap = {
-    {
-        {i=1, x=1, y=1, right={1, 2}},
-        {i=2, x=3, y=1, left={1, 1}, right={1, 3}},
-        {i=3, x=5, y=1, left={1, 2}, right={1, 4}},
-        {i=4, x=7, y=1, left={1, 3}, down={2, 1}}
-    },
-    {
-        {i=5, x=7, y=3, up={1, 4}, left={2, 2}},
-        {i=6, x=5, y=3, right={2, 1}, left={2, 3}},
-        {i=7, x=3, y=3, right={2, 2}, left={2, 4}},
-        {i=8, x=1, y=3, right={2, 3}, down={3, 1}}
-    },
-    {
-        {i=9, x=1, y=5, up={2, 4}, right={3, 2}},
-        {i=10, x=5, y=5, left={3, 1}, right={3, 3}},
-        {i=12, x=7, y=5, left={3, 2}, right={3, 4}},
-        {i=13, x=9, y=5, left={3, 3}}
-    }
-    -- world1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
+    {levelIdx=11, world=1, levelName="1-1", x=1, y=1, right=2},
+    {levelIdx=19, world=1, levelName="1-2", x=3, y=1, left=1, right=3},
+    {levelIdx=6, world=1, levelName="1-3", x=5, y=1, left=2, right=4},
+    {levelIdx=22, world=1, levelName="1-4", x=7, y=1, left=3, right=5},
+    {levelIdx=20, world=1, levelName="1-5", x=9, y=1, left=4, right=6},
+    {levelIdx=1, world=1, levelName="1-6", x=11, y=1, left=5, right=7},
+    {levelIdx=14, world=1, levelName="1-7", x=13, y=1, left=6, right=8},
+    {levelIdx=21, world=1, levelName="1-8", x=15, y=1, left=7, right=9},
+    {levelIdx=12, world=1, levelName="1-9", x=17, y=1, left=8, right=10},
+    {levelIdx=3, world=1, levelName="1-10", x=19, y=1, left=9, down=11},
+    {levelIdx=7, world=1, levelName="1-11", x=19, y=3, up=10, left=12},
+    {levelIdx=8, world=1, levelName="1-12", x=17, y=3, right=11, left=13},
+    {levelIdx=15, world=1, levelName="1-13", x=15, y=3, right=12, left=14},
+    {levelIdx=9, world=1, levelName="1-14", x=13, y=3, right=13, left=15},
+    {levelIdx=17, world=1, levelName="1-15", x=11, y=3, right=14, down=16},
+    {levelIdx=2, world=2, levelName="1-15", x=11, y=5, up=15, left=17},
+    {levelIdx=4, world=2, levelName="1-15", x=9, y=5, right=16, left=18},
+    {levelIdx=5, world=2, levelName="1-15", x=7, y=5, right=17, left=19},
+    {levelIdx=10, world=2, levelName="1-15", x=5, y=5, right=18, left=20},
+    {levelIdx=13, world=2, levelName="1-15", x=3, y=5, right=19, left=21},
+    {levelIdx=16, world=2, levelName="1-15", x=1, y=5, right=20, down=22},
+    {levelIdx=18, world=2, levelName="1-15", x=1, y=7, up=21}
 }

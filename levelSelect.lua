@@ -1,20 +1,18 @@
 function levelSelect_load()
-    if not currentWorld then
-        currentWorld = 1
-        currentLevel = 1 --level within world
-        for j = 1, #levelMap do
-            for i = 1, #levelMap[j] do
-                levelMap[j][i].completed = false
-            end
+    if not currentLevel then
+        currentLevel = 1
+        currentWorld = levelMap[currentLevel].world
+        for i = 1, #levelMap do
+            levelMap[i].completed = false
         end
 
-        mapPlayerPos = {x=levelMap[currentWorld][currentLevel].x, y=levelMap[currentWorld][currentLevel].y}
+        mapPlayerPos = {x=levelMap[currentLevel].x, y=levelMap[currentLevel].y}
     end
 end
 
 function levelSelect_update()
-    mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentWorld][currentLevel].x, 0.1)
-    mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentWorld][currentLevel].y, 0.1)
+    mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentLevel].x, 0.1)
+    mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentLevel].y, 0.1)
 end
 
 function levelSelect_draw()
@@ -23,33 +21,30 @@ function levelSelect_draw()
     love.graphics.setColor(colors.checkerLight[currentWorld])
     love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
 
-    for j = 1, #levelMap do
-        for i = 1, #levelMap[j] do
-            if levelMap[j][i].up then
-                connectLevels(j, i, "up")
-            end
-            if levelMap[j][i].left then
-                connectLevels(j, i, "left")
-            end
-            if levelMap[j][i].right then
-                connectLevels(j, i, "right")
-            end
-            if levelMap[j][i].down then
-                connectLevels(j, i, "down")
-            end
+    for i = 1, #levelMap do
+        if levelMap[i].up then
+            connectLevels(i, "up")
+        end
+        if levelMap[i].left then
+            connectLevels(i, "left")
+        end
+        if levelMap[i].right then
+            connectLevels(i, "right")
+        end
+        if levelMap[i].down then
+            connectLevels(i, "down")
         end
     end
     
-
-    for j = 1, #levelMap do
-        for i = 1, #levelMap[j] do
+    for i = 1, #levelMap do
+        if levelMap[i].levelIdx then
             love.graphics.setColor(1, 1, 1, 1)
-            if levelMap[j][i].completed then
+            if levelMap[i].completed then
                 love.graphics.draw(
                     images.level,
                     love.graphics.newQuad(mapTileSize, 0, mapTileSize, mapTileSize, mapTileSize*2, mapTileSize),
-                    levelMap[j][i].x*mapTileSize,
-                    levelMap[j][i].y*mapTileSize,
+                    levelMap[i].x*mapTileSize,
+                    levelMap[i].y*mapTileSize,
                     0,
                     1,
                     1
@@ -58,8 +53,8 @@ function levelSelect_draw()
                 love.graphics.draw(
                     images.level,
                     love.graphics.newQuad(0, 0, mapTileSize, mapTileSize, mapTileSize*2, mapTileSize),
-                    levelMap[j][i].x*mapTileSize,
-                    levelMap[j][i].y*mapTileSize,
+                    levelMap[i].x*mapTileSize,
+                    levelMap[i].y*mapTileSize,
                     0,
                     1,
                     1
@@ -79,21 +74,17 @@ end
 function levelSelect_keypressed(key, scancode, isrepeat)
     if isrepeat then return end
 
-    if mapPlayerPos.x ~= levelMap[currentWorld][currentLevel].x
-    or mapPlayerPos.y ~= levelMap[currentWorld][currentLevel].y then
+    if mapPlayerPos.x ~= levelMap[currentLevel].x
+    or mapPlayerPos.y ~= levelMap[currentLevel].y then
         return
     end
 
     if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" then
-        
-        if levelMap[currentWorld][currentLevel][scancode] then
-            if levelMap[currentWorld][currentLevel].completed or 
-            levelMap[levelMap[currentWorld][currentLevel][scancode][1]][levelMap[currentWorld][currentLevel][scancode][2]].completed then
-                local newWorld = levelMap[currentWorld][currentLevel][scancode][1]
-                local newLevel = levelMap[currentWorld][currentLevel][scancode][2]
-                
-                currentWorld = newWorld
-                currentLevel = newLevel
+        if levelMap[currentLevel][scancode] then
+            if levelMap[currentLevel].completed or 
+            levelMap[levelMap[currentLevel][scancode]].completed or true then
+                currentLevel = levelMap[currentLevel][scancode]
+                currentWorld = levelMap[currentLevel].world
             end
         end
     end
@@ -102,12 +93,20 @@ function levelSelect_keypressed(key, scancode, isrepeat)
     end
 end
 
-function connectLevels(w, l, i)
+function connectLevels(l, i)
     love.graphics.setColor(colors.outline)
     love.graphics.line(
-        levelMap[w][l].x * mapTileSize + mapTileSize/2,
-        levelMap[w][l].y * mapTileSize + mapTileSize/2,
-        levelMap[ levelMap[w][l][i][1] ][ levelMap[w][l][i][2] ].x * mapTileSize + mapTileSize/2,
-        levelMap[ levelMap[w][l][i][1] ][ levelMap[w][l][i][2] ].y * mapTileSize + mapTileSize/2
+        levelMap[l].x * mapTileSize + mapTileSize/2,
+        levelMap[l].y * mapTileSize + mapTileSize/2,
+        levelMap[levelMap[l][i]].x * mapTileSize + mapTileSize/2,
+        levelMap[levelMap[l][i]].y * mapTileSize + mapTileSize/2
     )
+end
+
+function getLevelById(id)
+    for i = 1, #levelMap do
+        if levelMap[i].id == id then
+            return levelMap[i]
+        end
+    end
 end

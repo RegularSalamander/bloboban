@@ -52,17 +52,17 @@ function love.load()
     
     setGameState("levelSelect")
 
-    for i = 1, 18 do
+    for i = 1, 22 do
         io.write('"')
         levels[i] = compileLevel(i)
         io.write('",\n')
     end
 
     -- for playtesting levels
-    currentWorld = 1
-    currentLevel = 1
-    levelMap[1][1].i = 18
-    setGameState("game")
+    -- currentWorld = 1
+    -- currentLevel = 1
+    -- levelMap[1].levelIdx = 9
+    -- setGameState("game")
 end
 
 function love.update(dt)

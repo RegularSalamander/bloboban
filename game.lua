@@ -30,7 +30,7 @@ function game_load()
 
     floors = {}
 
-    loadLevel(levelMap[currentWorld][currentLevel].i)
+    loadLevel(levelMap[currentLevel].levelIdx)
 
     animationState = animStates.ready
     animationFrame = 0
@@ -120,7 +120,7 @@ function game_update(delta)
         end
     elseif animationState == animStates.victory then
         if animationFrame == victoryTime then
-            levelMap[currentWorld][currentLevel].completed = true
+            levelMap[currentLevel].completed = true
             disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then
