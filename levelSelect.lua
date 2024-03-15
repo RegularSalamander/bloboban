@@ -21,6 +21,16 @@ function levelSelect_draw()
     love.graphics.setColor(colors.checkerLight[currentWorld])
     love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
 
+    for i = 1, #levelCheckers do
+        drawCheckerboard(
+            levelCheckers[i][1],
+            levelCheckers[i][2],
+            levelCheckers[i][3],
+            levelCheckers[i][4],
+            levelCheckers[i][5]
+        )
+    end
+
     for i = 1, #levelMap do
         if levelMap[i].up then
             connectLevels(i, "up")
@@ -107,6 +117,19 @@ function getLevelById(id)
     for i = 1, #levelMap do
         if levelMap[i].id == id then
             return levelMap[i]
+        end
+    end
+end
+
+function drawCheckerboard(c, x, y, w, h)
+    for i = x, x+w-1 do
+        for j = y, y+h-1 do
+            if (i+j)%2 == 0 then
+                love.graphics.setColor(colors.checkerDark[c])
+            else
+                love.graphics.setColor(colors.checkerLight[c])
+            end
+            love.graphics.rectangle("fill", i*mapTileSize, j*mapTileSize, mapTileSize, mapTileSize)
         end
     end
 end

@@ -52,11 +52,11 @@ function love.load()
     
     setGameState("levelSelect")
 
-    for i = 1, 22 do
-        io.write('"')
-        levels[i] = compileLevel(i)
-        io.write('",\n')
-    end
+    -- for i = 1, 22 do
+    --     io.write('"')
+    --     levels[i] = compileLevel(i)
+    --     io.write('",\n')
+    -- end
 
     -- for playtesting levels
     -- currentWorld = 1

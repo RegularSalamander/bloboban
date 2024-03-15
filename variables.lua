@@ -1,17 +1,15 @@
 --native resolution (16:9)
-screenWidth = 432
-screenHeight = 243
+screenWidth = 27*16
+screenHeight = 27*9
 
 --scale the window starts as (multiplier of the native resolution)
-defaultScale = 3
-
-updatesPerFrame = 1
+defaultScale = 2
 
 tileSize = 16
 mapTileSize = 16
 
 disolveGrid = 32
-disolveSize = 1
+disolveSize = 4
 disolvesPerFrame = 40
 
 colors = {
