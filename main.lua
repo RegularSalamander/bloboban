@@ -30,6 +30,8 @@ function love.load()
     love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true })
     love.window.setTitle("Bloboban")
 
+    love.window.setFullscreen(false)
+
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
     images.blob = love.graphics.newImage("assets/blob.png")
@@ -52,17 +54,22 @@ function love.load()
     
     setGameState("levelSelect")
 
-    -- for i = 1, 22 do
-    --     io.write('"')
-    --     levels[i] = compileLevel(i)
-    --     io.write('",\n')
-    -- end
+    if debugMode then
+        -- animLengths.moveTime = 3
 
-    -- for playtesting levels
-    -- currentWorld = 1
-    -- currentLevel = 1
-    -- levelMap[1].levelIdx = 9
-    -- setGameState("game")
+        --compile levels from images
+        for i = 1, 22 do
+            io.write('"')
+            levels[i] = compileLevel(i)
+            io.write('",\n')
+        end
+
+        -- for playtesting levels
+        currentWorld = 1
+        currentLevel = 1
+        levelMap[1].levelIdx = 9
+        setGameState("game")
+    end
 end
 
 function love.update(dt)

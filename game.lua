@@ -19,7 +19,6 @@ function game_load()
     }
     bufferedControl = false
 
-    --objects are anything we should call an update and/or draw function on each frame
     objects = {}
     objects.player = {}
     objects.blobs = {}
@@ -28,6 +27,7 @@ function game_load()
     objects.affectors = {}
     objects.particles = {}
 
+    -- coordinates to draw floor tiles (dark checkerboard color)
     floors = {}
 
     loadLevel(levelMap[currentLevel].levelIdx)
@@ -37,23 +37,6 @@ function game_load()
 end
 
 function game_update(delta)
-    --default frame rate is 60, delta time is dealt with in frames
-    delta = delta * 60
-    delta = math.min(delta, 2)
-
-    if animationState ~= animStates.victory then
-        if controls["escape"] == 1 then
-            disolveToGameState("levelSelect")
-            return
-        end
-        if controls["r"] == 1 then
-            disolveToGameState("game")
-            return
-        end
-    end
-
-    -- table.insert(objects.particles, particle:new(100, 100, love.math.random()*1-0.5, love.math.random()*1-0.5, 10, 50))
-
     --update and kill particles
     for i = 1, #objects.particles do
         objects.particles[i]:update()
@@ -73,7 +56,7 @@ function game_update(delta)
             changeAnimationState(animStates.moving)
         end
     elseif animationState == animStates.moving then
-        if animationFrame == moveTime then
+        if animationFrame == animLengths.moveTime then
             applyMove()
 
             if checkAffect() then
@@ -87,9 +70,9 @@ function game_update(delta)
             end
         end
     elseif animationState == animStates.affect then
-        if animationFrame == affectTime then
+        if animationFrame == animLengths.affectTime then
             applyAffect()
-        elseif animationFrame == affectTime*2 then
+        elseif animationFrame == animLengths.affectTime*2 then
             if checkConnect() then
                 changeAnimationState(animStates.connect)
             elseif checkFill() then
@@ -99,9 +82,9 @@ function game_update(delta)
             end
         end
     elseif animationState == animStates.connect then
-        if animationFrame == connectTime then
+        if animationFrame == animLengths.connectTime then
             applyConnect()
-        elseif animationFrame == connectTime*2 then
+        elseif animationFrame == animLengths.connectTime*2 then
             if checkFill() then
                 changeAnimationState(animStates.fill)
             else
@@ -109,7 +92,7 @@ function game_update(delta)
             end
         end
     elseif animationState == animStates.fill then
-        if animationFrame == fillTime then
+        if animationFrame == animLengths.fillTime then
             applyFill()
             if checkVictory() then
                 changeAnimationState(animStates.victory)
@@ -119,20 +102,20 @@ function game_update(delta)
             end
         end
     elseif animationState == animStates.victory then
-        if animationFrame == victoryTime then
+        if animationFrame == animLengths.victoryTime then
             levelMap[currentLevel].completed = true
             disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then
-        if animationFrame == waitTime then
+        if animationFrame == animLengths.waitTime then
             changeAnimationState(animStates.ready)
         end
     end
 
     --keys are updated last so that objects can see if they're 1 or -1
     for k, v in pairs(controls) do
-        if v > 0 then controls[k] = v + delta
-        else controls[k] = v - delta
+        if v > 0 then controls[k] = v + 1
+        else controls[k] = v - 1
         end
     end
 end
@@ -180,7 +163,7 @@ function drawVictoryAnimation()
     for i = 0, 6 do
         local spacing = 20
         local offset = 3
-        local x = (animationFrame - i*offset)/(victoryTime-offset*7)
+        local x = (animationFrame - i*offset)/(animLengths.victoryTime-offset*7)
 
         local drawx = screenWidth/2 - 7*(8+spacing)/2 + i*(8+spacing)
         local drawy = victoryAnimationY(x, currentWorld, currentLevel)
@@ -215,6 +198,17 @@ function game_keypressed(key, scancode, isrepeat)
     if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" and animationState ~= animStates.ready then
         bufferedControl = true
     end
+    if animationState ~= animStates.victory then
+        if scancode == "escape" then
+            disolveToGameState("levelSelect")
+            return
+        end
+        if scancode == "r" then
+            disolveToGameState("game")
+            return
+        end
+    end
+
     if controls[scancode] ~= nil then controls[scancode] = 1 end
 end
 
@@ -233,7 +227,7 @@ function getObjectAt(x, y)
     
     for i = 1, #objects.walls do
         if objects.walls[i].pos.x == x and objects.walls[i].pos.y == y then
-            rv.wall = objects.walls[i] 
+            rv.wall = objects.walls[i]
             break
         end
     end
@@ -260,7 +254,7 @@ function getObjectAt(x, y)
 end
 
 function checkPlayerMoving()
-    local rv =  objects.player[1]:control()
+    local rv = objects.player[1]:control()
 
     if not rv then
         for i = 1, #objects.blobs do

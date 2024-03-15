@@ -16,20 +16,20 @@ end
 function blob:draw()
     local drawScale = 1
     if animationState == animStates.affect and self.willChange then
-        if animationFrame <= affectTime then
-            drawScale = util.map(animationFrame, 0, affectTime, 1, blobEnlarge)
+        if animationFrame <= animLengths.affectTime then
+            drawScale = util.map(animationFrame, 0, animLengths.affectTime, 1, blobEnlarge)
         else
-            drawScale = util.map(animationFrame, affectTime, affectTime*2, blobEnlarge, 1)
+            drawScale = util.map(animationFrame, animLengths.affectTime, animLengths.affectTime*2, blobEnlarge, 1)
         end
     elseif animationState == animStates.connect and self.willChange then
-        if animationFrame <= connectTime then
-            drawScale = util.map(animationFrame, 0, connectTime, 1, blobEnlarge)
+        if animationFrame <= animLengths.connectTime then
+            drawScale = util.map(animationFrame, 0, animLengths.connectTime, 1, blobEnlarge)
         else
-            drawScale = util.map(animationFrame, connectTime, connectTime*2, blobEnlarge, 1)
+            drawScale = util.map(animationFrame, animLengths.connectTime, animLengths.connectTime*2, blobEnlarge, 1)
         end
     end
-    local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
-    local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
+    local drawx = util.map(animationFrame, 0, animLengths.moveTime, self.pos.x, self.nextPos.x)
+    local drawy = util.map(animationFrame, 0, animLengths.moveTime, self.pos.y, self.nextPos.y)
 
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(

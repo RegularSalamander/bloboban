@@ -18,8 +18,8 @@ function hole:init(x, y, cn)
 end
 
 function hole:draw()
-    local drawx = util.map(animationFrame, 0, moveTime, self.pos.x, self.nextPos.x)
-    local drawy = util.map(animationFrame, 0, moveTime, self.pos.y, self.nextPos.y)
+    local drawx = util.map(animationFrame, 0, animLengths.moveTime, self.pos.x, self.nextPos.x)
+    local drawy = util.map(animationFrame, 0, animLengths.moveTime, self.pos.y, self.nextPos.y)
     
     love.graphics.setColor(1, 1, 1, 1)
     if self.filled then

@@ -92,7 +92,7 @@ function levelSelect_keypressed(key, scancode, isrepeat)
     if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" then
         if levelMap[currentLevel][scancode] then
             if levelMap[currentLevel].completed or 
-            levelMap[levelMap[currentLevel][scancode]].completed or true then
+            levelMap[levelMap[currentLevel][scancode]].completed or debugMode then
                 currentLevel = levelMap[currentLevel][scancode]
                 currentWorld = levelMap[currentLevel].world
             end
