@@ -183,13 +183,13 @@ function drawVictoryAnimation()
         local x = (animationFrame - i*offset)/(victoryTime-offset*7)
 
         local drawx = screenWidth/2 - 7*(8+spacing)/2 + i*(8+spacing)
-        local drawy = victoryY(x, currentWorld, currentLevel)
+        local drawy = victoryAnimationY(x, currentWorld, currentLevel)
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.draw(
             images.victory,
             love.graphics.newQuad(i*8, 0, 8, 14, 8*7, 14),
-            drawx,
-            drawy,
+            math.floor(drawx),
+            math.floor(drawy),
             0,
             1,
             1
@@ -197,13 +197,15 @@ function drawVictoryAnimation()
     end
 end
 
-function victoryY(x, w, l)
-    if (w+l)%3 == 0 then
+function victoryAnimationY(x, w, l)
+    if (w+l)%4 == 0 then
         return 0.5*(math.pow(2*x-1, 4)+1) * screenHeight
-    elseif (w+l)%3 == 1 then
+    elseif (w+l)%4 == 1 then
+        return screenHeight - 0.5*(math.pow(2*x-1, 5)+1) * screenHeight
+    elseif (w+l)%4 == 2 then
         return screenHeight - 0.5*(math.pow(2*x-1, 4)+1) * screenHeight
     else
-        return 0.5*(math.pow(2*x-1, 3)+1) * screenHeight
+        return 0.5*(math.pow(2*x-1, 5)+1) * screenHeight
     end
 end
 

@@ -78,17 +78,23 @@ end
 
 function levelSelect_keypressed(key, scancode, isrepeat)
     if isrepeat then return end
-    if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" then
-        if mapPlayerPos.x ~= levelMap[currentWorld][currentLevel].x
-        or mapPlayerPos.y ~= levelMap[currentWorld][currentLevel].y then
-            return
-        end
-        if levelMap[currentWorld][currentLevel][scancode] then
-            local newWorld = levelMap[currentWorld][currentLevel][scancode][1]
-            local newLevel = levelMap[currentWorld][currentLevel][scancode][2]
 
-            currentWorld = newWorld
-            currentLevel = newLevel
+    if mapPlayerPos.x ~= levelMap[currentWorld][currentLevel].x
+    or mapPlayerPos.y ~= levelMap[currentWorld][currentLevel].y then
+        return
+    end
+
+    if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" then
+        
+        if levelMap[currentWorld][currentLevel][scancode] then
+            if levelMap[currentWorld][currentLevel].completed or 
+            levelMap[levelMap[currentWorld][currentLevel][scancode][1]][levelMap[currentWorld][currentLevel][scancode][2]].completed then
+                local newWorld = levelMap[currentWorld][currentLevel][scancode][1]
+                local newLevel = levelMap[currentWorld][currentLevel][scancode][2]
+                
+                currentWorld = newWorld
+                currentLevel = newLevel
+            end
         end
     end
     if scancode == "z" then
