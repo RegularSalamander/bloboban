@@ -103,7 +103,7 @@ function game_update(delta)
         end
     elseif animationState == animStates.victory then
         if animationFrame == animLengths.victoryTime then
-            levelMap[currentLevel].completed = true
+            setLevelComplete(currentLevel)
             disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then

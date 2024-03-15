@@ -3,7 +3,9 @@ function levelSelect_load()
         currentLevel = 1
         currentWorld = levelMap[currentLevel].world
         for i = 1, #levelMap do
-            levelMap[i].completed = false
+            if not levelMap[i].complete then
+                levelMap[i].complete = false
+            end
         end
 
         mapPlayerPos = {x=levelMap[currentLevel].x, y=levelMap[currentLevel].y}
@@ -49,7 +51,7 @@ function levelSelect_draw()
     for i = 1, #levelMap do
         if levelMap[i].levelIdx then
             love.graphics.setColor(1, 1, 1, 1)
-            if levelMap[i].completed then
+            if levelMap[i].complete then
                 love.graphics.draw(
                     images.level,
                     love.graphics.newQuad(mapTileSize, 0, mapTileSize, mapTileSize, mapTileSize*2, mapTileSize),
@@ -91,14 +93,14 @@ function levelSelect_keypressed(key, scancode, isrepeat)
 
     if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" then
         if levelMap[currentLevel][scancode] then
-            if levelMap[currentLevel].completed or 
-            levelMap[levelMap[currentLevel][scancode]].completed or debugMode then
+            if levelMap[currentLevel].complete or levelMap[levelMap[currentLevel][scancode]].complete 
+            or debugMode then
                 currentLevel = levelMap[currentLevel][scancode]
                 currentWorld = levelMap[currentLevel].world
             end
         end
     end
-    if scancode == "z" then
+    if scancode == "z" and levelMap[currentLevel].levelIdx then
         disolveToGameState("game")
     end
 end
@@ -118,6 +120,27 @@ function getLevelById(id)
         if levelMap[i].id == id then
             return levelMap[i]
         end
+    end
+end
+
+function setLevelComplete(idx)
+    --recursively set nil spaces surrounding the level to complete
+
+    if levelMap[idx].complete then return end
+
+    levelMap[idx].complete = true
+
+    if levelMap[idx].up and not levelMap[levelMap[idx].up].levelIdx then
+        setLevelComplete(levelMap[idx].up)
+    end
+    if levelMap[idx].left and not levelMap[levelMap[idx].left].levelIdx then
+        setLevelComplete(levelMap[idx].left)
+    end
+    if levelMap[idx].right and not levelMap[levelMap[idx].right].levelIdx then
+        setLevelComplete(levelMap[idx].right)
+    end
+    if levelMap[idx].down and not levelMap[levelMap[idx].down].levelIdx then
+        setLevelComplete(levelMap[idx].down)
     end
 end
 
