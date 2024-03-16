@@ -13,44 +13,46 @@ levels = {
     "fFEwFEwGEfHEwHEwIEfJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREwSEfTEwTEwUEwFFfGFfIFfKFfMFfOFfQFbRFAfSFbSFAbTFAfUFwUFwVFfFGwFGfHGfJGfLGfNGhNGMhOGGfPGhPGKfRGbRGAbSGBfTGbTGAfVGwVGwFHfGHfIHhIHAfKHpLHfMHhNHJfOHhPHJfQHbRHAfSHbSHAbTHAfUHwUHwVHfFIwFIfHIfJIfLIfNIhNIFhOIGfPIhPIDfRIwRIwSIfTIwTIwUIwFJfGJfIJfKJfMJfOJfQJwRJfFKwFKwGKfHKwHKwIKfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRK",
     "fFEwFEwGEfHEwHEwIEfJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREwSEfTEwTEwUEwFFfGFfIFfKFpLFfMFfOFfQFbRFAfSFbSFAbTFAfUFwUFfFGwFGfHGhHGMhIGGfJGhJGKdKGIfLGrMGIfNGfPGfRGbRGAbSGBfTGbTGAwUGwFHfGHhHHJfIHhJHJfKHdKHBfMHrMHBfOHhOHAfQHbRHAfSHbSHAbTHAfUHwUHfFIwFIfHIhHIFhIIGfJIhJIDfLIfNIfPIfRIwRIwSIfTIwTIwUIwFJfGJfIJfKJfMJfOJfQJwRJfFKwFKwGKfHKwHKwIKfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRK",
     "wFFfGFwGFwHFfIFwIFwJFfKFwKFwLFfMFwMFwNFfOFwOFwPFfQFwQFwRFfSFwSFwTFfUFwUFfFGwFGfHGfJGfLGfNGbNGAwOGfPGfRGfTGwUGwFHfGHpHHfIHbJHAfKHfMHfOHbPHAfQHwRHfSHhSHIfUHwUHfFIwFIfHIfJIfLIfNIfPIfRIhSIBfTIwTIwUIwFJfGJfIJfKJwKJbLJAfMJfOJbPJAfQJwQJfSJfUJwUJfFKwFKwGKfHKwHKwIKfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRKwSKfTKwTKwUK",
-    "wICfJCwJCwKCfLCwLCwMCfNCwNCwOCfPCwPCwQCfRCwRCfIDwIDwJDfKDfMDfODfQDwQDwRDwIEfJEbKEAfLEbMEAfNEbNECbOEAfPEfREwREfIFwIFfKFwLFfMFwMFfOFwOFfQFwRFwIGfJGfLGwLGwMGfNGhNGIwOGfPGfRGwRGfIHwIHfKHfMHhMHEhNHLfOHwOHhPHEfQHhQHCwRHwIIfJIfLIwLIwMIfNIhNIBwOIfPIfRIwRIfIJwIJwJJfKJwLJfMJwMJfOJwOJfQJwRJwIKfJKwJKbKKAfLKbMKAfNKbOKAfPKpQKfRKwRKfILwILwJLfKLfMLfOLfQLwRLwIMfJMwJMwKMfLMwLMwMMfNMwNMwOMfPMwPMwQMfRMwRM",
+    "fJCwJCwKCfLCwLCwMCfNCwNCwOCfPCwPCwQCfIDwIDwJDfKDfMDfODfQDwQDwRDwIEfJEbKEAfLEbMEAfNEbNECbOEAfPEfREwREfIFwIFfKFwLFfMFwMFfOFwOFfQFwRFwIGfJGfLGwLGwMGfNGhNGIwOGfPGfRGwRGfIHwIHfKHfMHhMHEhNHLfOHwOHhPHEfQHhQHCwRHwIIfJIfLIwLIwMIfNIhNIBwOIfPIfRIwRIfIJwIJwJJfKJwLJfMJwMJfOJwOJfQJwRJfJKwJKbKKAfLKbMKAfNKbOKAfPKpQKfRKwRKwJLfKLfMLfOLfQLwRLfJMwJMwKMfLMwLMwMMfNMwNMwOMfPMwPMwQMfRMwRM",
     "wJDfKDwKDwLDfMDwMDwNDfODwODwPDfQDwQDwRDwEEfFEwFEwGEfHEwHEwIEfJEwJEfLEfNEfPEfREwREwSEfTEwTEwUEfVEwVEwWEfEFwEFfGFfIFfKFfMFfOFfQFfSFfUFfWFwEGfFGhGGMfHGhHGKhIGIfJGfLGrLGErMGCfNGdNGIfPGrPGIfRGfTGbTGCbUGCfVGbVGCfEHwEHpFHfGHhGHBhHHJfIHhIHJfKHfMHdNHBfOHrPHBfQHfSHbTHAfUHbUHAbVHAfWHwEIfFIhGIEfHIhHIHhIIDfJIfLIfNIdNIEdOICfPIfRIfTIbTIAbUIAfVIbVIAfEJwEJfGJfIJfKJfMJfOJfQJfSJfUJfWJwEKfFKwFKwGKfHKwHKwIKfJKwJKfLKfNKfPKfRKwRKwSKfTKwTKwUKfVKwVKwWKwJLfKLwKLwLLfMLwMLwNLfOLwOLwPLfQLwQLwRL",
     "fHCwHCwICfJCwJCwKCfLCwLCwQCfRCwRCwSCfGDwGDwHDfIDfKDwLDwPDfQDwQDfSDwSDwGEfHEhIEAfJEwJEfLEwLEwMEfNEwNEwOEfPEwPEfREwSEfGFwGFfIFhJFAfKFfMFfOFfQFfSFwSFwGGfHGwHGwIGfJGhJGAwKGfLGwLGwMGfNGwNGfPGwPGhQGAfRGwSGfIHwIHfKHwKHbLHAfMHbNHBfOHfQHfSHwSHwIIfJIwKIfLIbLIBfNIbNIAfPIpPIfRIwRIwSIfIJwIJfKJwKJbLJAfMJfOJwPJfQJwQJwRJwIKfJKwKKfLKwLKfNKwNKfPKwPKfILwILfKLfMLhNLAfOLwPLwIMfJMfLMwLMwMMfNMwNMwOMfPMwPMfINwINwJNfKNwKNwLN",
     "fIDwIDwJDfKDwKDwLDfMDwMDwNDfODwODwPDfQDwQDwRDfSDwSDwTDwIEfJEfLEfNEfPEfREhSEAfTEwTEfIFwIFbJFCfKFbKFCbLFCfMFwMFwNFfOFwOFfQFwRFfSFwSFwTFwIGfJGbJGCpKGfLGbLGCfNGbNGBwOGfPGfRGwRGfIHwIHbJHCfKHbKHCbLHCfMHhNHAfOHwOHfQHwQHwRHwIIfJIfLIcLIAfNIwNIwOIfPIfRIwRIfIJwIJfKJfMJfOJcPJBfQJwRJwIKfJKwJKwKKfLKwLKwMKfNKwNKfPKfRKwRKwNLfOLwOLwPLfQLwQLwRL",
     "fPEwPEwQEfREwREwSEfTEwTEwHFfIFwIFwJFfKFwKFwLFfMFwMFwNFfOFwOFwPFfQFfSFhSFAwTFfHGwHGfJGfLGbLGAfNGfPGfRGwSGfTGwTGwHHfIHpJHfKHbLHBfMHfOHfQHfSHhSHAwTHfHIwHIfJIfLIbLICfNIfPIfRIwSIfTIwTIwHJfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJfSJhSJAwTJfPKwPKwQKfRKwRKwSKfTKwTK",
     "wMCfNCwNCwOCfPCwPCwQCfRCwRCfMDwMDfODfQDwRDwMEfNEbNEAfPEbPEAfREwREwHFfIFwIFwJFfKFwKFwLFfMFwMFfOFbOFAfQFbQFAwRFfHGwHGfJGfLGwMGfNGfPGwQGfRGwRGwHHfIHpJHfKHhKHAfMHhMHEhNHCfOHfQHwQHfHIwHIfJIfLIwMIfNIfPIwQIfRIwRIwHJfIJwIJwJJfKJwKJwLJfMJwMJfOJbOJBfQJbQJBwRJwMKfNKbNKBfPKbPKBfRKwRKfMLwMLfOLfQLwRLwMMfNMwNMwOMfPMwPMwQMfRMwRM",
     "wJFfKFwKFwLFfMFwMFwNFfOFwOFwPFfQFwQFwRFfJGwJGbKGAfLGbLGBbMGBfNGhOGEfPGhPGCfRGwRGwJHfKHwKHwLHfMHwMHfOHhPHAfQHwRHfJIwJIfLIpLIfNIfPIfRIwRIwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJwQJwRJ",
-    "fLEwLEwMEfNEwNEwOEfGFwGFwHFfIFwIFwJFfKFwKFwLFfMFfOFwOFwPFfQFwQFwRFfSFwSFwTFfUFwUFwGGfHGfJGwKGfLGfNGhOGEfPGhPGCfRGbSGAfTGwUGfGHwGHfIHpIHfKHwKHfMHfOHwPHfQHfSHfUHwUHwGIfHIfJIhKIAfLIfNIbNIBbOIBfPIwPIfRIfTIwUIfGJwGJwHJfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJwQJwRJfSJwSJwTJfUJwUJ"
+    "fLEwLEwMEfNEwNEwOEfGFwGFwHFfIFwIFwJFfKFwKFwLFfMFfOFwOFwPFfQFwQFwRFfSFwSFwTFfUFwUFwGGfHGfJGwKGfLGfNGhOGEfPGhPGCfRGbSGAfTGwUGfGHwGHfIHpIHfKHwKHfMHfOHwPHfQHfSHfUHwUHwGIfHIfJIhKIAfLIfNIbNIBbOIBfPIwPIfRIfTIwUIfGJwGJwHJfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJwQJwRJfSJwSJwTJfUJwUJ",
+    "wRDfSDwSDwTDfUDwUDwVDfWDwWDwOEfPEwPEwQEfREwREfTEfVEwWEfXEwXEfGFwGFwHFfIFwIFwJFfKFwKFwLFfMFwMFwNFfOFwOFfQFfSFfUFfWFwXFwGGfHGbIGAfJGbJGAcKGBfLGhLGEhMGGfNGhNGGhOGGfPGhPGCcQGCfRGbRGAbSGAfTGbTGAwUGfVGfXGwXGfGHwGHfIHwJHfKHwKHfMHdNHEfOHdOHCfQHwQHwRHfSHfUHfWHwWHwXHwGIfHIfJIfLIwLIwMIfNIfPIwPIpQIfRIfTIwTIwUIfVIwVIwWIfGJwGJwHJfIJwIJfKJfMJfOJbOJAfQJfSJwTJwIKfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRKwSKfTKwTK",
+    "fJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREwJFfKFbKFAbLFAfMFbMFAhNFEfOFhOFGhPFCfQFwRFfJGwJGwKGfLGwLGwMGfNGwNGfPGfRGwRGwJHfKHfMHwNHfOHfQHwRHfJIwJIfLIpLIfNIhNIAfPIbPICfRIwRIwJJfKJfMJwNJfOJfQJwRJfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRK"
 }
 
 levelCheckers = {
-    {1, 0, 0, 27, 5},
-    {2, 0, 5, 27, 11}
+    {1, 0, 0, 27, 12},
+    {2, 0, 12, 27, 11}
+    -- {2, 0, 5, 27, 11}
 }
 
 levelMap = {
-    {levelIdx=11, world=1, levelName="1-1", x=1, y=1, right=2},
-    {levelIdx=19, world=1, levelName="1-2", x=3, y=1, left=1, right=3},
-    {levelIdx=6, world=1, levelName="1-3", x=5, y=1, left=2, right=4},
-    {levelIdx=22, world=1, levelName="1-4", x=7, y=1, left=3, right=5},
-    {levelIdx=20, world=1, levelName="1-5", x=9, y=1, left=4, right=6},
-    {levelIdx=1, world=1, levelName="1-6", x=11, y=1, left=5, right=7},
-    {levelIdx=14, world=1, levelName="1-7", x=13, y=1, left=6, right=8},
-    {levelIdx=21, world=1, levelName="1-8", x=15, y=1, left=7, right=9},
-    {levelIdx=12, world=1, levelName="1-9", x=17, y=1, left=8, right=10},
-    {levelIdx=3, world=1, levelName="1-10", x=19, y=1, left=9, down=11},
-    {levelIdx=7, world=1, levelName="1-11", x=19, y=3, up=10, left=12},
-    {levelIdx=8, world=1, levelName="1-12", x=17, y=3, right=11, left=13},
-    {levelIdx=15, world=1, levelName="1-13", x=15, y=3, right=12, left=14},
-    {levelIdx=9, world=1, levelName="1-14", x=13, y=3, right=13, left=15},
-    {levelIdx=17, world=1, levelName="1-15", x=11, y=3, right=14, down=16},
-    {levelIdx=2, world=2, levelName="2-1", x=11, y=6, up=15, left=17},
-    {levelIdx=4, world=2, levelName="2-2", x=9, y=6, right=16, left=18},
-    {levelIdx=5, world=2, levelName="2-3", x=7, y=6, right=17, left=19, up=24},
-    {levelIdx=10, world=2, levelName="2-4", x=5, y=6, right=18, left=20},
-    {levelIdx=13, world=2, levelName="2-5", x=3, y=6, right=19, left=21},
-    {levelIdx=16, world=2, levelName="2-6", x=1, y=6, right=20, down=22},
-    {levelIdx=18, world=2, levelName="2-7", x=1, y=8, up=21},
-    {levelIdx=nil, world=1, levelName=nil, x=5, y=3, up=3, right=24},
-    {levelIdx=nil, world=1, levelName=nil, x=7, y=3, left=23, down=18}
+    --1
+    {levelIdx=11, world=1, levelName="1-1", x=7, y=1, right=2},
+    {levelIdx=19, world=1, levelName="1-2", x=10, y=1, left=1, right=3},
+    {levelIdx=24, world=1, levelName="1-3", x=13, y=1, left=2, right=4},
+    {levelIdx=1, world=1, levelName="1-4", x=16, y=1, left=3, right=5},
+    {levelIdx=6, world=1, levelName="1-5", x=19, y=1, left=4, down=6},
+    --6
+    {levelIdx=20, world=1, levelName="1-6", x=19, y=4, up=5, left=7, down=15},
+    {levelIdx=14, world=1, levelName="1-7", x=16, y=4, right=6, left=8},
+    {levelIdx=22, world=1, levelName="1-8", x=13, y=4, right=7, left=9},
+    {levelIdx=3, world=1, levelName="1-9", x=10, y=4, right=8, left=10, down=17},
+    {levelIdx=21, world=1, levelName="1-10", x=7, y=4, right=9, down=11},
+    --11
+    {levelIdx=12, world=1, levelName="1-11", x=7, y=7, up=10, down=12},
+    {levelIdx=7, world=1, levelName="1-12", x=7, y=10, up=11, right=13},
+    {levelIdx=15, world=1, levelName="1-13", x=10, y=10, left=12, right=14},
+    {x=13, y=10, left=13, down=19, right=18},
+    {x=19, y=7, up=6, left=16},
+    --16
+    {levelIdx=17, world=1, levelName="1-A", x=16, y=7, right=15, left=17, down=18},
+    {x=10, y=7, up=9, right=16},
+    {levelIdx=9, world=1, levelName="1-B", x=16, y=10, up=16, left=14},
+    {levelIdx=2, world=2, levelName="2-1", x=13, y=13, up=14}
 }

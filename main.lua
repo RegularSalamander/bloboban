@@ -67,7 +67,7 @@ function love.load()
         -- animLengths.moveTime = 3
 
         --compile levels from images
-        for i = 1, 23 do
+        for i = 1, 24 do
             io.write('"')
             levels[i] = compileLevel(i)
             io.write('",\n')
@@ -76,7 +76,7 @@ function love.load()
         -- for playtesting levels
         currentWorld = 1
         currentLevel = 1
-        levelMap[1].levelIdx = 9
+        levelMap[1].levelIdx = 15
         setGameState("game")
     end
 end

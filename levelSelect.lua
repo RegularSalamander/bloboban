@@ -27,8 +27,8 @@ end
 function levelSelect_draw()
     love.graphics.setCanvas(gameCanvas)
 
-    love.graphics.setColor(colors.checkerLight[currentWorld])
-    love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
+    -- love.graphics.setColor(colors.checkerLight[currentWorld])
+    -- love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
 
     for i = 1, #levelCheckers do
         drawCheckerboard(
