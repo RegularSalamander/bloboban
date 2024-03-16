@@ -30,7 +30,7 @@ function love.load()
     love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true })
     love.window.setTitle("Bloboban")
 
-    love.window.setFullscreen(false)
+    love.window.setFullscreen(true)
 
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
@@ -67,7 +67,7 @@ function love.load()
         -- for playtesting levels
         currentWorld = 1
         currentLevel = 1
-        levelMap[1].levelIdx = 9
+        levelMap[1].levelIdx = 5
         setGameState("game")
     end
 end

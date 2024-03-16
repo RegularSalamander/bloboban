@@ -177,7 +177,7 @@ function hole:applyAffect()
 
     if willChange then
         self:changeConnectNum()
-        spawnParticleSquare(50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 30)
+        spawnParticleSquare(particleTypes.circle, 50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 30)
     end
 end
 
@@ -228,7 +228,7 @@ function hole:applyFill()
     self.color = here.blob.color
     here.blob.alive = false
 
-    spawnParticleSquare(50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 30)
+    spawnParticleSquare(particleTypes.sparkle, 50, self.pos.x*tileSize, self.pos.y*tileSize, tileSize, tileSize, 0.5, 5, 60)
 
     if self.connections.up then
         getObjectAt(self.pos.x, self.pos.y - 1).hole:applyFill()

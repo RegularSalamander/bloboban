@@ -1,7 +1,8 @@
-function spawnParticleSquare(n, x, y, w, h, v, r, ttl)
+function spawnParticleSquare(t, n, x, y, w, h, v, r, ttl)
     for i = 1, n do
         local theta = love.math.random() * 2*math.pi
         table.insert(objects.particles, particle:new(
+            t,
             x + love.math.random() * w,
             y + love.math.random() * h,
             math.cos(theta) * v,
@@ -14,7 +15,9 @@ end
 
 particle = class:new()
 
-function particle:init(x, y, vx, vy, r, ttl)
+function particle:init(t, x, y, vx, vy, r, ttl)
+    self.type = t
+
     self.pos = {x=x, y=y}
     self.vel = {x=vx, y=vy}
 
@@ -27,8 +30,16 @@ function particle:init(x, y, vx, vy, r, ttl)
 end
 
 function particle:draw()
-    love.graphics.setColor(colors.particle)
-    love.graphics.circle("fill", self.pos.x, self.pos.y, self.rad)
+    if self.type == particleTypes.circle then
+        love.graphics.setColor(colors.particle)
+        love.graphics.circle("fill", self.pos.x, self.pos.y, self.rad)
+    elseif self.type == particleTypes.sparkle then
+        love.graphics.setColor(colors.sparkle)
+        love.graphics.line(self.pos.x, self.pos.y, self.pos.x, self.pos.y-self.rad)
+        love.graphics.line(self.pos.x, self.pos.y, self.pos.x, self.pos.y+self.rad)
+        love.graphics.line(self.pos.x, self.pos.y, self.pos.x+self.rad, self.pos.y)
+        love.graphics.line(self.pos.x, self.pos.y, self.pos.x-self.rad, self.pos.y)
+    end
 end
 
 function particle:update()

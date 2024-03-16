@@ -193,7 +193,12 @@ function victoryAnimationY(x, w, l)
 end
 
 function game_keypressed(key, scancode, isrepeat)
-    --if you want to remap keys, do it by changing the scancode
+    --remapping wasd
+    if scancode == "w" then scancode = "up" end
+    if scancode == "a" then scancode = "left" end
+    if scancode == "s" then scancode = "down" end
+    if scancode == "d" then scancode = "right" end
+
     if isrepeat then return end
     if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" and animationState ~= animStates.ready then
         bufferedControl = true
@@ -213,6 +218,12 @@ function game_keypressed(key, scancode, isrepeat)
 end
 
 function game_keyreleased(key, scancode, isrepeat)
+    --remapping wasd
+    if scancode == "w" then scancode = "up" end
+    if scancode == "a" then scancode = "left" end
+    if scancode == "s" then scancode = "down" end
+    if scancode == "d" then scancode = "right" end
+    
     if isrepeat then return end
     if controls[scancode] ~= nil then controls[scancode] = 0 end
 end

@@ -84,6 +84,12 @@ function levelSelect_draw()
 end
 
 function levelSelect_keypressed(key, scancode, isrepeat)
+    --remapping wasd
+    if scancode == "w" then scancode = "up" end
+    if scancode == "a" then scancode = "left" end
+    if scancode == "s" then scancode = "down" end
+    if scancode == "d" then scancode = "right" end
+    
     if isrepeat then return end
 
     if mapPlayerPos.x ~= levelMap[currentLevel].x

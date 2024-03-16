@@ -2,7 +2,7 @@
 screenWidth = 27*16
 screenHeight = 27*9
 
-debugMode = false
+debugMode = true
 
 --scale the window starts as (multiplier of the native resolution)
 defaultScale = 2
@@ -26,6 +26,7 @@ colors = {
         {184/255, 111/255, 233/255}
     },
     particle = {231/255, 231/255, 231/255},
+    sparkle = {231/255, 231/255, 0/255},
     outline = {33/255, 33/255, 66/255}
 }
 
@@ -45,6 +46,11 @@ animLengths = {
     fillTime = 5,
     waitTime = 2,
     victoryTime = 180
+}
+
+particleTypes = {
+    circle = 0,
+    sparkle = 1
 }
 
 blobEnlarge = 1.5
