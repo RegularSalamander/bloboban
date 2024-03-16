@@ -9,12 +9,19 @@ function levelSelect_load()
         end
 
         mapPlayerPos = {x=levelMap[currentLevel].x, y=levelMap[currentLevel].y}
+        mapPlayerDir = 0
+        mapPlayerFrame = 0
     end
 end
 
 function levelSelect_update()
     mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentLevel].x, 0.1)
     mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentLevel].y, 0.1)
+
+    if mapPlayerPos.x == levelMap[currentLevel].x and mapPlayerPos.y == levelMap[currentLevel].y
+    and mapPlayerDir == 3 then
+        mapPlayerDir = 0
+    end
 end
 
 function levelSelect_draw()
@@ -78,7 +85,7 @@ function levelSelect_draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
         images.player,
-        love.graphics.newQuad(0, 0, tileSize, tileSize, tileSize*4, tileSize*2),
+        love.graphics.newQuad(mapPlayerDir*tileSize, mapPlayerFrame*tileSize, tileSize, tileSize, tileSize*4, tileSize*2),
         mapPlayerPos.x*mapTileSize,
         mapPlayerPos.y*mapTileSize - 6,
         0,
@@ -107,6 +114,13 @@ function levelSelect_keypressed(key, scancode, isrepeat)
             or debugMode then
                 currentLevel = levelMap[currentLevel][scancode]
                 currentWorld = levelMap[currentLevel].world
+
+                if scancode == "down" then mapPlayerDir = 0
+                elseif scancode == "left" then mapPlayerDir = 1
+                elseif scancode == "right" then mapPlayerDir = 2
+                else mapPlayerDir = 3 end
+
+                mapPlayerFrame = (mapPlayerFrame + 1)%2
 
                 local stepNum = math.floor(love.math.random()*2) + 1
                 sounds["step" .. stepNum]:stop()
