@@ -45,7 +45,16 @@ function love.load()
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
-    --sounds.explosion1 = love.audio.newSource("assets/explosion1.wav", "static")
+    sounds.step1 = love.audio.newSource("assets/step1.wav", "static")
+    sounds.step2 = love.audio.newSource("assets/step2.wav", "static")
+    sounds.step3 = love.audio.newSource("assets/step3.wav", "static")
+    sounds.step4 = love.audio.newSource("assets/step4.wav", "static")
+    sounds.colorchange = love.audio.newSource("assets/colorchange.wav", "static")
+    sounds.blobconnect = love.audio.newSource("assets/blobconnect.wav", "static")
+    sounds.holeaffect = love.audio.newSource("assets/holeaffect.wav", "static")
+    sounds.holefill = love.audio.newSource("assets/holefill.wav", "static")
+    sounds.disolve1 = love.audio.newSource("assets/disolve1.wav", "static")
+    sounds.disolve2 = love.audio.newSource("assets/disolve2.wav", "static")
 
     --font = love.graphics.newFont("assets/fancySalamander.ttf", 16)
     --font:setFilter("nearest", "nearest")
@@ -58,7 +67,7 @@ function love.load()
         -- animLengths.moveTime = 3
 
         --compile levels from images
-        for i = 1, 22 do
+        for i = 1, 23 do
             io.write('"')
             levels[i] = compileLevel(i)
             io.write('",\n')
@@ -67,7 +76,7 @@ function love.load()
         -- for playtesting levels
         currentWorld = 1
         currentLevel = 1
-        levelMap[1].levelIdx = 5
+        levelMap[1].levelIdx = 23
         setGameState("game")
     end
 end

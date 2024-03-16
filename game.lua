@@ -52,6 +52,13 @@ function game_update(delta)
 
     if animationState == animStates.ready then
         if checkPlayerMoving() then
+            local stepNum = math.floor(love.math.random()*2) + 1
+            if checkObjectMoving() then
+                stepNum = stepNum + 2
+            end
+            sounds["step" .. stepNum]:stop()
+            sounds["step" .. stepNum]:play()
+
             bufferedControl = false
             changeAnimationState(animStates.moving)
         end
@@ -93,6 +100,8 @@ function game_update(delta)
         end
     elseif animationState == animStates.fill then
         if animationFrame == animLengths.fillTime then
+            sounds.holefill:stop()
+            sounds.holefill:play()
             applyFill()
             if checkVictory() then
                 changeAnimationState(animStates.victory)
@@ -104,6 +113,7 @@ function game_update(delta)
     elseif animationState == animStates.victory then
         if animationFrame == animLengths.victoryTime then
             setLevelComplete(currentLevel)
+            sounds.disolve1:play()
             disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.waiting then
@@ -205,10 +215,14 @@ function game_keypressed(key, scancode, isrepeat)
     end
     if animationState ~= animStates.victory then
         if scancode == "escape" then
+            sounds.disolve1:stop()
+            sounds.disolve1:play()
             disolveToGameState("levelSelect")
             return
         end
         if scancode == "r" then
+            sounds.disolve2:stop()
+            sounds.disolve2:play()
             disolveToGameState("game")
             return
         end
@@ -290,8 +304,23 @@ function applyMove()
     end
 end
 
+function checkObjectMoving()
+    for i = 1, #objects.blobs do
+        if objects.blobs[i].pos.x ~= objects.blobs[i].nextPos.x or objects.blobs[i].pos.y ~= objects.blobs[i].nextPos.y then
+            return true
+        end
+    end
+
+    for i = 1, #objects.holes do
+        if objects.holes[i].pos.x ~= objects.holes[i].nextPos.x or objects.holes[i].pos.y ~= objects.holes[i].nextPos.y then
+            return true
+        end
+    end
+end
+
 function checkAffect()
     local rv = false
+    local playHoleSound = false
     
     for i = 1, #objects.blobs do
         if objects.blobs[i]:checkAffect() then
@@ -299,11 +328,16 @@ function checkAffect()
         end
     end
 
+    if rv then sounds.colorchange:play() end
+
     for i = 1, #objects.holes do
         if objects.holes[i]:checkAffect() then
             rv = true
+            playHoleSound = true
         end
     end
+
+    if playHoleSound then sounds.holeaffect:play() end
 
     return rv
 end
@@ -327,6 +361,8 @@ function checkConnect()
             rv = true
         end
     end
+
+    if rv then sounds.blobconnect:play() end
 
     return rv
 end

@@ -2,7 +2,7 @@
 screenWidth = 27*16
 screenHeight = 27*9
 
-debugMode = true
+debugMode = false
 
 --scale the window starts as (multiplier of the native resolution)
 defaultScale = 2

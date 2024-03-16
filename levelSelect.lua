@@ -103,10 +103,16 @@ function levelSelect_keypressed(key, scancode, isrepeat)
             or debugMode then
                 currentLevel = levelMap[currentLevel][scancode]
                 currentWorld = levelMap[currentLevel].world
+
+                local stepNum = math.floor(love.math.random()*2) + 1
+                sounds["step" .. stepNum]:stop()
+                sounds["step" .. stepNum]:play()
             end
         end
     end
     if scancode == "z" and levelMap[currentLevel].levelIdx then
+        sounds.disolve2:stop()
+        sounds.disolve2:play()
         disolveToGameState("game")
     end
 end
