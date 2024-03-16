@@ -5,7 +5,7 @@ screenHeight = 27*9
 debugMode = false
 
 --scale the window starts as (multiplier of the native resolution)
-defaultScale = 2
+defaultScale = 3
 
 tileSize = 16
 mapTileSize = 16

@@ -74,12 +74,16 @@ function levelSelect_draw()
             end
         end
     end
-    
+
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
         images.player,
+        love.graphics.newQuad(0, 0, tileSize, tileSize, tileSize*4, tileSize*2),
         mapPlayerPos.x*mapTileSize,
-        mapPlayerPos.y*mapTileSize - 6
+        mapPlayerPos.y*mapTileSize - 6,
+        0,
+        1,
+        1
     )
 end
 

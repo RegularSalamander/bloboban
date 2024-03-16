@@ -3,6 +3,9 @@ player = class:new()
 function player:init(x, y)
     self.pos = {x=x, y=y}
     self.nextPos = {x=x, y=y}
+
+    self.dir = 0
+    self.frame = 0
 end
 
 function player:draw()
@@ -12,8 +15,12 @@ function player:draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(
         images.player,
-        math.floor(drawx * tileSize),
-        math.floor(drawy * tileSize)
+        love.graphics.newQuad(self.dir*tileSize, self.frame*tileSize, tileSize, tileSize, tileSize*4, tileSize*2),
+        drawx*tileSize,
+        drawy*tileSize,
+        0,
+        1,
+        1
     )
 end
 
@@ -72,6 +79,18 @@ function player:move(dx, dy)
     if doMove then
         self.nextPos.x = self.pos.x + dx
         self.nextPos.y = self.pos.y + dy
+
+        if dy == 1 then
+            self.dir = 0
+        elseif dx == -1 then
+            self.dir = 1
+        elseif dx == 1 then
+            self.dir = 2
+        else
+            self.dir = 3
+        end
+
+        self.frame = (self.frame + 1)%2
     end
 
     return doMove

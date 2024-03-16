@@ -30,7 +30,7 @@ function love.load()
     love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true })
     love.window.setTitle("Bloboban")
 
-    love.window.setFullscreen(true)
+    -- love.window.setFullscreen(true)
 
     images = {}
     images.player = love.graphics.newImage("assets/player.png")

@@ -31,7 +31,7 @@ levelCheckers = {
 levelMap = {
     {levelIdx=11, world=1, levelName="1-1", x=1, y=1, right=2},
     {levelIdx=19, world=1, levelName="1-2", x=3, y=1, left=1, right=3},
-    {levelIdx=6, world=1, levelName="1-3", x=5, y=1, left=2, right=4, down=23},
+    {levelIdx=6, world=1, levelName="1-3", x=5, y=1, left=2, right=4},
     {levelIdx=22, world=1, levelName="1-4", x=7, y=1, left=3, right=5},
     {levelIdx=20, world=1, levelName="1-5", x=9, y=1, left=4, right=6},
     {levelIdx=1, world=1, levelName="1-6", x=11, y=1, left=5, right=7},
@@ -43,7 +43,7 @@ levelMap = {
     {levelIdx=8, world=1, levelName="1-12", x=17, y=3, right=11, left=13},
     {levelIdx=15, world=1, levelName="1-13", x=15, y=3, right=12, left=14},
     {levelIdx=9, world=1, levelName="1-14", x=13, y=3, right=13, left=15},
-    {levelIdx=17, world=1, levelName="1-15", x=11, y=3, right=14, down=16},
+    {levelIdx=17, world=1, levelName="1-15", x=11, y=3, right=14},
     {levelIdx=2, world=2, levelName="2-1", x=11, y=6, up=15, left=17},
     {levelIdx=4, world=2, levelName="2-2", x=9, y=6, right=16, left=18},
     {levelIdx=5, world=2, levelName="2-3", x=7, y=6, right=17, left=19, up=24},
