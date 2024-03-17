@@ -56,6 +56,9 @@ function love.load()
     sounds.holefill = love.audio.newSource("assets/holefill.wav", "static")
     sounds.disolve1 = love.audio.newSource("assets/disolve1.wav", "static")
     sounds.disolve2 = love.audio.newSource("assets/disolve2.wav", "static")
+    sounds.victory = love.audio.newSource("assets/victory.wav", "static")
+    sounds.open = love.audio.newSource("assets/open.wav", "static")
+    sounds.open:setVolume(0.5)
 
     --font = love.graphics.newFont("assets/fancySalamander.ttf", 16)
     --font:setFilter("nearest", "nearest")
@@ -68,16 +71,16 @@ function love.load()
         -- animLengths.moveTime = 3
 
         --compile levels from images
-        for i = 1, 24 do
+        for i = 1, 29 do
             io.write('"')
             levels[i] = compileLevel(i)
             io.write('",\n')
         end
 
         -- for playtesting levels
-        currentWorld = 1
-        currentLevel = 1
-        levelMap[1].levelIdx = 5
+        -- currentWorld = 1
+        -- currentLevel = 1
+        levelMap[1].levelIdx = 29
         setGameState("game")
     end
 end

@@ -47,6 +47,18 @@ levelMap = {
     --16
     {levelIdx=17, world=1, levelName="1-A", challenge=true, x=16, y=7, right=15, left=17, down=18},
     {x=10, y=7, up=9, right=16},
-    {levelIdx=9, world=1, levelName="1-B", challenge=true, x=16, y=10, up=16, left=14},
-    {levelIdx=2, world=2, levelName="2-1", x=13, y=17, up=14}
+    {levelIdx=25, world=1, levelName="1-B", challenge=true, x=16, y=10, up=16, left=14},
+    {levelIdx=25, world=2, levelName="2-1", x=13, y=17, up=14, right=20},
+    {levelIdx=26, world=2, levelName="2-2", x=16, y=17, left=19, right=21},
+    --21
+    {levelIdx=4, world=2, levelName="2-3", x=19, y=17, left=20, down=22},
+    {levelIdx=2, world=2, levelName="2-4", x=19, y=20, up=21, left=23},
+    {levelIdx=27, world=2, levelName="2-5", x=16, y=20, right=22, left=24},
+    {levelIdx=10, world=2, levelName="2-6", x=13, y=20, right=23, left=25},
+    {levelIdx=28, world=2, levelName="2-7", x=10, y=20, right=24, left=26},
+    --26
+    {levelIdx=5, world=2, levelName="2-8", x=7, y=20, right=25, down=27},
+    {levelIdx=18, world=2, levelName="2-9", x=7, y=23, up=26, right=28},
+    {levelIdx=29, world=2, levelName="2-10", x=10, y=23, left=27, right=29},
+    {levelIdx=13, world=2, levelName="2-11", x=13, y=23, left=28}
 }

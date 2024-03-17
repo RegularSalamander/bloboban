@@ -34,6 +34,7 @@ function game_load()
 
     if oldGameState == "levelSelect" then
         animationState = animStates.open
+        sounds.open:play()
     else
         animationState = animStates.ready
     end
@@ -113,6 +114,7 @@ function game_update(delta)
             applyFill()
             if checkVictory() then
                 changeAnimationState(animStates.victory)
+                sounds.victory:play()
                 -- setGameState("levelSelect")
             else
                 changeAnimationState(animStates.ready)

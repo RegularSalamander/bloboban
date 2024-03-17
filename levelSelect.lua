@@ -2,7 +2,6 @@ function levelSelect_load()
     -- resetSave()
     if not currentLevel then
         currentLevel = 1
-        currentWorld = levelMap[currentLevel].world
         for i = 1, #levelMap do
             if not levelMap[i].complete then
                 levelMap[i].complete = false
@@ -10,6 +9,7 @@ function levelSelect_load()
         end
 
         loadSave()
+        currentWorld = levelMap[currentLevel].world
 
         mapPlayerPos = {x=levelMap[currentLevel].x, y=levelMap[currentLevel].y}
         mapPlayerDir = 0
