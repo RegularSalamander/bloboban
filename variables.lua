@@ -53,6 +53,7 @@ animLengths = {
 }
 
 quitTime = 60
+restartTime = 180
 
 particleTypes = {
     circle = 0,

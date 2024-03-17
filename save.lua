@@ -29,9 +29,10 @@ function loadSave()
 end
 
 function resetSave()
+    currentLevel = 1
     for i = 1, #levelMap do
         levelMap[i].complete = false
     end
-    currentLevel = 1
     saveProgress()
+    currentLevel = nil
 end

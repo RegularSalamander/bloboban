@@ -1,4 +1,5 @@
 function levelSelect_load()
+    -- resetSave()
     if not currentLevel then
         currentLevel = 1
         currentWorld = levelMap[currentLevel].world
@@ -23,6 +24,9 @@ function levelSelect_load()
 
     quitProgress = 0
     quitting = false
+
+    restartProgress = 0
+    restarting = false
 end
 
 function levelSelect_update()
@@ -46,7 +50,18 @@ function levelSelect_update()
             love.event.quit()
         end
     else
-        quitProgress = 0
+        quitProgress =  quitProgress - 1
+    end
+
+    if restarting then
+        restartProgress = restartProgress + 1
+        if restartProgress >= restartTime then
+            sounds.disolve2:play()
+            resetSave()
+            disolveToGameState("levelSelect")
+        end
+    else
+        restartProgress = restartProgress - 1
     end
 end
 
@@ -126,6 +141,12 @@ function levelSelect_draw()
         love.graphics.setColor(0, 0, 0, quitOpacity)
         love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
     end
+
+    if restartTime > 0 then
+        local restartOpacity = restartProgress/restartTime
+        love.graphics.setColor(1, 1, 1, restartOpacity)
+        love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
+    end
 end
 
 function levelSelect_keypressed(key, scancode, isrepeat)
@@ -142,6 +163,12 @@ function levelSelect_keypressed(key, scancode, isrepeat)
 
     if scancode == "escape" then
         quitting = true
+        quitProgress = math.max(quitProgress, 0)
+    end
+
+    if scancode == "r" then
+        restarting = true
+        restartProgress = math.max(restartProgress, 0)
     end
 
     if mapPlayerPos.x ~= levelMap[currentLevel].x
@@ -179,6 +206,10 @@ end
 function levelSelect_keyreleased(key, scancode, isrepeat)
     if scancode == "escape" then
         quitting = false
+    end
+
+    if scancode == "r" then
+        restarting = false
     end
 end
 
