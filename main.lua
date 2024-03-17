@@ -58,6 +58,7 @@ function love.load()
     sounds.disolve2 = love.audio.newSource("assets/disolve2.wav", "static")
     sounds.victory = love.audio.newSource("assets/victory.wav", "static")
     sounds.open = love.audio.newSource("assets/open.wav", "static")
+    sounds.finalvictory = love.audio.newSource("assets/finalvictory.wav", "static")
     sounds.open:setVolume(0.5)
 
     --font = love.graphics.newFont("assets/fancySalamander.ttf", 16)

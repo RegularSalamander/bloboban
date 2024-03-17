@@ -18,11 +18,16 @@ levels = {
     "fHCwHCwICfJCwJCwKCfLCwLCwQCfRCwRCwSCfGDwGDwHDfIDfKDwLDwPDfQDwQDfSDwSDwGEfHEhIEAfJEwJEfLEwLEwMEfNEwNEwOEfPEwPEfREwSEfGFwGFfIFhJFAfKFfMFfOFfQFfSFwSFwGGfHGwHGwIGfJGhJGAwKGfLGwLGwMGfNGwNGfPGwPGhQGAfRGwSGfIHwIHfKHwKHbLHAfMHbNHBfOHfQHfSHwSHwIIfJIwKIfLIbLIBfNIbNIAfPIpPIfRIwRIwSIfIJwIJfKJwKJbLJAfMJfOJwPJfQJwQJwRJwIKfJKwKKfLKwLKfNKwNKfPKwPKfILwILfKLfMLhNLAfOLwPLwIMfJMfLMwLMwMMfNMwNMwOMfPMwPMfINwINwJNfKNwKNwLN",
     "fIDwIDwJDfKDwKDwLDfMDwMDwNDfODwODwPDfQDwQDwRDfSDwSDwTDwIEfJEfLEfNEfPEfREhSEAfTEwTEfIFwIFbJFCfKFbKFCbLFCfMFwMFwNFfOFwOFfQFwRFfSFwSFwTFwIGfJGbJGCpKGfLGbLGCfNGbNGBwOGfPGfRGwRGfIHwIHbJHCfKHbKHCbLHCfMHhNHAfOHwOHfQHwQHwRHwIIfJIfLIcLIAfNIwNIwOIfPIfRIwRIfIJwIJfKJfMJfOJcPJBfQJwRJwIKfJKwJKwKKfLKwLKwMKfNKwNKfPKfRKwRKwNLfOLwOLwPLfQLwQLwRL",
     "fPEwPEwQEfREwREwSEfTEwTEwHFfIFwIFwJFfKFwKFwLFfMFwMFwNFfOFwOFwPFfQFfSFhSFAwTFfHGwHGfJGfLGbLGAfNGfPGfRGwSGfTGwTGwHHfIHpJHfKHbLHBfMHfOHfQHfSHhSHAwTHfHIwHIfJIfLIbLICfNIfPIfRIwSIfTIwTIwHJfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJfSJhSJAwTJfPKwPKwQKfRKwRKwSKfTKwTK",
-    "wMCfNCwNCwOCfPCwPCwQCfRCwRCfMDwMDfODfQDwRDwMEfNEbNEAfPEbPEAfREwREwHFfIFwIFwJFfKFwKFwLFfMFwMFfOFbOFAfQFbQFAwRFfHGwHGfJGfLGwMGfNGfPGwQGfRGwRGwHHfIHpJHfKHhKHAfMHhMHEhNHCfOHfQHwQHfHIwHIfJIfLIwMIfNIfPIwQIfRIwRIwHJfIJwIJwJJfKJwKJwLJfMJwMJfOJbOJBfQJbQJBwRJwMKfNKbNKBfPKbPKBfRKwRKfMLwMLfOLfQLwRLwMMfNMwNMwOMfPMwPMwQMfRMwRM",
+    "fMDwMDwNDfODwODwPDfQDwQDfHEwHEwIEfJEwJEwKEfLEwLEwMEfNEbOEAfPEwQEwHFfIFfKFfMFwMFfOFfQFwQFfHGwHGfJGpJGhKGAfLGhMGEfNGhNGCfPGwQGwHHfIHfKHfMHwMHfOHfQHwQHwRHfHIwHIwIIfJIwJIwKIfLIwLIwMIfNIbOIBfPIbQIBfRIwRIfMJwMJbNJBfOJbPJBfQJwRJwMKfNKfPKfRKwRKfMLwMLwNLfOLwOLwPLfQLwQLwRL",
     "wJFfKFwKFwLFfMFwMFwNFfOFwOFwPFfQFwQFwRFfJGwJGbKGAfLGbLGBbMGBfNGhOGEfPGhPGCfRGwRGwJHfKHwKHwLHfMHwMHfOHhPHAfQHwRHfJIwJIfLIpLIfNIfPIfRIwRIwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJwQJwRJ",
     "fLEwLEwMEfNEwNEwOEfGFwGFwHFfIFwIFwJFfKFwKFwLFfMFfOFwOFwPFfQFwQFwRFfSFwSFwTFfUFwUFwGGfHGfJGwKGfLGfNGhOGEfPGhPGCfRGbSGAfTGwUGfGHwGHfIHpIHfKHwKHfMHfOHwPHfQHfSHfUHwUHwGIfHIfJIhKIAfLIfNIbNIBbOIBfPIwPIfRIfTIwUIfGJwGJwHJfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJwQJwRJfSJwSJwTJfUJwUJ",
     "wRDfSDwSDwTDfUDwUDwVDfWDwWDwOEfPEwPEwQEfREwREfTEfVEwWEfXEwXEfGFwGFwHFfIFwIFwJFfKFwKFwLFfMFwMFwNFfOFwOFfQFfSFfUFfWFwXFwGGfHGbIGAfJGbJGAcKGBfLGhLGEhMGGfNGhNGGhOGGfPGhPGCcQGCfRGbRGAbSGAfTGbTGAwUGfVGfXGwXGfGHwGHfIHwJHfKHwKHfMHdNHEfOHdOHCfQHwQHwRHfSHfUHfWHwWHwXHwGIfHIfJIfLIwLIwMIfNIfPIwPIpQIfRIfTIwTIwUIfVIwVIwWIfGJwGJwHJfIJwIJfKJfMJfOJbOJAfQJfSJwTJwIKfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRKwSKfTKwTK",
-    "fJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREwJFfKFbKFAbLFAfMFbMFAhNFEfOFhOFGhPFCfQFwRFfJGwJGwKGfLGwLGwMGfNGwNGfPGfRGwRGwJHfKHfMHwNHfOHfQHwRHfJIwJIfLIpLIfNIhNIAfPIbPICfRIwRIwJJfKJfMJwNJfOJfQJwRJfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRK"
+    "fJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREwJFfKFbKFAbLFAfMFbMFAhNFEfOFhOFGhPFCfQFwRFfJGwJGwKGfLGwLGwMGfNGwNGfPGfRGwRGwJHfKHfMHwNHfOHfQHwRHfJIwJIfLIpLIfNIhNIAfPIbPICfRIwRIwJJfKJfMJwNJfOJfQJwRJfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRK",
+    "fGFwGFwHFfIFwIFwJFfKFwKFwLFfMFwMFwNFfOFwOFwPFfQFwQFwRFfSFwSFwTFwGGfHGfJGfLGwMGfNGfPGfRGfTGwTGfGHwGHfIHpIHfKHbKHAfMHcMHBfOHbOHBfQHhQHEhRHCfSHwTHwGIfHIfJIfLIwMIfNIfPIfRIfTIwTIfGJwGJwHJfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJwQJwRJfSJwSJwTJ",
+    "wIEfJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREfIFwIFfKFfMFfOFfQFwRFwIGfJGpKGfLGhMGIfNGdOGIfPGfRGwRGfIHwIHfKHfMHhMHBfOHdOHBfQHwRHfSHwSHwIIfJIfLIfNIfPIfRIbRIBwSIfIJwIJwJJfKJwKJwLJfMJwMJwNJfOJwOJwPJfQJbQJAwRJfSJwSJfPKwPKwQKfRKwRK",
+    "wMCfNCwNCwOCfPCwPCwQCfRCwRCwSCfGDwGDwHDfIDwIDwJDfKDwKDwLDfMDwMDfODfQDfSDwSDfFEwFEwGEfHEfJEfLEfNEfPEfREwSEwFFfGFbGFCfIFfKFfMFdMFIfOFfQFfSFwSFfFGwFGwGGfHGfJGfLGdMGBfNGwOGfPGfRGwRGwSGwFHfGHbGHCfIHfKHfMHfOHfQHwRHfFIwFIwGIfHIwHIwIIfJIwJIwKIfLIwLIwMIfNIwNIfPIdPIEdQICfRIwRIfGJwGJpHJfIJhIJMhJJKfKJfMJfOJfQJwRJwGKfHKhIKFfJKhJKDfLKfNKfPKfRKwRKfGLwGLwHLfILwILwJLfKLbKLCbLLCfMLwMLfOLfQLwRLfJMwJMwKMfLMwLMwMMfNMwNMwOMfPMwPMwQMfRMwRM",
+    "wHDfIDwIDwJDfKDwKDwLDfMDwMDwNDfODwODwPDfQDwQDwRDfHEwHEfJEfLErMEEfNErNECfPEfREwREwHFfIFbJFBfKFbKFBfMFfOFfQFwRFfHGwHGfJGbJGBbKGBfLGfNGfPGrPGIfRGwRGwHHfIHwIHwJHfKHwKHwLHfMHwMHwNHfOHrPHBfQHwRHfHIwHIfJIhJIIfLIfNIfPIfRIwRIwHJfIJpIJhJJFfKJhKJCfMJfOJhPJAfQJwRJfHKwHKfJKfLKfNKfPKfRKwRKwHLfILwILwJLfKLwKLwLLfMLwMLwNLfOLwOLwPLfQLwQLwRL",
+    "wKCfLCwLCwMCfNCwNCwOCfPCwPCwQCfKDwKDfMDpNDfODfQDwQDwKEfLEcLEAbMECfNEbNECwOEfPEwQEfREwREwSEwJFfKFwKFfMFhMFIhNFIfOFdPFIfQFfSFwSFfJGwJGfLGhMGFfNGhNGDfPGdPGBrQGIfRGwSGfIHwIHwJHfKHfMHwNHfOHfQHrQHBfSHwSHwIIfJIbJIAbKIAfLIwMIfNIwNIwOIfPIwPIfRIwSIfIJwIJfKJwLJfMJwMJwNJfOJwOJwPJfQJfSJwSJwIKfJKfLKfNKfPKfRKwSKfILwILfKLfMLfOLfQLfSLwSLwIMfJMwJMwKMfLMwLMwMMfNMwNMwOMfPMwPMwQMfRMwRMwSM"
 }
 
 levelMap = {
@@ -31,34 +36,37 @@ levelMap = {
     {levelIdx=19, world=1, levelName="1-2", x=10, y=1, left=1, right=3},
     {levelIdx=24, world=1, levelName="1-3", x=13, y=1, left=2, right=4},
     {levelIdx=1, world=1, levelName="1-4", x=16, y=1, left=3, right=5},
+    --5
     {levelIdx=6, world=1, levelName="1-5", x=19, y=1, left=4, down=6},
-    --6
     {levelIdx=20, world=1, levelName="1-6", x=19, y=4, up=5, left=7, down=15},
     {levelIdx=14, world=1, levelName="1-7", x=16, y=4, right=6, left=8},
     {levelIdx=22, world=1, levelName="1-8", x=13, y=4, right=7, left=9},
     {levelIdx=3, world=1, levelName="1-9", x=10, y=4, right=8, left=10, down=17},
+    --10
     {levelIdx=21, world=1, levelName="1-10", x=7, y=4, right=9, down=11},
-    --11
     {levelIdx=12, world=1, levelName="1-11", x=7, y=7, up=10, down=12},
     {levelIdx=7, world=1, levelName="1-12", x=7, y=10, up=11, right=13},
     {levelIdx=15, world=1, levelName="1-13", x=10, y=10, left=12, right=14},
-    {x=13, y=10, world=1, left=13, down=19, right=18},
-    {x=19, y=7, up=6, left=16},
-    --16
-    {levelIdx=17, world=1, levelName="1-A", challenge=true, x=16, y=7, right=15, left=17, down=18},
-    {x=10, y=7, up=9, right=16},
-    {levelIdx=25, world=1, levelName="1-B", challenge=true, x=16, y=10, up=16, left=14},
-    {levelIdx=25, world=2, levelName="2-1", x=13, y=17, up=14, right=20},
-    {levelIdx=26, world=2, levelName="2-2", x=16, y=17, left=19, right=21},
-    --21
-    {levelIdx=4, world=2, levelName="2-3", x=19, y=17, left=20, down=22},
-    {levelIdx=2, world=2, levelName="2-4", x=19, y=20, up=21, left=23},
-    {levelIdx=27, world=2, levelName="2-5", x=16, y=20, right=22, left=24},
-    {levelIdx=10, world=2, levelName="2-6", x=13, y=20, right=23, left=25},
-    {levelIdx=28, world=2, levelName="2-7", x=10, y=20, right=24, left=26},
-    --26
-    {levelIdx=5, world=2, levelName="2-8", x=7, y=20, right=25, down=27},
-    {levelIdx=18, world=2, levelName="2-9", x=7, y=23, up=26, right=28},
-    {levelIdx=29, world=2, levelName="2-10", x=10, y=23, left=27, right=29},
-    {levelIdx=13, world=2, levelName="2-11", x=13, y=23, left=28}
+    {world=1, x=13, y=10, world=1, left=13, down=19, right=18},
+    --15
+    {levelIdx=17, world=1, levelName="1-A", challenge=true, x=19, y=7, up=6, left=16},
+    {world=1, x=16, y=7, right=15, left=17, down=18},
+    {world=1, x=10, y=7, up=9, right=16},
+    {levelIdx=9, world=1, levelName="1-B", challenge=true, x=16, y=10, up=16, left=14},
+    {levelIdx=25, world=2, levelName="2-1", x=13, y=17, up=14, left=20, right=29},
+    --20
+    {levelIdx=26, world=2, levelName="2-2", x=10, y=17, right=19, left=21, down=24},
+    {world=2, x=7, y=17, right=20, down=22},
+    {levelIdx=13, world=2, levelName="2-A", challenge=true, x=7, y=26, up=21, right=23},
+    {levelIdx=29, world=2, levelName="2-9", x=13, y=26, left=22, up=26, right=31},
+    {levelIdx=27, world=2, levelName="2-4", x=10, y=20, up=20, down=25},
+    --25
+    {levelIdx=28, world=2, levelName="2-6", x=10, y=23, up=24, right=26},
+    {levelIdx=5, world=2, levelName="2-8", x=13, y=23, left=25, down=23, right=27},
+    {levelIdx=18, world=2, levelName="2-7", x=16, y=23, left=26, up=28},
+    {levelIdx=2, world=2, levelName="2-5", x=16, y=20, down=27, up=29},
+    {levelIdx=4, world=2, levelName="2-3", x=16, y=17, down=28, left=19, right=30},
+    --30
+    {world=2, x=19, y=17, left=29, down=31},
+    {levelIdx=10, world=2, levelName="2-B", challenge=true, x=19, y=26, up=30, left=23},
 }
