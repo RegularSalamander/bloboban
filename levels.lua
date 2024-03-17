@@ -26,9 +26,9 @@ levels = {
 }
 
 levelCheckers = {
-    {1, 0, 0, 27, 12},
-    {2, 0, 12, 27, 11}
-    -- {2, 0, 5, 27, 11}
+    {1, 0, -1, 27, 16},
+    {3, 15, 6, 3, 6},
+    {2, 0, 15, 27, 16}
 }
 
 levelMap = {
@@ -54,5 +54,5 @@ levelMap = {
     {levelIdx=17, world=1, levelName="1-A", x=16, y=7, right=15, left=17, down=18},
     {x=10, y=7, up=9, right=16},
     {levelIdx=9, world=1, levelName="1-B", x=16, y=10, up=16, left=14},
-    {levelIdx=2, world=2, levelName="2-1", x=13, y=13, up=14}
+    {levelIdx=2, world=2, levelName="2-1", x=13, y=17, up=14}
 }

@@ -11,6 +11,8 @@ function levelSelect_load()
         mapPlayerPos = {x=levelMap[currentLevel].x, y=levelMap[currentLevel].y}
         mapPlayerDir = 0
         mapPlayerFrame = 0
+
+        camY = -mapTileSize
     end
 end
 
@@ -22,6 +24,12 @@ function levelSelect_update()
     and mapPlayerDir == 3 then
         mapPlayerDir = 0
     end
+
+    if currentWorld == 1 then
+        camY = util.approach(camY, -mapTileSize, 1)
+    elseif currentWorld == 2 then
+        camY = util.approach(camY, mapTileSize*12, 1)
+    end
 end
 
 function levelSelect_draw()
@@ -29,6 +37,9 @@ function levelSelect_draw()
 
     -- love.graphics.setColor(colors.checkerLight[currentWorld])
     -- love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
+
+    love.graphics.push()
+    love.graphics.translate(0, -math.floor(camY))
 
     for i = 1, #levelCheckers do
         drawCheckerboard(
@@ -92,6 +103,8 @@ function levelSelect_draw()
         1,
         1
     )
+
+    love.graphics.pop()
 end
 
 function levelSelect_keypressed(key, scancode, isrepeat)
