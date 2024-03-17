@@ -4,6 +4,7 @@ util = require "utils"
 require "variables"
 require "levels"
 require "levelLoader"
+require "save"
 
 require "levelSelect"
 require "game"
@@ -27,7 +28,7 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.graphics.setLineStyle("rough")
     
-    love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true })
+    love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true, resizable=true})
     love.window.setTitle("Bloboban")
 
     -- love.window.setFullscreen(true)
@@ -41,7 +42,7 @@ function love.load()
     images.colorChanger = love.graphics.newImage("assets/colorChanger.png")
     images.holeAffector = love.graphics.newImage("assets/holeAffector.png")
     images.level = love.graphics.newImage("assets/level.png")
-    images.victory = love.graphics.newImage("assets/victory.png")
+    images.text = love.graphics.newImage("assets/text.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
@@ -76,7 +77,7 @@ function love.load()
         -- for playtesting levels
         currentWorld = 1
         currentLevel = 1
-        levelMap[1].levelIdx = 15
+        levelMap[1].levelIdx = 5
         setGameState("game")
     end
 end
@@ -100,12 +101,22 @@ function love.draw()
     --draw the gameCanvas onto the screen, at maximum integer resolution
     love.graphics.setCanvas()
     local w, h = love.graphics.getDimensions()
-    local scl = math.floor(math.min(w/screenWidth, h/screenHeight))*1
+    local scl
+    if keepInteger then
+        scl = math.floor(math.min(w/screenWidth, h/screenHeight))
+    else
+        scl = math.min(w/screenWidth, h/screenHeight)
+    end
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(gameCanvas, w/2, h/2, 0, scl, scl, screenWidth/2, screenHeight/2)
 end
 
 function love.keypressed(key, scancode, isrepeat)
+    if scancode == "f11" then
+        fullscreen = not fullscreen
+        love.window.setFullscreen(fullscreen)
+    end
+
 	if _G[gameState .. "_keypressed"] then
 		_G[gameState .. "_keypressed"](key, scancode, isrepeat)
 	end

@@ -25,12 +25,6 @@ levels = {
     "fJEwJEwKEfLEwLEwMEfNEwNEwOEfPEwPEwQEfREwREwJFfKFbKFAbLFAfMFbMFAhNFEfOFhOFGhPFCfQFwRFfJGwJGwKGfLGwLGwMGfNGwNGfPGfRGwRGwJHfKHfMHwNHfOHfQHwRHfJIwJIfLIpLIfNIhNIAfPIbPICfRIwRIwJJfKJfMJwNJfOJfQJwRJfJKwJKwKKfLKwLKwMKfNKwNKwOKfPKwPKwQKfRKwRK"
 }
 
-levelCheckers = {
-    {1, 0, -1, 27, 16},
-    {3, 15, 6, 3, 6},
-    {2, 0, 15, 27, 16}
-}
-
 levelMap = {
     --1
     {levelIdx=11, world=1, levelName="1-1", x=7, y=1, right=2},
@@ -48,11 +42,11 @@ levelMap = {
     {levelIdx=12, world=1, levelName="1-11", x=7, y=7, up=10, down=12},
     {levelIdx=7, world=1, levelName="1-12", x=7, y=10, up=11, right=13},
     {levelIdx=15, world=1, levelName="1-13", x=10, y=10, left=12, right=14},
-    {x=13, y=10, left=13, down=19, right=18},
+    {x=13, y=10, world=1, left=13, down=19, right=18},
     {x=19, y=7, up=6, left=16},
     --16
-    {levelIdx=17, world=1, levelName="1-A", x=16, y=7, right=15, left=17, down=18},
+    {levelIdx=17, world=1, levelName="1-A", challenge=true, x=16, y=7, right=15, left=17, down=18},
     {x=10, y=7, up=9, right=16},
-    {levelIdx=9, world=1, levelName="1-B", x=16, y=10, up=16, left=14},
+    {levelIdx=9, world=1, levelName="1-B", challenge=true, x=16, y=10, up=16, left=14},
     {levelIdx=2, world=2, levelName="2-1", x=13, y=17, up=14}
 }

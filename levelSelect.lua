@@ -8,12 +8,21 @@ function levelSelect_load()
             end
         end
 
+        loadSave()
+
         mapPlayerPos = {x=levelMap[currentLevel].x, y=levelMap[currentLevel].y}
         mapPlayerDir = 0
         mapPlayerFrame = 0
 
-        camY = -mapTileSize
+        if currentWorld == 1 then
+            camY = -mapTileSize
+        elseif currentWorld == 2 then
+            camY = mapTileSize*15
+        end
     end
+
+    quitProgress = 0
+    quitting = false
 end
 
 function levelSelect_update()
@@ -26,9 +35,18 @@ function levelSelect_update()
     end
 
     if currentWorld == 1 then
-        camY = util.approach(camY, -mapTileSize, 1)
+        camY = util.approach(camY, -mapTileSize, 2)
     elseif currentWorld == 2 then
-        camY = util.approach(camY, mapTileSize*12, 1)
+        camY = util.approach(camY, mapTileSize*15, 2)
+    end
+
+    if quitting then
+        quitProgress = quitProgress + 1
+        if quitProgress >= quitTime then
+            love.event.quit()
+        end
+    else
+        quitProgress = 0
     end
 end
 
@@ -41,15 +59,12 @@ function levelSelect_draw()
     love.graphics.push()
     love.graphics.translate(0, -math.floor(camY))
 
-    for i = 1, #levelCheckers do
-        drawCheckerboard(
-            levelCheckers[i][1],
-            levelCheckers[i][2],
-            levelCheckers[i][3],
-            levelCheckers[i][4],
-            levelCheckers[i][5]
-        )
-    end
+    love.graphics.setColor(colors.checkerLight[1])
+    love.graphics.rectangle("fill", 0, -mapTileSize, screenWidth, 16*mapTileSize)
+    love.graphics.setColor(colors.checkerLight[2])
+    love.graphics.rectangle("fill", 0, mapTileSize*15, screenWidth, 16*mapTileSize)
+    drawCheckerboard(1, 4, -1, 19, 16)
+    drawCheckerboard(2, 4, 15, 19, 16)
 
     for i = 1, #levelMap do
         if levelMap[i].up then
@@ -105,6 +120,12 @@ function levelSelect_draw()
     )
 
     love.graphics.pop()
+
+    if quitTime > 0 then
+        local quitOpacity = quitProgress/quitTime
+        love.graphics.setColor(0, 0, 0, quitOpacity)
+        love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
+    end
 end
 
 function levelSelect_keypressed(key, scancode, isrepeat)
@@ -113,8 +134,15 @@ function levelSelect_keypressed(key, scancode, isrepeat)
     if scancode == "a" then scancode = "left" end
     if scancode == "s" then scancode = "down" end
     if scancode == "d" then scancode = "right" end
+    if scancode == "e" then scancode = "z" end
+    if scancode == "return" then scancode = "z" end
+    if scancode == "space" then scancode = "z" end
     
     if isrepeat then return end
+
+    if scancode == "escape" then
+        quitting = true
+    end
 
     if mapPlayerPos.x ~= levelMap[currentLevel].x
     or mapPlayerPos.y ~= levelMap[currentLevel].y then
@@ -145,6 +173,12 @@ function levelSelect_keypressed(key, scancode, isrepeat)
         sounds.disolve2:stop()
         sounds.disolve2:play()
         disolveToGameState("game")
+    end
+end
+
+function levelSelect_keyreleased(key, scancode, isrepeat)
+    if scancode == "escape" then
+        quitting = false
     end
 end
 

@@ -32,8 +32,16 @@ function game_load()
 
     loadLevel(levelMap[currentLevel].levelIdx)
 
-    animationState = animStates.ready
+    if oldGameState == "levelSelect" then
+        animationState = animStates.open
+    else
+        animationState = animStates.ready
+    end
     animationFrame = 0
+
+    if levelMap[currentLevel].challenge then
+        currentWorld = 3
+    end
 end
 
 function game_update(delta)
@@ -113,8 +121,13 @@ function game_update(delta)
     elseif animationState == animStates.victory then
         if animationFrame == animLengths.victoryTime then
             setLevelComplete(currentLevel)
+            saveProgress()
             sounds.disolve1:play()
             disolveToGameState("levelSelect")
+        end
+    elseif animationState == animStates.open then
+        if animationFrame == animLengths.victoryTime then
+            changeAnimationState(animStates.ready)
         end
     elseif animationState == animStates.waiting then
         if animationFrame == animLengths.waitTime then
@@ -164,14 +177,84 @@ function game_draw()
         objects.particles[i]:draw()
     end
 
-    if animationState == animStates.victory then
+    if animationState == animStates.open then
+        drawOpenAnimation()
+    elseif animationState == animStates.victory then
         drawVictoryAnimation()
+    end
+end
+
+function drawOpenAnimation()
+    local letters
+    local quadX
+    local quadY
+    
+    if levelMap[currentLevel].challenge then
+        letters = 10
+        quadY = 28
+    else
+        letters = 5
+        quadY = 14
+    end
+
+    local spacing = 10
+    local offset = 3
+
+    for i = 0, letters-1 do
+        local x = (animationFrame - i*offset)/(animLengths.openTime-offset*7)
+        local drawx = screenWidth/2 - letters*(8+spacing)/2 + i*(8+spacing)
+        local drawy = screenHeight - victoryAnimationY(x, currentWorld, currentLevel)
+
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.draw(
+            images.text,
+            love.graphics.newQuad(i*8, quadY, 8, 14, 80, 56),
+            math.floor(drawx),
+            math.floor(drawy - 4),
+            0,
+            1,
+            1
+        )
+    end
+
+    letters = string.len(levelMap[currentLevel].levelName)
+    for i = 0, letters-1 do
+        local currentLetter = util.charAt(levelMap[currentLevel].levelName, i+1)
+
+        if currentLetter == "-" then
+            quadX = 48
+            quadY = 14
+        elseif currentLetter == "A" then
+            quadX = 16
+            quadY = 28
+        elseif currentLetter == "B" then
+            quadX = 40
+            quadY = 14
+        else
+            quadX = 8*(string.byte(currentLetter)-48)
+            quadY = 42
+        end
+
+        local x = (animationFrame - i*offset)/(animLengths.openTime-offset*7)
+        local drawx = screenWidth/2 - letters*(8+spacing)/2 + i*(8+spacing)
+        local drawy = screenHeight - victoryAnimationY(x, currentWorld, currentLevel)
+
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.draw(
+            images.text,
+            love.graphics.newQuad(quadX, quadY, 8, 14, 80, 56),
+            math.floor(drawx),
+            math.floor(drawy + 15),
+            0,
+            1,
+            1
+        )
     end
 end
 
 function drawVictoryAnimation()
     for i = 0, 6 do
-        local spacing = 20
+        local spacing = 10
         local offset = 3
         local x = (animationFrame - i*offset)/(animLengths.victoryTime-offset*7)
 
@@ -179,10 +262,10 @@ function drawVictoryAnimation()
         local drawy = victoryAnimationY(x, currentWorld, currentLevel)
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.draw(
-            images.victory,
-            love.graphics.newQuad(i*8, 0, 8, 14, 8*7, 14),
+            images.text,
+            love.graphics.newQuad(i*8, 0, 8, 14, 80, 56),
             math.floor(drawx),
-            math.floor(drawy),
+            math.floor(drawy - 4),
             0,
             1,
             1

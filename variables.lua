@@ -2,10 +2,12 @@
 screenWidth = 27*16
 screenHeight = 27*9
 
-debugMode = true
+debugMode = false
 
 --scale the window starts as (multiplier of the native resolution)
 defaultScale = 2
+fullscreen = false
+keepInteger = false
 
 tileSize = 16
 mapTileSize = 16
@@ -31,15 +33,17 @@ colors = {
 }
 
 animStates = {
-    ready = 0,
-    moving = 1,
-    waiting = 2,
-    affect = 3,
-    connect = 4,
-    fill = 5,
-    victory = 6
+    open = 0,
+    ready = 1,
+    moving = 2,
+    waiting = 3,
+    affect = 4,
+    connect = 5,
+    fill = 6,
+    victory = 7
 }
 animLengths = {
+    openTime = 180,
     moveTime = 10,
     affectTime = 10,
     connectTime = 10,
@@ -47,6 +51,8 @@ animLengths = {
     waitTime = 2,
     victoryTime = 180
 }
+
+quitTime = 60
 
 particleTypes = {
     circle = 0,
