@@ -34,5 +34,4 @@ function resetSave()
         levelMap[i].complete = false
     end
     saveProgress()
-    currentLevel = nil
 end
