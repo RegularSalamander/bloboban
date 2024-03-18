@@ -22,9 +22,6 @@ function levelSelect_load()
         end
     end
 
-    quitProgress = 0
-    quitting = false
-
     restartProgress = 0
     restarting = false
 end
@@ -42,15 +39,6 @@ function levelSelect_update()
         camY = util.approach(camY, -mapTileSize, 2)
     elseif currentWorld == 2 then
         camY = util.approach(camY, mapTileSize*15, 2)
-    end
-
-    if quitting then
-        quitProgress = quitProgress + 1
-        if quitProgress >= quitTime then
-            love.event.quit()
-        end
-    else
-        quitProgress =  quitProgress - 1
     end
 
     if restarting then
@@ -136,11 +124,13 @@ function levelSelect_draw()
 
     love.graphics.pop()
 
-    if quitTime > 0 then
-        local quitOpacity = quitProgress/quitTime
-        love.graphics.setColor(0, 0, 0, quitOpacity)
-        love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
-    end
+    love.graphics.setColor(colors.checkerLight[currentWorld])
+    love.graphics.rectangle("fill", 0, screenHeight-20, screenWidth, 20)
+
+    love.graphics.setColor(colors.checkerDark[1])
+    love.graphics.setFont(font)
+    str = "Arrows to move    Z to enter    ESC to exit    Hold R to reset"
+    love.graphics.print(str, screenWidth/2-font:getWidth(str)/2, screenHeight-font:getHeight(str)-4)
 
     if restartTime > 0 then
         local restartOpacity = restartProgress/restartTime
@@ -162,8 +152,9 @@ function levelSelect_keypressed(key, scancode, isrepeat)
     if isrepeat then return end
 
     if scancode == "escape" then
-        quitting = true
-        quitProgress = math.max(quitProgress, 0)
+        sounds.disolve1:stop()
+        sounds.disolve1:play()
+        disolveToGameState("mainMenu")
     end
 
     if scancode == "r" then
@@ -204,9 +195,7 @@ function levelSelect_keypressed(key, scancode, isrepeat)
 end
 
 function levelSelect_keyreleased(key, scancode, isrepeat)
-    if scancode == "escape" then
-        quitting = false
-    end
+    if isrepeat then return end
 
     if scancode == "r" then
         restarting = false

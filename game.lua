@@ -184,6 +184,11 @@ function game_draw()
     elseif animationState == animStates.victory then
         drawVictoryAnimation()
     end
+
+    love.graphics.setColor(colors.checkerDark[1])
+    love.graphics.setFont(font)
+    str = "Arrows to move    R to restart    ESC to exit"
+    love.graphics.print(str, screenWidth/2-font:getWidth(str)/2, screenHeight-font:getHeight(str)-4)
 end
 
 function drawOpenAnimation()
@@ -295,7 +300,8 @@ function game_keypressed(key, scancode, isrepeat)
     if scancode == "d" then scancode = "right" end
 
     if isrepeat then return end
-    if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down" and animationState ~= animStates.ready then
+    if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down"
+    and animationState ~= animStates.ready and animationState ~= animStates.open then
         bufferedControl = true
     end
     if animationState ~= animStates.victory then

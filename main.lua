@@ -6,6 +6,7 @@ require "levels"
 require "levelLoader"
 require "save"
 
+require "mainMenu"
 require "levelSelect"
 require "game"
 require "disolveTransition"
@@ -43,6 +44,7 @@ function love.load()
     images.holeAffector = love.graphics.newImage("assets/holeAffector.png")
     images.level = love.graphics.newImage("assets/level.png")
     images.text = love.graphics.newImage("assets/text.png")
+    images.title = love.graphics.newImage("assets/title.png")
 
     sounds = {}
     --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
@@ -61,18 +63,19 @@ function love.load()
     sounds.finalvictory = love.audio.newSource("assets/finalvictory.wav", "static")
     sounds.open:setVolume(0.5)
 
-    --font = love.graphics.newFont("assets/fancySalamander.ttf", 16)
-    --font:setFilter("nearest", "nearest")
+    largeFont = love.graphics.newFont("assets/fancySalamander.ttf", 32)
+    font = love.graphics.newFont("assets/fancySalamander.ttf", 16)
+    font:setFilter("nearest", "nearest")
 
     gameCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
     
-    setGameState("levelSelect")
+    setGameState("mainMenu")
 
     if debugMode then
         -- animLengths.moveTime = 3
 
         --compile levels from images
-        for i = 1, 29 do
+        for i = 1, 30 do
             io.write('"')
             levels[i] = compileLevel(i)
             io.write('",\n')
@@ -81,8 +84,8 @@ function love.load()
         -- for playtesting levels
         -- currentWorld = 1
         -- currentLevel = 1
-        levelMap[1].levelIdx = 29
-        setGameState("game")
+        -- levelMap[1].levelIdx = 30
+        -- setGameState("game")
     end
 end
 
