@@ -32,8 +32,6 @@ function love.load()
     love.window.setMode(screenWidth*defaultScale, screenHeight*defaultScale, { vsync = true, msaa = 0, highdpi = true, resizable=true})
     love.window.setTitle("Bloboban")
 
-    -- love.window.setFullscreen(true)
-
     images = {}
     images.player = love.graphics.newImage("assets/player.png")
     images.blob = love.graphics.newImage("assets/blob.png")
@@ -47,7 +45,6 @@ function love.load()
     images.title = love.graphics.newImage("assets/title.png")
 
     sounds = {}
-    --sounds.musicStart = love.audio.newSource("assets/DRONEKILLER_start.mp3", "stream")
     sounds.step1 = love.audio.newSource("assets/step1.wav", "static")
     sounds.step2 = love.audio.newSource("assets/step2.wav", "static")
     sounds.step3 = love.audio.newSource("assets/step3.wav", "static")
@@ -60,7 +57,6 @@ function love.load()
     sounds.disolve2 = love.audio.newSource("assets/disolve2.wav", "static")
     sounds.victory = love.audio.newSource("assets/victory.wav", "static")
     sounds.open = love.audio.newSource("assets/open.wav", "static")
-    sounds.finalvictory = love.audio.newSource("assets/finalvictory.wav", "static")
     sounds.open:setVolume(0.5)
 
     largeFont = love.graphics.newFont("assets/fancySalamander.ttf", 32)
@@ -70,42 +66,21 @@ function love.load()
     gameCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
     
     setGameState("mainMenu")
-
-    if debugMode then
-        -- animLengths.moveTime = 3
-
-        --compile levels from images
-        for i = 1, 30 do
-            io.write('"')
-            levels[i] = compileLevel(i)
-            io.write('",\n')
-        end
-
-        -- for playtesting levels
-        -- currentWorld = 1
-        -- currentLevel = 1
-        -- levelMap[1].levelIdx = 30
-        -- setGameState("game")
-    end
 end
 
 function love.update(dt)
-    --don't run in background
     if not love.window.hasFocus() then return end
     
-    --run gamestate's update function
     if _G[gameState .. "_update"] then
         _G[gameState .. "_update"](dt)
     end
 end
 
 function love.draw()
-    --each draw function is responsible for setting the canvas itself
     if _G[gameState .. "_draw"] then
         _G[gameState .. "_draw"]()
     end
 
-    --draw the gameCanvas onto the screen, at maximum integer resolution
     love.graphics.setCanvas()
     local w, h = love.graphics.getDimensions()
     local scl
@@ -136,7 +111,6 @@ function love.keyreleased(key, scancode, isrepeat)
 end
 
 function setGameState(newGameState)
-    --set the gamestate and do its load function (if applicable)
     gameState = newGameState
 
     if _G[gameState .. "_load"] then

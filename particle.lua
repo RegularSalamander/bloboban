@@ -1,18 +1,3 @@
-function spawnParticleSquare(t, n, x, y, w, h, v, r, ttl)
-    for i = 1, n do
-        local theta = love.math.random() * 2*math.pi
-        table.insert(objects.particles, particle:new(
-            t,
-            x + love.math.random() * w,
-            y + love.math.random() * h,
-            math.cos(theta) * v,
-            math.sin(theta) * v,
-            r,
-            ttl
-        ))
-    end
-end
-
 particle = class:new()
 
 function particle:init(t, x, y, vx, vy, r, ttl)
@@ -51,5 +36,20 @@ function particle:update()
     self.ttl = self.ttl - 1
     if self.ttl <= 0 then
         self.alive = false
+    end
+end
+
+function spawnParticleSquare(t, n, x, y, w, h, v, r, ttl)
+    for i = 1, n do
+        local theta = love.math.random() * 2*math.pi
+        table.insert(objects.particles, particle:new(
+            t,
+            x + love.math.random() * w,
+            y + love.math.random() * h,
+            math.cos(theta) * v,
+            math.sin(theta) * v,
+            r,
+            ttl
+        ))
     end
 end

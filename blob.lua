@@ -57,19 +57,17 @@ function blob:push(dx, dy)
 
     self.checked = true
 
-    if self.connectNum ~= 0 then
-        if self.connections.up then
-            doMove = doMove and getObjectAt(self.pos.x, self.pos.y - 1).blob:push(dx, dy)
-        end
-        if self.connections.left then
-            doMove = doMove and getObjectAt(self.pos.x - 1, self.pos.y).blob:push(dx, dy)
-        end
-        if self.connections.right then
-            doMove = doMove and getObjectAt(self.pos.x + 1, self.pos.y).blob:push(dx, dy)
-        end
-        if self.connections.down then
-            doMove = doMove and getObjectAt(self.pos.x, self.pos.y + 1).blob:push(dx, dy)
-        end
+    if self.connections.up then
+        doMove = doMove and getObjectAt(self.pos.x, self.pos.y - 1).blob:push(dx, dy)
+    end
+    if self.connections.left then
+        doMove = doMove and getObjectAt(self.pos.x - 1, self.pos.y).blob:push(dx, dy)
+    end
+    if self.connections.right then
+        doMove = doMove and getObjectAt(self.pos.x + 1, self.pos.y).blob:push(dx, dy)
+    end
+    if self.connections.down then
+        doMove = doMove and getObjectAt(self.pos.x, self.pos.y + 1).blob:push(dx, dy)
     end
 
     if doMove then

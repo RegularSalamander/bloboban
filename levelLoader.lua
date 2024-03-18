@@ -1,11 +1,3 @@
-function fillWallRect(x, y, w, h)
-    for i = x, x+w-1 do
-        for j = y, y+h-1 do
-            table.insert(objects.walls, wall:new(i, j))
-        end
-    end
-end
-
 function loadLevel(num)
     objects.player = {}
     objects.walls = {}
@@ -23,76 +15,6 @@ function loadLevel(num)
     for i = 1, #objects.blobs do
         objects.blobs[i]:applyConnect()
     end
-end
-
-function compileLevel(num)
-    local str = ""
-
-    local img = love.image.newImageData("levels/" .. num .. ".png")
-    for y = 0, img:getHeight()-1 do
-        for x = 0, img:getWidth()-1 do
-            local r, g, b, a = img:getPixel(x, y)
-            r = r * 255
-            g = g * 255
-            b = b * 255
-            a = a * 255
-
-            if a > 0 and (x+y)%2 == 1 then
-                str = str .. "f"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-            end
-
-            if r == 0 and g == 0 and b == 0 and a == 255 then --wall
-                str = str .. "w"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-            elseif r == 255 and g == 128 and b == 0 and a == 255 then --player
-                str = str .. "p"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-            elseif r == 255 and g == 0 and b == 0 and a == 255 then --red blob
-                str = str .. "b"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(65)
-            elseif r == 0 and g == 255 and b == 0 and a == 255 then --green blob
-                str = str .. "b"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(66)
-            elseif r == 0 and g == 0 and b == 255 and a == 255 then --blue blob
-                str = str .. "b"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(67)
-            elseif r == 128 and g == 128 and a == 255 then --hole
-                str = str .. "h"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(b+65)
-            elseif g == 128 and b == 128 and a == 255 then --color changer
-                str = str .. "c"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(r+65)
-            elseif r == 128 and b == 128 and a == 255 then --hole disconnector
-                str = str .. "d"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(g+65)
-            elseif r == 255 and b == 128 and a == 255 then --hole connector
-                str = str .. "r"
-                str = str .. string.char(x+65)
-                str = str .. string.char(y+65)
-                str = str .. string.char(g+65)
-            end
-        end
-    end
-
-    io.write(str)
-    levels[num] = str
-    return str
 end
 
 function readLevel(num)

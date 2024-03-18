@@ -48,7 +48,6 @@ function player:control()
         return false
     end
 
-    --movement
     if input == "up" then
         allowMove = self:move(0, -1)
     elseif input == "down" then

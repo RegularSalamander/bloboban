@@ -1,21 +1,10 @@
 function game_load()
-    --[[
-        ints for controls
-        -1 always means it was just released this frame
-        1 always means it was just pressed this frame
-        above 1 means the amount of time it's been pressed (in 1/60th seconds)
-        below -1 means the amount of time since it was last pressed (times -1)
-    ]]
     controls = {
         left = 0,
         right = 0,
         up = 0,
         down = 0,
-        z = 0,
-        x = 0,
-        c = 0,
-        r = 0,
-        escape = 0
+        z = 0
     }
     bufferedControl = false
 
@@ -47,7 +36,7 @@ function game_load()
 end
 
 function game_update(delta)
-    --update and kill particles
+    --update and delete particles
     for i = 1, #objects.particles do
         objects.particles[i]:update()
     end
@@ -62,6 +51,7 @@ function game_update(delta)
 
     if animationState == animStates.ready then
         if checkPlayerMoving() then
+            --play step sound
             local stepNum = math.floor(love.math.random()*2) + 1
             if checkObjectMoving() then
                 stepNum = stepNum + 2
@@ -128,7 +118,7 @@ function game_update(delta)
             disolveToGameState("levelSelect")
         end
     elseif animationState == animStates.open then
-        if animationFrame == animLengths.victoryTime then
+        if animationFrame == animLengths.openTime then
             changeAnimationState(animStates.ready)
         end
     elseif animationState == animStates.waiting then
@@ -137,7 +127,7 @@ function game_update(delta)
         end
     end
 
-    --keys are updated last so that objects can see if they're 1 or -1
+    --update controls
     for k, v in pairs(controls) do
         if v > 0 then controls[k] = v + 1
         else controls[k] = v - 1
@@ -155,7 +145,6 @@ function game_draw()
         love.graphics.setColor(colors.checkerDark[currentWorld])
         love.graphics.rectangle("fill", floors[i].x*tileSize, floors[i].y*tileSize, tileSize, tileSize)
     end
-    
 
     for i = 1, #objects.affectors do
         objects.affectors[i]:draw()
@@ -185,7 +174,7 @@ function game_draw()
         drawVictoryAnimation()
     end
 
-    love.graphics.setColor(colors.checkerDark[1])
+    love.graphics.setColor(colors.checkerDark[currentWorld])
     love.graphics.setFont(font)
     str = "Arrows to move    R to restart    ESC to exit"
     love.graphics.print(str, screenWidth/2-font:getWidth(str)/2, screenHeight-font:getHeight(str)-4)
@@ -224,7 +213,7 @@ function drawOpenAnimation()
         )
     end
 
-    letters = string.len(levelMap[currentLevel].levelName)
+    letters = #levelMap[currentLevel].levelName
     for i = 0, letters-1 do
         local currentLetter = util.charAt(levelMap[currentLevel].levelName, i+1)
 
@@ -293,17 +282,20 @@ function victoryAnimationY(x, w, l)
 end
 
 function game_keypressed(key, scancode, isrepeat)
-    --remapping wasd
+    --remap keys
     if scancode == "w" then scancode = "up" end
     if scancode == "a" then scancode = "left" end
     if scancode == "s" then scancode = "down" end
     if scancode == "d" then scancode = "right" end
 
     if isrepeat then return end
-    if scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down"
+
+    --buffer control
+    if (scancode == "up" or scancode == "left" or scancode == "right" or scancode == "down")
     and animationState ~= animStates.ready and animationState ~= animStates.open then
         bufferedControl = true
     end
+
     if animationState ~= animStates.victory then
         if scancode == "escape" then
             sounds.disolve1:stop()
@@ -319,18 +311,18 @@ function game_keypressed(key, scancode, isrepeat)
         end
     end
 
-    if controls[scancode] ~= nil then controls[scancode] = 1 end
+    if controls[scancode] then controls[scancode] = 1 end
 end
 
 function game_keyreleased(key, scancode, isrepeat)
-    --remapping wasd
+    --remap keys
     if scancode == "w" then scancode = "up" end
     if scancode == "a" then scancode = "left" end
     if scancode == "s" then scancode = "down" end
     if scancode == "d" then scancode = "right" end
     
     if isrepeat then return end
-    if controls[scancode] ~= nil then controls[scancode] = 0 end
+    if controls[scancode] then controls[scancode] = 0 end
 end
 
 function getObjectAt(x, y)
@@ -465,7 +457,6 @@ function applyConnect()
 end
 
 function checkFill()
-    --check for filled holes and fill them
     for i = 1, #objects.holes do
         if objects.holes[i]:checkFill() then
             return true
@@ -474,14 +465,13 @@ function checkFill()
 end
 
 function applyFill()
-    --check for filled holes and fill them
     for i = 1, #objects.holes do
         if objects.holes[i]:checkFill() then
             objects.holes[i]:applyFill()
         end
     end
 
-    --delete blobs from filled holes
+    --delete blobs that holes
     for i = #objects.blobs, 1, -1 do
         if not objects.blobs[i].alive then
             table.remove(objects.blobs, i)

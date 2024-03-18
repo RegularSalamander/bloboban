@@ -1,5 +1,4 @@
 function levelSelect_load()
-    -- resetSave()
     if not currentLevel then
         currentLevel = 1
         for i = 1, #levelMap do
@@ -27,18 +26,17 @@ function levelSelect_load()
 end
 
 function levelSelect_update()
-    mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentLevel].x, 0.1)
-    mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentLevel].y, 0.1)
+    mapPlayerPos.x = util.approach(mapPlayerPos.x, levelMap[currentLevel].x, mapPlayerSpeed)
+    mapPlayerPos.y = util.approach(mapPlayerPos.y, levelMap[currentLevel].y, mapPlayerSpeed)
 
-    if mapPlayerPos.x == levelMap[currentLevel].x and mapPlayerPos.y == levelMap[currentLevel].y
-    and mapPlayerDir == 3 then
+    if mapPlayerPos.x == levelMap[currentLevel].x and mapPlayerPos.y == levelMap[currentLevel].y and mapPlayerDir == 3 then
         mapPlayerDir = 0
     end
 
     if currentWorld == 1 then
-        camY = util.approach(camY, -mapTileSize, 2)
+        camY = util.approach(camY, -mapTileSize, mapScrollSpeed)
     elseif currentWorld == 2 then
-        camY = util.approach(camY, mapTileSize*15, 2)
+        camY = util.approach(camY, mapTileSize*15, mapScrollSpeed)
     end
 
     if restarting then
@@ -55,9 +53,6 @@ end
 
 function levelSelect_draw()
     love.graphics.setCanvas(gameCanvas)
-
-    -- love.graphics.setColor(colors.checkerLight[currentWorld])
-    -- love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
 
     love.graphics.push()
     love.graphics.translate(0, -math.floor(camY))
@@ -124,10 +119,10 @@ function levelSelect_draw()
 
     love.graphics.pop()
 
-    love.graphics.setColor(colors.checkerLight[currentWorld])
+    love.graphics.setColor(colors.checkerLight[levelMap[currentLevel].world or 1])
     love.graphics.rectangle("fill", 0, screenHeight-20, screenWidth, 20)
 
-    love.graphics.setColor(colors.checkerDark[1])
+    love.graphics.setColor(colors.checkerDark[levelMap[currentLevel].world or 1])
     love.graphics.setFont(font)
     str = "Arrows to move    Z to enter    ESC to exit    Hold R to reset"
     love.graphics.print(str, screenWidth/2-font:getWidth(str)/2, screenHeight-font:getHeight(str)-4)
@@ -140,7 +135,7 @@ function levelSelect_draw()
 end
 
 function levelSelect_keypressed(key, scancode, isrepeat)
-    --remapping wasd
+    --remap keys
     if scancode == "w" then scancode = "up" end
     if scancode == "a" then scancode = "left" end
     if scancode == "s" then scancode = "down" end
@@ -212,16 +207,8 @@ function connectLevels(l, i)
     )
 end
 
-function getLevelById(id)
-    for i = 1, #levelMap do
-        if levelMap[i].id == id then
-            return levelMap[i]
-        end
-    end
-end
-
 function setLevelComplete(idx)
-    --recursively set nil spaces surrounding the level to complete
+    --recursively set empty spaces surrounding the level to complete
 
     if levelMap[idx].complete then return end
 

@@ -1,9 +1,3 @@
-function swap(lst, i, j)
-    local temp = lst[i]
-    lst[i] = lst[j]
-    lst[j] = temp
-end
-
 function disolveTransition_load()
     tuples = {}
     for i = 0, disolveGrid-1 do
@@ -13,8 +7,6 @@ function disolveTransition_load()
     end
 
     overlayCanvas = nil
-
-    -- disolveCanvas = love.graphics.newCanvas(disolveGrid, disolveGrid)
 end
 
 function disolveTransition_update()
@@ -38,20 +30,10 @@ function disolveTransition_draw()
         pic = love.graphics.newImage(gameCanvas:newImageData())
         overlayCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
 
-        love.graphics.setCanvas(overlayCanvas)
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.draw(pic)
-
         if _G[nextGameState .. "_load"] then
             _G[nextGameState .. "_load"]()
         end
     end
-
-    -- love.graphics.setCanvas(disolveCanvas)
-    -- love.graphics.clear()
-    -- love.graphics.setColor(0, 0, 0, 1)
-    -- love.graphics.rectangle("fill", 0, 0, disolveGrid, disolveGrid)
-    -- love.graphics.setColor(1, 1, 1, 1)
 
     love.graphics.setCanvas(overlayCanvas)
     love.graphics.clear(0, 0, 0, 0)
@@ -72,9 +54,6 @@ function disolveTransition_draw()
 end
 
 function stencilFunc()
-    -- love.graphics.rectangle("fill", 0, 0, 20, 20)
-    -- love.graphics.setColor(0, 0, 0, 1)
-    -- love.graphics.rectangle("fill", 0, 0, screenWidth, screenHeight)
     love.graphics.setColor(1, 1, 1, 1)
     for x = 0, screenWidth, disolveGrid*disolveSize do
         for y = 0, screenHeight, disolveGrid*disolveSize do
